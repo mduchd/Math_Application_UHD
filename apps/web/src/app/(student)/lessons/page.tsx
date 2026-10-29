@@ -143,14 +143,14 @@ export default function LessonsPage() {
               <h3 className="font-display font-black text-slate-800 text-lg leading-snug">
                 {lesson.title}
               </h3>
-              <p className="text-xs md:text-sm text-slate-600 font-semibold leading-relaxed">
+              <p className="text-sm text-slate-700 font-semibold leading-relaxed">
                 {lesson.description}
               </p>
             </div>
 
-            <div className="pt-4 border-t-2 border-kid-border flex items-center justify-between text-xs font-bold text-slate-500">
-              <span className="flex items-center gap-1">
-                <Clock className="w-4 h-4 text-slate-400" /> {lesson.duration}
+            <div className="pt-4 border-t-2 border-kid-border flex items-center justify-between text-sm font-bold text-slate-700">
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-slate-600" /> {lesson.duration}
               </span>
               <TactileButton
                 variant={lesson.completed ? 'white' : 'yellow'}
@@ -158,7 +158,7 @@ export default function LessonsPage() {
                 onClick={() => sound.playPop()}
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
-                <span>{lesson.completed ? 'Ôn lại bài' : 'Bắt đầu học'}</span>
+                <span>{lesson.completed ? 'Ôn lại bài 🔄' : 'Bắt đầu học 🚀'}</span>
               </TactileButton>
             </div>
           </m.div>

@@ -1,14 +1,18 @@
 import { create } from 'zustand';
-import { User, ProficiencyLevel, AssessmentSubmission, AILearningPlan } from '@kid-elearning/types';
+import { User, AssessmentSubmission, AILearningPlan } from '@kid-elearning/types';
+import { clearStoredAuth, getStoredUser, setStoredAuth } from '@/lib/api';
 
 interface AppState {
   currentUser: User | null;
   currentSubmission: AssessmentSubmission | null;
   currentPlan: AILearningPlan | null;
+  stars: number;
+  isHydrated: boolean;
   setUser: (user: User | null) => void;
   setSubmission: (submission: AssessmentSubmission | null) => void;
   setPlan: (plan: AILearningPlan | null) => void;
-  registerGuestStudent: (fullName: string, mascot: string, pin: string, submissionData: any) => void;
+  addStars: (amount: number) => void;
+  hydrate: () => void;
   logout: () => void;
 }
 
@@ -16,14 +20,40 @@ export const useAppStore = create<AppState>((set) => ({
   currentUser: null,
   currentSubmission: null,
   currentPlan: null,
+  stars: 120,
+  isHydrated: false,
+
+  hydrate: () => {
+    if (typeof window === 'undefined') return;
+    try {
+      const storedUser = getStoredUser();
+      const rawSub = localStorage.getItem('kid_submission');
+      const rawPlan = localStorage.getItem('kid_plan');
+      const rawStars = localStorage.getItem('kid_stars');
+
+      set({
+        currentUser: storedUser,
+        currentSubmission: rawSub ? JSON.parse(rawSub) : null,
+        currentPlan: rawPlan ? JSON.parse(rawPlan) : null,
+        stars: rawStars ? parseInt(rawStars, 10) : 120,
+        isHydrated: true,
+      });
+    } catch {
+      set({ isHydrated: true });
+    }
+  },
 
   setUser: (user) => {
     set({ currentUser: user });
     if (typeof window !== 'undefined') {
-      if (user) localStorage.setItem('kid_user', JSON.stringify(user));
-      else localStorage.removeItem('kid_user');
+      if (user) {
+        localStorage.setItem('kid_user', JSON.stringify(user));
+      } else {
+        localStorage.removeItem('kid_user');
+      }
     }
   },
+
   setSubmission: (submission) => {
     set({ currentSubmission: submission });
     if (typeof window !== 'undefined') {
@@ -31,6 +61,7 @@ export const useAppStore = create<AppState>((set) => ({
       else localStorage.removeItem('kid_submission');
     }
   },
+
   setPlan: (plan) => {
     set({ currentPlan: plan });
     if (typeof window !== 'undefined') {
@@ -39,46 +70,18 @@ export const useAppStore = create<AppState>((set) => ({
     }
   },
 
-  registerGuestStudent: (fullName, mascot, pin, submissionData) => {
-    const newUser: User = {
-      id: `student_${Date.now()}`,
-      role: 'STUDENT',
-      fullName,
-      avatarMascot: mascot,
-      gradeLevel: 3,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-
-    const newSubmission: AssessmentSubmission = {
-      id: `sub_${Date.now()}`,
-      studentId: newUser.id,
-      totalQuestions: submissionData.totalQuestions,
-      correctAnswersCount: submissionData.correctCount,
-      score: submissionData.score,
-      proficiencyLevel: submissionData.proficiencyLevel,
-      answers: submissionData.answers,
-      questionsReview: submissionData.questionsReview,
-      completedAt: new Date().toISOString(),
-    };
-
-    set({
-      currentUser: newUser,
-      currentSubmission: newSubmission,
+  addStars: (amount: number) => {
+    set((state) => {
+      const newStars = state.stars + amount;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('kid_stars', newStars.toString());
+      }
+      return { stars: newStars };
     });
-
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('kid_user', JSON.stringify(newUser));
-      localStorage.setItem('kid_submission', JSON.stringify(newSubmission));
-    }
   },
 
   logout: () => {
+    clearStoredAuth();
     set({ currentUser: null, currentSubmission: null, currentPlan: null });
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('kid_user');
-      localStorage.removeItem('kid_submission');
-      localStorage.removeItem('kid_plan');
-    }
   },
 }));

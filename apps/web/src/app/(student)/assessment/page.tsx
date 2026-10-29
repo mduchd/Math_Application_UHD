@@ -330,7 +330,7 @@ export default function AssessmentPage() {
               <h3 className="font-display text-xl font-black text-slate-800">
                 Xem Lại Lời Giải & Hướng Dẫn
               </h3>
-              <span className="text-xs font-bold text-slate-400">
+              <span className="text-sm font-bold text-slate-700">
                 {correctCount}/{mockQuestions.length} câu đúng
               </span>
             </div>
@@ -354,7 +354,7 @@ export default function AssessmentPage() {
                   >
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <div className="font-bold text-slate-800 text-sm md:text-base">
-                        <span className="text-slate-400 mr-2">Câu {qIndex + 1}:</span>
+                        <span className="text-slate-600 font-extrabold mr-2">Câu {qIndex + 1}:</span>
                         {q.questionText}
                       </div>
                       {isCorrect ? (

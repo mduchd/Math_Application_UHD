@@ -1,79 +1,96 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { LibraryItem, CreateLibraryItemDto, UserRole } from '@kid-elearning/types';
+import { prisma } from '../../database/prisma';
+import { Prisma } from '@prisma/client';
+import { LibraryItem, CreateLibraryItemDto } from '@kid-elearning/types';
 
 @Injectable()
 export class LibraryService {
-  private libraryItems: LibraryItem[] = [
-    {
-      id: 'lib-1',
-      authorId: 'student-01',
-      authorName: 'Nguyễn Văn An',
-      authorRole: 'STUDENT',
-      title: 'Bộ câu đố vui toán học 10 câu ôn tập hè',
-      subject: 'Toán học',
-      visibility: 'PUBLIC', // Đã chọn Công khai
-      itemType: 'QUIZ',
-      questionsCount: 10,
-      content: { topic: 'Toán cộng trừ nâng cao' },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-    {
-      id: 'lib-2',
-      authorId: 'student-01',
-      authorName: 'Nguyễn Văn An',
-      authorRole: 'STUDENT',
-      title: 'Ghi chú bài học riêng về phân số',
-      subject: 'Toán học',
-      visibility: 'PRIVATE', // Để Riêng tư
-      itemType: 'EXERCISE',
-      questionsCount: 5,
-      content: { note: 'Chỉ mình em ôn' },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  ];
-
-  getUserLibrary(userId: string): LibraryItem[] {
-    return this.libraryItems.filter((item) => item.authorId === userId);
-  }
-
-  getPublicLibrary(): LibraryItem[] {
-    return this.libraryItems.filter((item) => item.visibility === 'PUBLIC');
-  }
-
-  createItem(
-    userId: string,
-    userName: string,
-    role: UserRole,
-    dto: CreateLibraryItemDto,
-  ): LibraryItem {
-    const newItem: LibraryItem = {
-      id: `lib-${Date.now()}`,
-      authorId: userId,
-      authorName: userName,
-      authorRole: role,
-      title: dto.title,
-      subject: dto.subject,
-      visibility: dto.visibility, // Người dùng chọn PUBLIC hoặc PRIVATE
-      itemType: dto.itemType,
-      questionsCount: 1,
-      content: dto.content,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+  private formatItem(item: any): LibraryItem {
+    const rawContent = item.quizContent || {};
+    return {
+      id: item.id,
+      authorId: item.authorId,
+      authorName: item.author?.fullName || 'Người dùng',
+      authorRole: item.author?.role || 'STUDENT',
+      title: item.title,
+      subject: item.subject,
+      visibility: item.visibility,
+      itemType: (item.itemType as any) || 'EXERCISE',
+      questionsCount: Array.isArray(rawContent.questions)
+        ? rawContent.questions.length
+        : typeof rawContent.questionsCount === 'number'
+          ? rawContent.questionsCount
+          : 1,
+      content: rawContent,
+      createdAt: item.createdAt.toISOString(),
+      updatedAt: item.updatedAt.toISOString(),
     };
-
-    this.libraryItems.push(newItem);
-    return newItem;
   }
 
-  toggleVisibility(itemId: string, userId: string): LibraryItem {
-    const item = this.libraryItems.find((i) => i.id === itemId && i.authorId === userId);
-    if (!item) {
+  async getUserLibrary(userId: string): Promise<LibraryItem[]> {
+    const items = await prisma.libraryItem.findMany({
+      where: { authorId: userId },
+      include: {
+        author: { select: { fullName: true, role: true } },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return items.map((i) => this.formatItem(i));
+  }
+
+  async getPublicLibrary(): Promise<LibraryItem[]> {
+    const items = await prisma.libraryItem.findMany({
+      where: { visibility: 'PUBLIC' },
+      include: {
+        author: { select: { fullName: true, role: true } },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return items.map((i) => this.formatItem(i));
+  }
+
+  async createItem(
+    userId: string,
+    dto: CreateLibraryItemDto,
+  ): Promise<LibraryItem> {
+    const created = await prisma.libraryItem.create({
+      data: {
+        authorId: userId,
+        title: dto.title.trim(),
+        subject: dto.subject,
+        visibility: dto.visibility || 'PRIVATE',
+        itemType: dto.itemType || 'EXERCISE',
+        quizContent: dto.content as unknown as Prisma.InputJsonValue,
+      },
+      include: {
+        author: { select: { fullName: true, role: true } },
+      },
+    });
+
+    return this.formatItem(created);
+  }
+
+  async toggleVisibility(itemId: string, userId: string): Promise<LibraryItem> {
+    const item = await prisma.libraryItem.findUnique({
+      where: { id: itemId },
+    });
+
+    if (!item || item.authorId !== userId) {
       throw new NotFoundException('Không tìm thấy bài tập hoặc bạn không có quyền sửa!');
     }
-    item.visibility = item.visibility === 'PUBLIC' ? 'PRIVATE' : 'PUBLIC';
-    item.updatedAt = new Date().toISOString();
-    return item;
+
+    const updated = await prisma.libraryItem.update({
+      where: { id: itemId },
+      data: {
+        visibility: item.visibility === 'PUBLIC' ? 'PRIVATE' : 'PUBLIC',
+      },
+      include: {
+        author: { select: { fullName: true, role: true } },
+      },
+    });
+
+    return this.formatItem(updated);
   }
 }

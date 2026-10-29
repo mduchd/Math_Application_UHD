@@ -6,11 +6,27 @@
   --bg-cream: #FDFBF7;
 }
 
+.dark,
+[data-theme="dark"] {
+  --bg-cream: #0B1120;
+  color-scheme: dark;
+}
+
+html, body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 body {
   background-color: var(--bg-cream);
-  color: #2D3748;
+  color: #1E293B;
   user-select: none;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.dark body {
+  color: #F8FAFC;
 }
 
 :focus-visible {
@@ -38,6 +54,29 @@ body {
 
 /* Tactile 3D Button Utility Classes */
 @layer components {
+  /* Commercial Kid Typography Primitives (Bold, Crisp, High Contrast) */
+  .text-kid-h1 {
+    @apply font-display text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight;
+  }
+  .text-kid-h2 {
+    @apply font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-800 tracking-tight leading-snug;
+  }
+  .text-kid-h3 {
+    @apply font-display text-xl sm:text-2xl font-bold text-slate-800 leading-snug;
+  }
+  .text-kid-body {
+    @apply font-body text-base md:text-lg font-semibold text-slate-800 leading-relaxed;
+  }
+  .text-kid-body-bold {
+    @apply font-body text-base md:text-lg font-bold text-slate-900 leading-relaxed;
+  }
+  .text-kid-sub {
+    @apply font-body text-sm md:text-base font-bold text-slate-700 leading-normal;
+  }
+  .text-kid-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-extrabold select-none shadow-sm border-2;
+  }
+
   .btn-tactile-yellow {
     @apply relative font-extrabold text-amber-950 bg-kid-yellow border-2 border-kid-yellow-deep shadow-tactile-yellow select-none;
   }
@@ -54,7 +93,7 @@ body {
     @apply relative font-extrabold text-white bg-kid-purple border-2 border-kid-purple-deep shadow-tactile-purple select-none;
   }
   .btn-tactile-white {
-    @apply relative font-extrabold text-slate-700 bg-white border-2 border-slate-200 shadow-tactile-white select-none;
+    @apply relative font-extrabold text-slate-800 bg-white border-2 border-slate-300 shadow-tactile-white select-none;
   }
 }
 

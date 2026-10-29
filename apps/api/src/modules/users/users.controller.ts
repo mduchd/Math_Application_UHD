@@ -1,5 +1,15 @@
-import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -14,19 +24,24 @@ export class UsersController {
       throw new BadRequestException('Tên học sinh là bắt buộc.');
     }
 
-    return this.usersService.createGuestStudent({
+    const user = await this.usersService.createGuestStudent({
       fullName,
       avatarMascot: body.avatarMascot,
       gradeLevel: body.gradeLevel,
     });
+
+    const { passwordHash, pinHash, ...safeUser } = user as any;
+    return safeUser;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async getUser(@Param('id') id: string) {
     const user = await this.usersService.findById(id);
     if (!user) {
       throw new NotFoundException('Không tìm thấy người dùng.');
     }
-    return user;
+    const { passwordHash, pinHash, ...safeUser } = user as any;
+    return safeUser;
   }
 }

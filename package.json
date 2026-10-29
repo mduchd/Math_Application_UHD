@@ -38,5 +38,9 @@
     "@prisma/engines@5.22.0": true,
     "prisma": true,
     "prisma@5.22.0": true
+  },
+  "dependencies": {
+    "@neon/config": "^1.9.5",
+    "@neon/env": "^1.6.6"
   }
 }

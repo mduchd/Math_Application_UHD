@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FFB300" />
+    </linearGradient>
+
+    <!-- Owl Body Gradient -->
+    <linearGradient id="owlBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFA726" />
+      <stop offset="100%" stop-color="#F57C00" />
+    </linearGradient>
+
+    <!-- Belly Gradient -->
+    <linearGradient id="bellyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDE7" />
+      <stop offset="100%" stop-color="#FFF9C4" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter for 3D depth -->
+    <filter id="tactileShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="2" flood-color="#B26A00" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- 3D Squircle App Icon Container -->
+  <rect x="4" y="4" width="120" height="120" rx="30" fill="url(#bgGrad)" stroke="#FFA000" stroke-width="3" filter="url(#tactileShadow)" />
+
+  <!-- Inner border highlight -->
+  <rect x="7" y="7" width="114" height="114" rx="27" fill="none" stroke="#FFE082" stroke-width="2" opacity="0.8" />
+
+  <!-- Owl Feet -->
+  <ellipse cx="50" cy="110" rx="9" ry="4" fill="#E65100" />
+  <ellipse cx="78" cy="110" rx="9" ry="4" fill="#E65100" />
+
+  <!-- Owl Body -->
+  <ellipse cx="64" cy="78" rx="42" ry="36" fill="url(#owlBody)" />
+
+  <!-- Owl Wings -->
+  <path d="M24 74 C18 86 22 102 34 98 C36 90 32 80 24 74 Z" fill="#E65100" />
+  <path d="M104 74 C110 86 106 102 94 98 C92 90 96 80 104 74 Z" fill="#E65100" />
+
+  <!-- Cream Belly with subtle feather markings -->
+  <ellipse cx="64" cy="85" rx="26" ry="21" fill="url(#bellyGrad)" />
+  <path d="M57 82 Q64 86 71 82" stroke="#FFE082" stroke-width="2" stroke-linecap="round" fill="none" />
+  <path d="M54 90 Q64 94 74 90" stroke="#FFE082" stroke-width="2" stroke-linecap="round" fill="none" />
+
+  <!-- Rosy Cheeks -->
+  <ellipse cx="36" cy="77" rx="6" ry="4" fill="#FF8A80" opacity="0.75" />
+  <ellipse cx="92" cy="77" rx="6" ry="4" fill="#FF8A80" opacity="0.75" />
+
+  <!-- Large Big Eyes (Left & Right) -->
+  <circle cx="48" cy="65" r="15" fill="#FFFFFF" stroke="#FFCC80" stroke-width="1.5" />
+  <circle cx="80" cy="65" r="15" fill="#FFFFFF" stroke="#FFCC80" stroke-width="1.5" />
+
+  <!-- Pupils -->
+  <circle cx="50" cy="65" r="8" fill="#1E293B" />
+  <circle cx="78" cy="65" r="8" fill="#1E293B" />
+
+  <!-- Eye Sparkles (Cute Specular Highlights) -->
+  <circle cx="47" cy="61" r="3.5" fill="#FFFFFF" />
+  <circle cx="53" cy="68" r="1.5" fill="#FFFFFF" />
+  <circle cx="75" cy="61" r="3.5" fill="#FFFFFF" />
+  <circle cx="81" cy="68" r="1.5" fill="#FFFFFF" />
+
+  <!-- Orange Beak -->
+  <polygon points="59,71 69,71 64,80" fill="#FF6F00" stroke="#E65100" stroke-width="1" stroke-linejoin="round" />
+
+  <!-- Academic Graduation Cap (Mũ Cử Nhân / Trạng Nguyên) -->
+  <!-- Cap Skull Base -->
+  <rect x="52" y="37" width="24" height="9" rx="3" fill="#0F172A" />
+  <!-- Cap Diamond Top -->
+  <polygon points="64,20 100,31 64,42 28,31" fill="#1E293B" stroke="#334155" stroke-width="1.5" />
+  <!-- Cap Center Pin -->
+  <circle cx="64" cy="31" r="2.5" fill="#FFD54F" />
+  <!-- Tassel Cord & Fringe -->
+  <path d="M64 31 C76 33 86 42 86 51" stroke="#FFD54F" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  <rect x="83.5" y="50" width="5" height="7" rx="1.5" fill="#FFC107" />
+
+  <!-- Tiny Sparkle Star in corner -->
+  <path d="M102 18 L104 23 L109 25 L104 27 L102 32 L100 27 L95 25 L100 23 Z" fill="#FFFDE7" opacity="0.9" />
+</svg>

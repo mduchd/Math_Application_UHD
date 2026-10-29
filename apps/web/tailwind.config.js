@@ -1,12 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './apps/web/src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
+      borderWidth: {
+        '3': '3px',
+      },
       fontFamily: {
         // The same complete Vietnamese family is used for text and headings,
         // so accented letters never fall back to a mismatched typeface.
@@ -37,6 +40,7 @@ module.exports = {
         },
       },
       boxShadow: {
+        xs: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
         'tactile-yellow': '0 4px 0 0 #D99B00',
         'tactile-green': '0 4px 0 0 #15803D',
         'tactile-orange': '0 4px 0 0 #D84315',

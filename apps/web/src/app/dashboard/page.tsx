@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { getStoredToken } from '@/lib/api';
 
 function DashboardContent() {
   const router = useRouter();
@@ -9,6 +10,13 @@ function DashboardContent() {
 
   useEffect(() => {
     const role = searchParams.get('role');
+    const token = getStoredToken();
+
+    if (!token) {
+      router.replace(`/login?role=${role === 'teacher' ? 'teacher' : 'student'}`);
+      return;
+    }
+
     if (role === 'teacher') {
       router.replace('/classes');
     } else {

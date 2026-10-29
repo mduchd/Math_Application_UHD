@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { m } from 'framer-motion';
 import {
   Users,
@@ -13,12 +13,15 @@ import {
   HeartHandshake,
   Sparkles,
   Star,
-  Award,
+  LogOut,
+  LogIn,
 } from 'lucide-react';
 import { useAppStore } from '@/stores/useAppStore';
 import { sound } from '@/lib/sound';
 import { PageTransition } from '@/components/motion/PageTransition';
 import { gentleSpring } from '@/lib/motion';
+import { AppLogo } from '@/components/kid/AppLogo';
+import { ThemeToggle, useThemeStore } from '@/features/theme';
 
 const studentNavItems = [
   { href: '/classroom', label: 'Lớp học của em', icon: Users, color: 'text-emerald-500', bg: 'bg-emerald-50', activeBg: 'bg-emerald-500 text-white' },
@@ -35,15 +38,40 @@ export default function StudentLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const pathname = usePathname();
   const currentUser = useAppStore((state) => state.currentUser);
+  const stars = useAppStore((state) => state.stars);
+  const hydrate = useAppStore((state) => state.hydrate);
+  const logout = useAppStore((state) => state.logout);
+
+  const theme = useThemeStore((state) => state.theme);
+  const hydrateTheme = useThemeStore((state) => state.hydrate);
+
+  useEffect(() => {
+    hydrate();
+    hydrateTheme();
+  }, [hydrate, hydrateTheme]);
 
   const handleNavClick = () => {
     sound.playPop();
   };
 
+  const handleLogout = () => {
+    sound.playPop();
+    logout();
+    router.push('/login?role=student');
+  };
+
+  const gradeText = currentUser?.gradeLevel ? `Lớp ${currentUser.gradeLevel}` : 'Lớp 3';
+
   return (
-    <div className="min-h-screen flex flex-col bg-kid-cream pb-20 md:pb-0">
+    <div
+      data-theme={theme}
+      className={`min-h-screen flex flex-col bg-kid-cream pb-20 md:pb-0 transition-colors duration-300 relative ${
+        theme === 'dark' ? 'dark' : ''
+      }`}
+    >
       {/* 1. TOPBAR VUI NHỘN CỦA HỌC SINH */}
       <header className="h-18 bg-white border-b-2 border-kid-border px-4 md:px-8 flex items-center justify-between sticky top-0 z-30 shadow-xs">
         {/* Logo trường học & link về Home */}
@@ -52,9 +80,7 @@ export default function StudentLayout({
           onClick={handleNavClick}
           className="flex items-center gap-3 group"
         >
-          <div className="w-11 h-11 bg-amber-400 text-amber-950 rounded-2.5xl flex items-center justify-center font-black text-2xl shadow-tactile-yellow group-hover:scale-105 transition-transform">
-            🦉
-          </div>
+          <AppLogo size="md" variant="icon" />
           <div>
             <h1 className="font-display font-black text-slate-800 text-lg md:text-xl leading-tight">
               Bé Thông Thái
@@ -66,7 +92,7 @@ export default function StudentLayout({
         </Link>
 
         {/* Gamification Stats: Ngôi sao & Khối lớp & Hồ sơ */}
-        <div className="flex items-center gap-2 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-3">
           {/* Huy hiệu sao */}
           <div className="flex items-center gap-1.5 bg-amber-50 border-2 border-amber-200 px-3 py-1.5 rounded-2xl shadow-xs">
             <m.span
@@ -76,30 +102,49 @@ export default function StudentLayout({
             >
               <Star className="w-4 h-4 text-amber-500 fill-amber-400" />
             </m.span>
-            <span className="font-black font-display text-sm text-amber-900">120 Sao</span>
+            <span className="font-black font-display text-sm text-amber-900">{stars} Sao</span>
           </div>
 
           {/* Khối lớp */}
           <span className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 bg-sky-50 text-sky-700 rounded-2xl text-xs font-black border-2 border-sky-200">
-            <Sparkles className="w-3.5 h-3.5" /> Lớp 3
+            <Sparkles className="w-3.5 h-3.5" /> {gradeText}
           </span>
 
           {/* Hồ sơ học sinh */}
           {currentUser ? (
-            <div className="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-2xl border-2 border-emerald-200 shadow-xs">
-              <span className="text-xl">{currentUser.avatarMascot || '🐰'}</span>
-              <span className="font-extrabold text-xs md:text-sm text-emerald-900">
-                {currentUser.fullName}
-              </span>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-2xl border-2 border-emerald-200 shadow-xs">
+                <span className="text-xl">{currentUser.avatarMascot || '🐰'}</span>
+                <span className="font-extrabold text-xs md:text-sm text-emerald-900 max-w-[120px] truncate">
+                  {currentUser.fullName}
+                </span>
+              </div>
+              <button
+                onClick={handleLogout}
+                title="Đăng xuất"
+                className="p-2 rounded-2xl border-2 border-slate-200 hover:border-rose-300 hover:bg-rose-50 text-slate-600 hover:text-rose-600 transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
             </div>
           ) : (
-            <Link
-              href="/assessment"
-              onClick={handleNavClick}
-              className="flex items-center gap-1.5 bg-amber-400 text-amber-950 px-3.5 py-1.5 rounded-2xl text-xs font-black border-2 border-amber-500 shadow-tactile-yellow active:translate-y-1 active:shadow-none transition-transform"
-            >
-              <span>Làm bài khảo sát</span>
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/login?role=student"
+                onClick={handleNavClick}
+                className="flex items-center gap-1 px-3 py-1.5 rounded-2xl text-xs font-black border-2 border-slate-200 hover:border-amber-400 bg-white text-slate-700 transition-colors"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>Đăng nhập</span>
+              </Link>
+              <Link
+                href="/assessment"
+                onClick={handleNavClick}
+                className="flex items-center gap-1.5 bg-amber-400 text-amber-950 px-3.5 py-1.5 rounded-2xl text-xs font-black border-2 border-amber-500 shadow-tactile-yellow active:translate-y-1 active:shadow-none transition-transform"
+              >
+                <span>Khảo sát</span>
+              </Link>
+            </div>
           )}
         </div>
       </header>
@@ -117,25 +162,18 @@ export default function StudentLayout({
                   key={item.href}
                   href={item.href}
                   onClick={handleNavClick}
-                  className={`relative flex items-center gap-3 px-4 py-3 rounded-2.5xl font-black text-sm transition-colors duration-150 select-none ${
+                  className={`group flex items-center gap-3 px-4 py-3 rounded-2.5xl font-display text-sm font-extrabold transition-all relative select-none ${
                     isActive
-                      ? 'text-white shadow-sm'
-                      : 'text-slate-600 hover:bg-white hover:text-slate-900 border-2 border-transparent hover:border-kid-border'
+                      ? `${item.activeBg} shadow-tactile-yellow border-2 border-kid-dark translate-y-[-2px]`
+                      : `hover:${item.bg} text-slate-700 hover:text-slate-900 border-2 border-transparent`
                   }`}
                 >
-                  {isActive ? (
-                    <m.span
-                      layoutId="student-active-nav"
-                      className={`absolute inset-0 rounded-2.5xl ${item.activeBg}`}
-                      transition={gentleSpring}
-                    />
-                  ) : null}
                   <div
-                    className={`relative z-10 w-8 h-8 rounded-xl flex items-center justify-center ${
+                    className={`p-2 rounded-xl transition-colors ${
                       isActive ? 'bg-white/20 text-white' : `${item.bg} ${item.color}`
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-5 h-5" />
                   </div>
                   <span className="relative z-10 font-bold">{item.label}</span>
                 </Link>
@@ -149,7 +187,12 @@ export default function StudentLayout({
               <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden border border-slate-200">
                 <div className="bg-amber-400 h-full w-3/5 rounded-full" />
               </div>
-              <p className="text-[11px] font-bold text-slate-400">Đã hoàn thành 60%</p>
+              <p className="text-xs font-bold text-slate-700">Đã hoàn thành 60%</p>
+            </div>
+
+            {/* Chế độ Sáng / Tối dịu mắt đặt ở chân Sidebar */}
+            <div className="pt-2 flex justify-center">
+              <ThemeToggle variant="pill" className="w-full justify-center" />
             </div>
           </nav>
         </aside>
@@ -160,9 +203,9 @@ export default function StudentLayout({
         </main>
       </div>
 
-      {/* 3. BOTTOM NAVIGATION BAR CHO MOBILE/TABLET */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t-2 border-kid-border px-3 py-2 flex items-center justify-around z-40 shadow-lg">
-        {studentNavItems.slice(0, 5).map((item) => {
+      {/* 3. BOTTOM NAVIGATION BAR CHO MOBILE/TABLET (Cuộn ngang đủ 7 mục) */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t-2 border-kid-border px-2 py-1.5 flex items-center justify-between overflow-x-auto z-40 shadow-lg gap-1">
+        {studentNavItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
           return (
@@ -170,8 +213,8 @@ export default function StudentLayout({
               key={item.href}
               href={item.href}
               onClick={handleNavClick}
-              className={`relative flex flex-col items-center gap-1 p-1 rounded-xl transition-colors ${
-                isActive ? 'text-amber-600' : 'text-slate-400'
+              className={`relative flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl transition-colors shrink-0 ${
+                isActive ? 'text-amber-700 font-extrabold' : 'text-slate-600 font-bold'
               }`}
             >
               {isActive ? (
@@ -182,13 +225,13 @@ export default function StudentLayout({
                 />
               ) : null}
               <div
-                className={`relative z-10 p-1.5 rounded-xl ${
+                className={`relative z-10 p-1 rounded-lg ${
                   isActive ? 'bg-amber-100 text-amber-600' : 'bg-transparent'
                 }`}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-4 h-4" />
               </div>
-              <span className="relative z-10 text-[10px] font-bold">{item.label.split(' ')[0]}</span>
+              <span className="relative z-10 text-[9px] font-black">{item.label.split(' ')[0]}</span>
             </Link>
           );
         })}

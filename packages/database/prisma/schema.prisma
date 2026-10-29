@@ -1,6 +1,7 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 generator client {
@@ -33,7 +34,13 @@ model User {
   id              String             @id @default(uuid())
   role            UserRole
   fullName        String
+  email           String?            @unique
+  username        String?            @unique
+  googleId        String?            @unique
+  passwordHash    String?
+  pinHash         String?
   avatarMascot    String?
+  avatarUrl       String?
   gradeLevel      Int?               // Khối 1 - 5 cho tiểu học
   createdAt       DateTime           @default(now())
   updatedAt       DateTime           @updatedAt

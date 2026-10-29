@@ -5,7 +5,7 @@ import { m } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { Sparkles, KeyRound, User, CheckCircle2, ArrowRight } from 'lucide-react';
 import { useAppStore } from '@/stores/useAppStore';
-import { createGuestStudent, submitAssessment } from '@/lib/api';
+import { registerStudent, submitAssessment } from '@/lib/api';
 import { TactileButton } from '@/components/kid/TactileButton';
 import { sound } from '@/lib/sound';
 import { MotionDialog } from '@/components/motion/MotionDialog';
@@ -65,11 +65,13 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
     setIsSaving(true);
     try {
       const mascotObj = MASCOTS.find((m) => m.id === selectedMascot);
-      const user = await createGuestStudent({
+      const authRes = await registerStudent({
         fullName: fullName.trim(),
+        pin,
         avatarMascot: mascotObj?.icon || '🦉',
         gradeLevel: 3,
       });
+      const user = authRes.user;
 
       // Prepare answers map
       const answersMap: Record<string, string> = submissionData.answers || {};
@@ -84,8 +86,8 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
         correctAnswersCount: gradeResult.correctCount,
         score: gradeResult.score,
         proficiencyLevel: gradeResult.proficiencyLevel,
-        answers: submissionData.answers,
-        questionsReview: submissionData.questionsReview,
+        answers: submissionData.answers || [],
+        questionsReview: submissionData.questionsReview || [],
         completedAt: gradeResult.completedAt,
       });
       setPlan(learningPlan);
@@ -108,21 +110,21 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
         {/* Nút đóng */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-black flex items-center justify-center text-sm"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-black flex items-center justify-center text-sm"
         >
           ✕
         </button>
 
         {/* Header chào đón */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-900 rounded-full text-xs font-black">
-            <Sparkles className="w-4 h-4 text-amber-500" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-950 rounded-full text-xs font-black">
+            <Sparkles className="w-4 h-4 text-amber-600" />
             Lưu Kết Quả & Mở Lộ Trình
           </div>
           <h2 className="font-display text-2xl md:text-3xl font-black text-slate-800">
             Bé Đạt Cấp Độ {levelName}! 🎉
           </h2>
-          <p className="text-xs md:text-sm text-slate-600 font-semibold leading-relaxed">
+          <p className="text-sm md:text-base text-slate-700 font-semibold leading-relaxed">
             Nhập tên và mã PIN 4 số đơn giản để bạn Cú Bi mở khóa Kế hoạch học tập nhé!
           </p>
         </div>

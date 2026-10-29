@@ -14,8 +14,16 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: 'Bé Thông Thái - Trường Học Vui Nhộn',
+  title: 'Trường Học Thông Thái | Nền Tảng Học Toán & Kỹ Năng Sống Tiểu Học Tích Hợp AI',
   description: 'Hệ thống học tập, khảo sát đánh giá năng lực và kỹ năng sống sinh động dành cho học sinh tiểu học',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png' }],
+  },
 };
 
 export default function RootLayout({
@@ -25,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" className={nunito.variable}>
-      <body className="min-h-screen font-body bg-kid-cream text-kid-dark antialiased">
+      <body className="min-h-screen font-body bg-amber-500 text-kid-dark antialiased">
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

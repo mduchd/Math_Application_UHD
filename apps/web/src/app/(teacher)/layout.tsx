@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { m } from 'framer-motion';
 import {
   Home,
@@ -17,9 +17,12 @@ import {
   Bell,
   UserCircle,
   ExternalLink,
+  LogOut,
 } from 'lucide-react';
 import { PageTransition } from '@/components/motion/PageTransition';
 import { gentleSpring } from '@/lib/motion';
+import { useAppStore } from '@/stores/useAppStore';
+import { ThemeToggle, useThemeStore } from '@/features/theme';
 
 const teacherSidebarItems = [
   { href: '/classes', label: 'Lớp học & Duyệt HS', icon: Users },
@@ -36,10 +39,35 @@ export default function TeacherLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const pathname = usePathname();
+  const currentUser = useAppStore((state) => state.currentUser);
+  const hydrate = useAppStore((state) => state.hydrate);
+  const logout = useAppStore((state) => state.logout);
+
+  const theme = useThemeStore((state) => state.theme);
+  const hydrateTheme = useThemeStore((state) => state.hydrate);
+
+  useEffect(() => {
+    hydrate();
+    hydrateTheme();
+  }, [hydrate, hydrateTheme]);
+
+  const handleLogout = () => {
+    logout();
+    router.push('/login?role=teacher');
+  };
+
+  const teacherName = currentUser?.fullName || 'Thầy/Cô Giáo';
+  const gradeText = currentUser?.gradeLevel ? `Khối ${currentUser.gradeLevel} Tiểu Học` : 'Khối 3 Tiểu Học';
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
+    <div
+      data-theme={theme}
+      className={`min-h-screen flex flex-col bg-slate-50 transition-colors duration-300 ${
+        theme === 'dark' ? 'dark' : ''
+      }`}
+    >
       {/* 1. HÀNG NGANG TRÊN CÙNG (Topbar Cổng Giáo Viên) */}
       <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
         {/* Logo & Về trang chủ */}
@@ -50,13 +78,13 @@ export default function TeacherLayout({
             </div>
             <div>
               <span className="font-extrabold text-slate-900 text-base">Cổng Giáo Viên</span>
-              <p className="text-[11px] text-slate-400 font-semibold">Hệ Thống Quản Lý Dạy Học</p>
+              <p className="text-xs text-slate-600 font-bold">Hệ Thống Quản Lý Dạy Học</p>
             </div>
           </Link>
 
           <Link
             href="/"
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-emerald-700 bg-slate-100 hover:bg-emerald-50 px-3 py-1.5 rounded-lg transition-colors border border-slate-200"
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-emerald-700 bg-slate-100 hover:bg-emerald-50 px-3 py-1.5 rounded-lg transition-colors border border-slate-200"
           >
             <Home className="w-3.5 h-3.5" /> Trang chủ
           </Link>
@@ -65,11 +93,11 @@ export default function TeacherLayout({
         {/* Thanh tìm kiếm nhanh */}
         <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
           <div className="relative w-full">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-600 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Tìm kiếm học sinh, bài tập, lớp học..."
-              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-colors"
+              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-colors"
             />
           </div>
         </div>
@@ -92,9 +120,16 @@ export default function TeacherLayout({
           <div className="flex items-center gap-2 pl-3 border-l border-slate-200">
             <UserCircle className="w-8 h-8 text-emerald-700" />
             <div className="hidden lg:block text-left">
-              <p className="text-xs font-bold text-slate-900 leading-tight">Cô Hoàng Mai</p>
-              <p className="text-[10px] text-slate-400 font-semibold">Khối 3 Tiểu Học</p>
+              <p className="text-xs font-bold text-slate-900 leading-tight">{teacherName}</p>
+              <p className="text-xs text-slate-600 font-bold">{gradeText}</p>
             </div>
+            <button
+              onClick={handleLogout}
+              title="Đăng xuất"
+              className="ml-2 p-1.5 text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </header>
@@ -111,10 +146,10 @@ export default function TeacherLayout({
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-colors ${
+                  className={`relative flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-colors ${
                     isActive
                       ? 'text-emerald-800 font-extrabold shadow-2xs'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                      : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
                   }`}
                 >
                   {isActive ? (
@@ -124,7 +159,7 @@ export default function TeacherLayout({
                       transition={gentleSpring}
                     />
                   ) : null}
-                  <Icon className={`relative z-10 w-4 h-4 ${isActive ? 'text-emerald-700' : 'text-slate-400'}`} />
+                  <Icon className={`relative z-10 w-4 h-4 ${isActive ? 'text-emerald-700' : 'text-slate-600'}`} />
                   <span className="relative z-10">{item.label}</span>
                 </Link>
               );
@@ -136,6 +171,11 @@ export default function TeacherLayout({
             <p className="text-[11px] leading-relaxed text-emerald-800">
               Chiếu mã PIN lên bảng thông minh để học sinh dùng máy tính bảng nhập và gửi yêu cầu vào lớp tự động.
             </p>
+          </div>
+
+          {/* Chế độ Sáng / Tối đặt ở chân Sidebar giáo viên */}
+          <div className="pt-2">
+            <ThemeToggle variant="pill" className="w-full justify-center" />
           </div>
         </aside>
 

@@ -49,25 +49,25 @@ export default function StudentsPage() {
                   <h3 className="font-bold text-slate-800 text-sm">{stu.name}</h3>
                   <div className="flex items-center gap-2 mt-0.5">
                     <span
-                      className={`text-[11px] font-bold px-2 py-0.5 rounded-md ${
+                      className={`text-xs font-bold px-2 py-0.5 rounded-md ${
                         stu.level === 'Vận dụng cao'
-                          ? 'bg-emerald-50 text-emerald-700'
+                          ? 'bg-emerald-50 text-emerald-800'
                           : stu.level === 'Vận dụng'
-                          ? 'bg-sky-50 text-sky-700'
-                          : 'bg-amber-50 text-amber-700'
+                          ? 'bg-sky-50 text-sky-800'
+                          : 'bg-amber-50 text-amber-800'
                       }`}
                     >
                       {stu.level}
                     </span>
-                    <span className="text-[11px] text-slate-400">Điểm test: {stu.score}/100</span>
+                    <span className="text-xs font-bold text-slate-700">Điểm test: {stu.score}/100</span>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center gap-6">
                 <div className="hidden sm:block text-right">
-                  <div className="text-xs font-bold text-slate-700">{stu.completedTasks} bài tập</div>
-                  <div className="text-[11px] text-slate-400">Đã hoàn thành</div>
+                  <div className="text-xs font-bold text-slate-800">{stu.completedTasks} bài tập</div>
+                  <div className="text-xs font-bold text-slate-600">Đã hoàn thành</div>
                 </div>
 
                 <div className="flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-800 font-bold rounded-xl text-xs border border-amber-200">

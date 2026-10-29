@@ -188,7 +188,7 @@ export default function GamesPage() {
             <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800">
               {map.icon} {map.title}
             </h1>
-            <p className="text-xs font-bold text-slate-400">
+            <p className="text-sm font-bold text-slate-700">
               Thử thách {index + 1} / {map.questions.length} · Thu thập được {score} ⭐
             </p>
           </div>
@@ -219,7 +219,7 @@ export default function GamesPage() {
           className="rounded-4xl border-2 border-kid-border bg-white p-6 md:p-8 shadow-xs space-y-6"
         >
           <div>
-            <span className="text-xs font-black text-slate-400 uppercase tracking-wider">
+            <span className="text-sm font-black text-slate-700 uppercase tracking-wider">
               Chọn đáp án đúng để vượt ải:
             </span>
             <h2 className="font-display mt-2 text-3xl md:text-4xl font-black text-slate-800">
