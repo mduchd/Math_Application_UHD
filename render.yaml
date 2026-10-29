@@ -4,7 +4,7 @@ services:
     runtime: node
     region: singapore
     plan: free
-    buildCommand: npm ci && npm run db:generate && npm run build --workspace=apps/api
+    buildCommand: npm ci && npm run build:api
     preDeployCommand: npm run db:push
     startCommand: npm run start:prod --workspace=apps/api
     healthCheckPath: /api/health
@@ -13,17 +13,8 @@ services:
       - key: NODE_VERSION
         value: 22
       - key: DATABASE_URL
-        fromDatabase:
-          name: kid-elearning-db
-          property: connectionString
+        sync: false
       - key: JWT_SECRET
         generateValue: true
       - key: GEMINI_API_KEY
         sync: false
-
-databases:
-  - name: kid-elearning-db
-    databaseName: kid_elearning
-    user: kid_elearning
-    region: singapore
-    plan: free
