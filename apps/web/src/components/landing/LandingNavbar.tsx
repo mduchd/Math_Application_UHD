@@ -11,7 +11,6 @@ import {
   BookOpen,
   GraduationCap,
   HelpCircle,
-  ArrowRight,
   ChevronDown,
 } from 'lucide-react';
 import { AppLogo } from '@/components/kid/AppLogo';
@@ -32,7 +31,7 @@ export const LandingNavbar: React.FC = () => {
 
   const navLinks = [
     { label: 'Chương Trình', href: '#chuong-trinh', icon: BookOpen },
-    { label: 'Học Thử AI', href: '#hoc-thu', icon: Sparkles },
+    { label: 'Khám Phá', href: '#kham-pha', icon: Sparkles },
     { label: 'Thầy Cô', href: '#thay-co', icon: GraduationCap },
     { label: 'Hỏi Đáp', href: '#hoi-dap', icon: HelpCircle },
   ];
@@ -105,7 +104,7 @@ export const LandingNavbar: React.FC = () => {
           </div>
 
           <div
-            className={`transition-all duration-300 ease-out flex items-center justify-between gap-4 sm:gap-6 ${
+            className={`transition-all duration-300 ease-out flex items-center justify-between gap-4 sm:gap-8 ${
               isScrolled
                 ? 'w-[90vw] max-w-4xl rounded-full bg-white/90 backdrop-blur-xl shadow-[0_16px_36px_-6px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.06)] border border-slate-200/80 px-4 sm:px-6 py-2 sm:py-2.5'
                 : 'w-[92vw] max-w-5xl bg-white rounded-b-[2rem] sm:rounded-b-[2.5rem] shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05)] px-6 sm:px-8 py-3 sm:py-3.5'
@@ -113,7 +112,7 @@ export const LandingNavbar: React.FC = () => {
           >
             {/* BÊN TRÁI: Logo App + Nav Links */}
             <div className="flex items-center gap-4 sm:gap-7">
-              {/* Logo App đưa sang bên trái */}
+              {/* Logo App */}
               <Link
                 href="/"
                 onClick={() => sound.playPop()}
@@ -129,46 +128,45 @@ export const LandingNavbar: React.FC = () => {
               <nav className="hidden md:flex items-center gap-1 sm:gap-2">
                 <button
                   onClick={() => handleNavClick('#chuong-trinh')}
-                  className="flex items-center gap-1 px-3 py-1.5 text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 rounded-full transition-all"
+                  className="flex items-center gap-1 px-3 py-1.5 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 rounded-full transition-all"
                 >
                   <span>Chương trình</span>
                   <ChevronDown className="w-3.5 h-3.5 text-slate-500 transition-transform" />
                 </button>
 
                 <button
-                  onClick={() => handleNavClick('#hoc-thu')}
-                  className="px-3 py-1.5 text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 rounded-full transition-all"
+                  onClick={() => handleNavClick('#kham-pha')}
+                  className="px-3 py-1.5 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 rounded-full transition-all"
                 >
-                  Học thử AI
+                  Khám phá
                 </button>
 
                 <button
                   onClick={() => handleNavClick('#thay-co')}
-                  className="px-3 py-1.5 text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 rounded-full transition-all"
+                  className="px-3 py-1.5 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 rounded-full transition-all"
                 >
                   Dành cho Thầy Cô
+                </button>
+
+                <button
+                  onClick={() => handleNavClick('#hoi-dap')}
+                  className="px-3 py-1.5 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 rounded-full transition-all"
+                >
+                  Hỏi đáp
                 </button>
               </nav>
             </div>
 
-            {/* BÊN PHẢI: Đăng nhập + CTA Button (Tone màu vàng mật ong - hổ phách đồng bộ thương hiệu) */}
-            <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+            {/* BÊN PHẢI: Nút Đăng nhập + Mobile hamburger button */}
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              {/* Nút Đăng nhập - Tone Vàng Hổ Phách nổi bật */}
               <Link
                 href="/login"
                 onClick={() => sound.playPop()}
-                className="text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-950 px-2 sm:px-3 py-1.5 transition-colors hidden sm:inline-block"
-              >
-                Đăng nhập
-              </Link>
-
-              {/* Button Học thử ngay - Tone Vàng Hổ Phách ấm áp đồng bộ toàn trang */}
-              <Link
-                href="/assessment"
-                onClick={() => sound.playPop()}
                 className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-black text-amber-950 bg-amber-400 hover:bg-amber-300 active:bg-amber-500 rounded-full shadow-[0_4px_14px_rgba(245,158,11,0.25)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 select-none border border-amber-300/60"
               >
-                <span>Học thử ngay</span>
-                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+                <LogIn className="w-4 h-4 text-amber-950 stroke-[2.5]" />
+                <span>Đăng nhập</span>
               </Link>
 
               {/* Mobile hamburger button */}
@@ -226,22 +224,10 @@ export const LandingNavbar: React.FC = () => {
                   sound.playPop();
                   setMobileMenuOpen(false);
                 }}
-                className="w-full py-3 bg-amber-50 hover:bg-amber-100 text-amber-950 font-extrabold text-sm rounded-full text-center flex items-center justify-center gap-2 border border-amber-200 transition-colors"
-              >
-                <LogIn className="w-4 h-4 text-amber-900" />
-                <span>Đăng Nhập Tài Khoản</span>
-              </Link>
-
-              <Link
-                href="/assessment"
-                onClick={() => {
-                  sound.playPop();
-                  setMobileMenuOpen(false);
-                }}
                 className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-amber-950 font-black text-sm rounded-full border-2 border-amber-500 shadow-md text-center flex items-center justify-center gap-2 transition-all"
               >
-                <span>Bắt Đầu Học Thử Miễn Phí</span>
-                <ArrowRight className="w-4 h-4" />
+                <LogIn className="w-4 h-4 text-amber-950 stroke-[2.5]" />
+                <span>Đăng Nhập Tài Khoản</span>
               </Link>
             </div>
           </m.div>
