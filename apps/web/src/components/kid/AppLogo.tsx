@@ -246,7 +246,7 @@ export const AppLogo: React.FC<AppLogoProps> = ({
         <div className="flex items-center gap-1.5">
           <span
             className={`font-black tracking-tight text-slate-800 leading-none ${textStyles.title}`}
-            style={{ fontFamily: 'var(--font-nunito), system-ui, sans-serif' }}
+            style={{ fontFamily: 'var(--font-plus-jakarta-sans), system-ui, sans-serif' }}
           >
             Toán Vui
           </span>

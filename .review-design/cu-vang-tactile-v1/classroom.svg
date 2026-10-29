@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="256" height="256">
+  <title>Lớp học — Cú Vàng Tactile</title>
+  <rect width="24" height="24" rx="5" fill="#FDFBF7"/>
+  <path d="m3.6 9.8 8.4-5.4 8.4 5.4v8.5c0 1.2-1 2.2-2.2 2.2H5.8c-1.2 0-2.2-1-2.2-2.2V9.8Z" fill="#FFCA28" stroke="#4B2E16" stroke-width="2.15" stroke-linejoin="round"/>
+  <path d="M7.6 20.5v-5.1h8.8v5.1" fill="#FFF8D9" stroke="#4B2E16" stroke-width="2.15" stroke-linejoin="round"/>
+  <circle cx="8.5" cy="10.6" r="1.25" fill="#38BDF8" stroke="#4B2E16" stroke-width="1.35"/>
+  <circle cx="15.5" cy="10.6" r="1.25" fill="#38BDF8" stroke="#4B2E16" stroke-width="1.35"/>
+</svg>

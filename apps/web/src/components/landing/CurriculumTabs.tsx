@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { m, AnimatePresence } from 'framer-motion';
-import { Volume2, ArrowRight, Check } from 'lucide-react';
+import { Volume2, ArrowRight } from 'lucide-react';
+import { KidLearnIcon, KidLifeSkillsIcon } from '@/components/kid/icons';
 import { TactileButton } from '@/components/kid/TactileButton';
 import { sound } from '@/lib/sound';
 
@@ -186,16 +187,14 @@ export const CurriculumTabs: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Math column */}
               <div className="bg-white rounded-3xl border-2 border-amber-200 p-5 space-y-3 shadow-xs">
-                <div className="flex items-center gap-2 text-amber-800 font-display font-black text-base sm:text-lg">
-                  <span className="text-xl">📐</span>
+                <div className="flex items-center gap-2 text-amber-900 font-display font-black text-base sm:text-lg">
+                  <KidLearnIcon className="w-5 h-5 shrink-0" />
                   <span>Chuyên Đề Toán Học Trọng Tâm</span>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {currentGradeData.mathTopics.map((topic, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-bold text-slate-700">
-                      <div className="w-5 h-5 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
-                        <Check className="w-3 h-3 stroke-[3]" />
-                      </div>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" aria-hidden="true" />
                       <span>{topic}</span>
                     </div>
                   ))}
@@ -204,16 +203,14 @@ export const CurriculumTabs: React.FC = () => {
 
               {/* Life skills column */}
               <div className="bg-white rounded-3xl border-2 border-emerald-200 p-5 space-y-3 shadow-xs">
-                <div className="flex items-center gap-2 text-emerald-800 font-display font-black text-base sm:text-lg">
-                  <span className="text-xl">🛡️</span>
-                  <span>Kỹ Năng Sống & Rèn Nhân Cách</span>
+                <div className="flex items-center gap-2 text-emerald-900 font-display font-black text-base sm:text-lg">
+                  <KidLifeSkillsIcon className="w-5 h-5 shrink-0" />
+                  <span>Kỹ Năng Sống &amp; Rèn Nhân Cách</span>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {currentGradeData.lifeSkillsTopics.map((topic, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-bold text-slate-700">
-                      <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
-                        <Check className="w-3 h-3 stroke-[3]" />
-                      </div>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" aria-hidden="true" />
                       <span>{topic}</span>
                     </div>
                   ))}
@@ -224,7 +221,7 @@ export const CurriculumTabs: React.FC = () => {
             {/* Bottom action */}
             <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
               <span className="text-sm font-bold text-slate-700">
-                ⭐ Tất cả bài học đều tích hợp bài tập tương tác & chấm điểm tự động.
+                Tất cả bài học đều tích hợp bài tập tương tác &amp; chấm điểm tự động.
               </span>
               <TactileButton
                 variant="yellow"

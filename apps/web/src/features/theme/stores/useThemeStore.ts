@@ -12,6 +12,19 @@ interface ThemeState {
 
 const STORAGE_KEY = 'kid_app_theme';
 
+const applyThemeToDOM = (theme: ThemeMode) => {
+  if (typeof window === 'undefined') return;
+  try {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch {}
+};
+
 export const useThemeStore = create<ThemeState>((set, get) => ({
   theme: 'light',
   isHydrated: false,
@@ -31,6 +44,8 @@ export const useThemeStore = create<ThemeState>((set, get) => ({
         initialTheme = prefersDark ? 'dark' : 'light';
       }
 
+      applyThemeToDOM(initialTheme);
+
       set({
         theme: initialTheme,
         isHydrated: true,
@@ -42,6 +57,7 @@ export const useThemeStore = create<ThemeState>((set, get) => ({
 
   setTheme: (theme: ThemeMode, playSound = true) => {
     set({ theme });
+    applyThemeToDOM(theme);
 
     if (typeof window !== 'undefined') {
       try {

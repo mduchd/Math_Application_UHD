@@ -1,15 +1,23 @@
 import type { Metadata } from 'next';
-import { Nunito } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import { MotionProvider } from '@/components/motion/MotionProvider';
+import { ThemeScript } from '@/features/theme';
 import './globals.css';
 
-// Nunito has a rounded, friendly shape while keeping Vietnamese accents in the
-// same typeface as the rest of each word. This avoids mixed-size glyphs in
-// headings such as "Bản Đồ Trò Chơi".
-const nunito = Nunito({
+// Inter keeps longer Vietnamese learning content crisp and highly legible.
+const inter = Inter({
   subsets: ['latin', 'vietnamese'],
   weight: ['400', '500', '600', '700', '800', '900'],
-  variable: '--font-nunito',
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+// Plus Jakarta Sans gives screen and section titles a distinctive, polished
+// SaaS-style hierarchy without affecting body-text readability.
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin', 'vietnamese'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-plus-jakarta-sans',
   display: 'swap',
 });
 
@@ -33,8 +41,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi" className={nunito.variable}>
-      <body className="min-h-screen font-body bg-amber-500 text-kid-dark antialiased">
+    <html lang="vi" suppressHydrationWarning className={`${inter.variable} ${plusJakartaSans.variable}`}>
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="min-h-screen font-body bg-kid-cream dark:bg-[#0B1120] text-kid-dark dark:text-slate-100 antialiased">
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

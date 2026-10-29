@@ -1,12 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { m, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { Star, CheckCircle, RotateCcw, ArrowRight, Lightbulb } from 'lucide-react';
+import {
+  ArrowRight,
+  Calculator,
+  CheckCircle,
+  Lightbulb,
+  RotateCcw,
+  ShieldCheck,
+} from 'lucide-react';
 import { AudioButton } from '@/components/shared/AudioButton';
-import { TactileButton } from '@/components/kid/TactileButton';
 import { sound } from '@/lib/sound';
 
 interface Question {
@@ -24,7 +30,7 @@ const SAMPLE_QUESTIONS: Question[] = [
   {
     id: 'm1',
     category: 'math',
-    title: 'Toán Vui Đếm Thỏ 🐰',
+    title: 'Toán vui đếm thỏ',
     question: 'Bác Thỏ có 3 củ cà rốt trong giỏ. Bé gấu tặng thêm 2 củ nữa. Hỏi bác Thỏ có tất cả mấy củ cà rốt?',
     illustration: '🥕 🥕 🥕  +  🥕 🥕',
     options: [
@@ -38,7 +44,7 @@ const SAMPLE_QUESTIONS: Question[] = [
   {
     id: 's1',
     category: 'lifeskill',
-    title: 'Kỹ Năng An Toàn Khi Tan Trường 🎒',
+    title: 'Kỹ năng an toàn khi tan trường',
     question: 'Khi tan trường chưa thấy bố mẹ đến đón, có một người lạ mặt tiến lại cho kẹo và rủ bé lên xe máy đi cùng. Bé sẽ làm gì?',
     illustration: '🏫 🚶‍♂️ 🍬 🛵',
     options: [
@@ -58,7 +64,7 @@ export const InteractiveQuizDemo: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const currentQuestion =
-    SAMPLE_QUESTIONS.find((q) => q.category === activeTab) || SAMPLE_QUESTIONS[0];
+    SAMPLE_QUESTIONS.find((question) => question.category === activeTab) ?? SAMPLE_QUESTIONS[0];
 
   const handleSelectTab = (tab: 'math' | 'lifeskill') => {
     sound.playPop();
@@ -67,17 +73,17 @@ export const InteractiveQuizDemo: React.FC = () => {
     setIsSubmitted(false);
   };
 
-  const handleSelectOption = (optionId: string) => {
-    sound.playPop();
+  const handleSelectOption = useCallback((optionId: string) => {
     if (isSubmitted) return;
+    sound.playPop();
     setSelectedOption(optionId);
-  };
+  }, [isSubmitted]);
 
-  const handleCheckAnswer = () => {
+  const handleCheckAnswer = useCallback(() => {
     if (!selectedOption) return;
     setIsSubmitted(true);
 
-    const chosen = currentQuestion.options.find((o) => o.id === selectedOption);
+    const chosen = currentQuestion.options.find((option) => option.id === selectedOption);
     if (chosen?.isCorrect) {
       sound.playSuccess();
       try {
@@ -88,188 +94,225 @@ export const InteractiveQuizDemo: React.FC = () => {
           colors: ['#FFCA28', '#22C55E', '#38BDF8', '#AB47BC', '#FF5252'],
         });
       } catch {
-        // Safe fallback
+        // Canvas effects are optional; success feedback remains available without them.
       }
     }
-  };
+  }, [currentQuestion.options, selectedOption]);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     sound.playPop();
     setSelectedOption(null);
     setIsSubmitted(false);
-  };
+  }, []);
 
-  const selectedAnswerObj = currentQuestion.options.find((o) => o.id === selectedOption);
-  const isCorrect = selectedAnswerObj?.isCorrect;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+
+      const target = e.target as HTMLElement | null;
+      if (
+        target?.tagName === 'INPUT' ||
+        target?.tagName === 'TEXTAREA' ||
+        target?.tagName === 'SELECT' ||
+        target?.isContentEditable
+      ) {
+        return;
+      }
+
+      if (isSubmitted) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleReset();
+        }
+        return;
+      }
+
+      const key = e.key.toLowerCase();
+      let targetId = '';
+      if (key === 'a' || key === 'â' || key === 'ă' || key === '1') targetId = 'a';
+      else if (key === 'b' || key === '2') targetId = 'b';
+      else if (key === 'c' || key === '3') targetId = 'c';
+
+      if (targetId) {
+        const exists = currentQuestion.options.some((o) => o.id === targetId);
+        if (exists) {
+          e.preventDefault();
+          handleSelectOption(targetId);
+        }
+        return;
+      }
+
+      if (e.key === 'Enter' && selectedOption) {
+        e.preventDefault();
+        handleCheckAnswer();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentQuestion.options, handleCheckAnswer, handleReset, handleSelectOption, isSubmitted, selectedOption]);
+
+  const selectedAnswer = currentQuestion.options.find((option) => option.id === selectedOption);
+  const isCorrect = selectedAnswer?.isCorrect;
 
   return (
-    <section id="hoc-thu" className="py-16 md:py-24 bg-white relative overflow-hidden">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Heading */}
-        <div className="text-center space-y-3 max-w-2xl mx-auto mb-10">
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 tracking-tight">
+    <section id="hoc-thu" className="bg-[#fcfbf8] py-16 md:py-24">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-10 max-w-2xl space-y-3 text-center">
+          <h2 className="font-display text-2xl font-black tracking-tight text-slate-800 sm:text-3xl md:text-4xl">
             Thử tài bé ngay hôm nay!
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base font-bold">
-            Không cần tài khoản, bé có thể bấm loa nghe đề bài và giải thử ngay 1 câu đố dưới đây:
+          <p className="text-sm font-bold text-slate-700 sm:text-base">
+            Không cần tài khoản, bé có thể bấm loa nghe đề bài và giải thử ngay một câu đố dưới đây.
           </p>
         </div>
 
-        {/* 3D Claymorphic Tablet Mockup */}
-        <div className="bg-amber-50/70 border-4 border-amber-300 rounded-5xl p-4 sm:p-8 shadow-xl relative max-w-3xl mx-auto">
-          {/* Top Category Tabs */}
-          <div className="flex items-center justify-center gap-3 mb-6">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-[#e8e3d9] bg-white p-4 shadow-[0_16px_40px_rgb(42_37_28_/_0.08)] sm:p-8">
+          <div
+            className="mx-auto mb-8 flex w-full max-w-md items-center gap-1 rounded-xl bg-stone-100 p-1"
+            role="group"
+            aria-label="Chọn chủ đề câu hỏi"
+          >
             <button
+              type="button"
               onClick={() => handleSelectTab('math')}
-              className={`px-5 py-2.5 rounded-2xl font-black text-xs sm:text-sm font-display transition-all border-2 ${
+              aria-pressed={activeTab === 'math'}
+              className={`flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 font-display text-sm font-extrabold transition-colors ${
                 activeTab === 'math'
-                  ? 'bg-amber-400 text-amber-950 border-amber-500 shadow-tactile-yellow scale-105'
-                  : 'bg-white text-slate-600 border-slate-200 hover:bg-amber-50'
+                  ? 'bg-amber-400 text-amber-950'
+                  : 'text-slate-700 hover:bg-white hover:text-slate-900'
               }`}
             >
-              🔢 1. Toán Vui Đếm Số
+              <Calculator className="h-4 w-4" aria-hidden="true" />
+              <span>Toán vui</span>
             </button>
             <button
+              type="button"
               onClick={() => handleSelectTab('lifeskill')}
-              className={`px-5 py-2.5 rounded-2xl font-black text-xs sm:text-sm font-display transition-all border-2 ${
+              aria-pressed={activeTab === 'lifeskill'}
+              className={`flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 font-display text-sm font-extrabold transition-colors ${
                 activeTab === 'lifeskill'
-                  ? 'bg-emerald-400 text-emerald-950 border-emerald-500 shadow-tactile-green scale-105'
-                  : 'bg-white text-slate-600 border-slate-200 hover:bg-emerald-50'
+                  ? 'bg-amber-400 text-amber-950'
+                  : 'text-slate-700 hover:bg-white hover:text-slate-900'
               }`}
             >
-              🛡️ 2. Kỹ Năng Sống An Toàn
+              <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+              <span>Kỹ năng sống</span>
             </button>
           </div>
 
-          {/* Question Card */}
-          <div className="bg-white rounded-3xl border-2 border-amber-200 p-5 sm:p-7 space-y-5 shadow-xs">
-            {/* Header: Title & Audio Speaker */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
-              <span className="font-display font-black text-base sm:text-lg text-slate-800">
+          <div className="space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
+              <h3 className="font-display text-base font-black text-slate-800 sm:text-lg">
                 {currentQuestion.title}
-              </span>
+              </h3>
               <AudioButton textToRead={currentQuestion.question} />
             </div>
 
-            {/* Illustration */}
-            <div className="bg-amber-50/50 border border-amber-100 rounded-2xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl tracking-widest select-none">
+            <div className="rounded-2xl bg-amber-50 px-4 py-5 text-center">
+              <div className="select-none text-2xl tracking-widest sm:text-3xl">
                 {currentQuestion.illustration}
               </div>
             </div>
 
-            {/* Question Text */}
-            <p className="text-slate-800 text-sm sm:text-base font-bold leading-relaxed">
+            <p className="text-sm font-bold leading-relaxed text-slate-800 sm:text-base">
               {currentQuestion.question}
             </p>
 
-            {/* Options List */}
-            <div className="grid grid-cols-1 gap-3 pt-1">
+            <div className="grid grid-cols-1 gap-3">
               {currentQuestion.options.map((option) => {
                 const isSelected = selectedOption === option.id;
                 let optionStyle =
-                  'bg-slate-50 border-slate-200 text-slate-700 hover:border-amber-400 hover:bg-amber-50/60';
+                  'border-slate-200 bg-white text-slate-800 hover:border-amber-400 hover:bg-amber-50/50';
 
                 if (isSelected && !isSubmitted) {
-                  optionStyle = 'bg-amber-100 border-amber-500 text-amber-950 shadow-xs';
-                } else if (isSubmitted) {
-                  if (option.isCorrect) {
-                    optionStyle = 'bg-emerald-100 border-emerald-500 text-emerald-950 shadow-xs';
-                  } else if (isSelected && !option.isCorrect) {
-                    optionStyle = 'bg-rose-100 border-rose-400 text-rose-900';
-                  }
+                  optionStyle = 'border-amber-500 bg-amber-50 text-amber-950';
+                } else if (isSubmitted && option.isCorrect) {
+                  optionStyle = 'border-emerald-500 bg-emerald-50 text-emerald-950';
+                } else if (isSubmitted && isSelected) {
+                  optionStyle = 'border-rose-400 bg-rose-50 text-rose-900';
                 }
 
                 return (
                   <button
                     key={option.id}
+                    type="button"
                     disabled={isSubmitted}
                     onClick={() => handleSelectOption(option.id)}
-                    className={`flex items-center justify-between px-4 py-3 sm:py-3.5 rounded-2xl border-2 text-left font-bold text-xs sm:text-sm transition-all select-none ${optionStyle}`}
+                    aria-pressed={isSelected}
+                    className={`flex min-h-14 items-center justify-between rounded-xl border px-4 py-3 text-left text-sm font-bold transition-colors disabled:cursor-default ${optionStyle}`}
                   >
                     <span>{option.text}</span>
                     {isSubmitted && option.isCorrect && (
-                      <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 ml-2" />
+                      <CheckCircle className="ml-2 h-5 w-5 shrink-0 text-emerald-600" aria-hidden="true" />
                     )}
                   </button>
                 );
               })}
             </div>
 
-            {/* Feedback Box (Shown after submit) */}
             <AnimatePresence>
               {isSubmitted && (
                 <m.div
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  className={`p-4 rounded-2xl border-2 flex items-start gap-3 ${
+                  className={`flex items-start gap-3 rounded-xl border-l-4 p-4 ${
                     isCorrect
-                      ? 'bg-emerald-50 border-emerald-300 text-emerald-950'
-                      : 'bg-amber-50 border-amber-300 text-amber-950'
+                      ? 'border-emerald-500 bg-emerald-50 text-emerald-950'
+                      : 'border-amber-400 bg-amber-50 text-amber-950'
                   }`}
                 >
-                  <div className="text-2xl shrink-0">{isCorrect ? '🎉' : '💡'}</div>
-                  <div className="space-y-1 text-xs sm:text-sm font-bold">
-                    <div className="flex items-center gap-1.5 font-black">
-                      {isCorrect ? (
-                        <>
-                          <span className="text-emerald-700">Tuyệt vời! Bé trả lời đúng rồi!</span>
-                          <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-amber-200 text-amber-900 rounded-full text-xs">
-                            <Star className="w-3 h-3 fill-amber-500 text-amber-500" /> +{currentQuestion.rewardStars} Sao
-                          </span>
-                        </>
-                      ) : (
-                        <span className="text-amber-800">Chưa chuẩn xác rồi, nhưng không sao!</span>
-                      )}
-                    </div>
-                    <p className="text-slate-600 font-semibold">{currentQuestion.explanation}</p>
+                  {isCorrect ? (
+                    <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
+                  ) : (
+                    <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
+                  )}
+                  <div className="space-y-1 text-sm font-bold">
+                    <p className="font-black">
+                      {isCorrect
+                        ? `Tuyệt vời! Bé trả lời đúng và nhận ${currentQuestion.rewardStars} sao.`
+                        : 'Chưa chuẩn xác rồi, nhưng không sao!'}
+                    </p>
+                    <p className="font-semibold text-slate-700">{currentQuestion.explanation}</p>
                   </div>
                 </m.div>
               )}
             </AnimatePresence>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               {!isSubmitted ? (
-                <TactileButton
-                  variant="yellow"
-                  size="md"
+                <button
+                  type="button"
                   disabled={!selectedOption}
                   onClick={handleCheckAnswer}
-                  className="w-full sm:w-auto font-black font-display text-amber-950"
+                  className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-amber-400 px-5 py-2.5 font-display text-sm font-black text-amber-950 transition-colors hover:bg-amber-300 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500 sm:w-auto"
                 >
-                  <span>Kiểm Tra Đáp Án</span>
-                  <CheckCircle className="w-4 h-4 ml-1" />
-                </TactileButton>
+                  Kiểm tra đáp án
+                </button>
               ) : (
-                <div className="flex items-center gap-2 w-full sm:w-auto">
+                <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
                   <button
+                    type="button"
                     onClick={handleReset}
-                    className="flex items-center gap-1 px-4 py-2.5 rounded-2xl border border-slate-300 bg-white hover:bg-slate-50 text-xs font-black text-slate-700"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-extrabold text-slate-800 transition-colors hover:bg-slate-50"
                   >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Làm Lại</span>
+                    <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
+                    Làm lại
                   </button>
-                  <TactileButton
-                    variant="yellow"
-                    size="md"
+                  <button
+                    type="button"
                     onClick={() => {
                       sound.playPop();
                       router.push('/assessment');
                     }}
-                    className="font-black font-display text-amber-950"
+                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-amber-400 px-5 py-2.5 font-display text-sm font-black text-amber-950 transition-colors hover:bg-amber-300"
                   >
-                    <span>Làm Khảo Sát Đầy Đủ</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </TactileButton>
+                    Làm khảo sát đầy đủ
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </button>
                 </div>
               )}
-
-              <span className="text-sm font-bold text-slate-700 flex items-center gap-1.5">
-                <Lightbulb className="w-4 h-4 text-amber-600 shrink-0" />
-                Bấm nút Loa ở góc để nghe Cú Vàng đọc đề bài nhé! 🔊
-              </span>
             </div>
           </div>
         </div>

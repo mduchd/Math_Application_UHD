@@ -1,22 +1,21 @@
 'use client';
 
 import React from 'react';
-import { m } from 'framer-motion';
-import { Star, Quote, CheckCircle2 } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 export const TestimonialsStats: React.FC = () => {
   const stats = [
-    { value: '50,000+', label: 'Bài tập hoàn thành mỗi tuần', icon: '📝' },
-    { value: '1,200+', label: 'Lớp học tiểu học hoạt động', icon: '🏫' },
-    { value: '98.5%', label: 'Phụ huynh thấy con tự giác hơn', icon: '❤️' },
-    { value: '0', label: 'Quảng cáo & An toàn tuyệt đối', icon: '🛡️' },
+    { value: '50,000+', label: 'Bài tập hoàn thành mỗi tuần' },
+    { value: '1,200+', label: 'Lớp học tiểu học hoạt động' },
+    { value: '98.5%', label: 'Phụ huynh thấy con tự giác hơn' },
+    { value: '0', label: 'Quảng cáo & An toàn tuyệt đối' },
   ];
 
   const testimonials = [
     {
       author: 'Cô Nguyễn Thị Mai Lan',
       role: 'Giáo viên Chủ nhiệm Lớp 2A • TH Thực Nghiệm (Hà Nội)',
-      avatar: '👩‍🏫',
+      avatar: 'Cô Lan',
       rating: 5,
       content:
         'Từ ngày áp dụng nền tảng cho lớp 2A, các con mê tít việc giải toán để tích sao nuôi Cú Vàng. Tính năng phát mã PIN lớp học 6 số giúp các bé vào lớp trong 10 giây mà không cần phụ huynh phải tạo email hay nhớ mật khẩu.',
@@ -24,7 +23,7 @@ export const TestimonialsStats: React.FC = () => {
     {
       author: 'Chị Trần Thu Hương',
       role: 'Phụ huynh bé Gia Huy (Lớp 1) • Quận 3 (TP.HCM)',
-      avatar: '👩',
+      avatar: 'Chị Hương',
       rating: 5,
       content:
         'Bé nhà mình mới vào lớp 1 chưa đọc chữ nhanh, nhưng nhờ có nút loa đọc to câu hỏi tiếng Việt rất tự nhiên nên con tự tin ngồi làm bài độc lập, không cần mẹ phải ngồi kèm chỉ từng chữ như trước nữa.',
@@ -32,7 +31,7 @@ export const TestimonialsStats: React.FC = () => {
     {
       author: 'Thầy Lê Hoàng Nam',
       role: 'Tổ trưởng Chuyên môn Khối 4 • TH Chu Văn An',
-      avatar: '👨‍🏫',
+      avatar: 'Thầy Nam',
       rating: 5,
       content:
         'Biểu đồ thống kê 3 mức năng lực (Hoàn thành tốt, Hoàn thành, Cần cố gắng) thiết kế đúng theo chuẩn Thông tư 27 của Bộ GD&ĐT. Tôi xuất báo cáo gửi phụ huynh cuối tuần cực kỳ khoa học và nhàn nhã.',
@@ -49,7 +48,6 @@ export const TestimonialsStats: React.FC = () => {
               key={idx}
               className="bg-kid-cream border-2 border-amber-200 rounded-3xl p-5 text-center space-y-1 shadow-xs hover:border-amber-400 transition-colors"
             >
-              <div className="text-2xl mb-1">{item.icon}</div>
               <div className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-slate-800">
                 {item.value}
               </div>
@@ -89,8 +87,8 @@ export const TestimonialsStats: React.FC = () => {
 
               {/* Author info */}
               <div className="flex items-center gap-3 pt-3 border-t border-amber-200/60">
-                <div className="w-10 h-10 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-xl shrink-0">
-                  {t.avatar}
+                <div className="w-10 h-10 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center font-display font-black text-xs text-amber-950 shrink-0">
+                  {t.avatar.slice(0, 2)}
                 </div>
                 <div>
                   <div className="font-display font-black text-slate-800 text-xs sm:text-sm">

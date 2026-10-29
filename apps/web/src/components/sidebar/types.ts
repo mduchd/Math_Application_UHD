@@ -1,4 +1,6 @@
-import type { LucideIcon } from 'lucide-react';
+import type { ComponentType, SVGProps } from 'react';
+
+export type SidebarIcon = ComponentType<SVGProps<SVGSVGElement>>;
 
 export interface SidebarBadge {
   text: string | number;
@@ -8,7 +10,7 @@ export interface SidebarBadge {
 export interface SidebarNavItem {
   href: string;
   label: string;
-  icon: LucideIcon;
+  icon: SidebarIcon;
   badge?: SidebarBadge | string | number;
   color?: string;
   activeColor?: string;

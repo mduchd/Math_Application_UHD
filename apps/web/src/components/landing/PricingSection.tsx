@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { m } from 'framer-motion';
-import { Check, Sparkles, Star, ShieldCheck, ArrowRight, School, User, GraduationCap } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { TactileButton } from '@/components/kid/TactileButton';
 import { sound } from '@/lib/sound';
 
@@ -16,7 +16,6 @@ export const PricingSection: React.FC = () => {
       id: 'free',
       name: 'Mầm Non Khởi Đầu',
       target: 'Dành cho bé & phụ huynh học thử',
-      icon: '🌱',
       badge: 'Miễn Phí Trọn Đời',
       priceMonthly: 0,
       priceYearly: 0,
@@ -41,7 +40,6 @@ export const PricingSection: React.FC = () => {
       id: 'pro-student',
       name: 'Trạng Nguyên Nhí (Pro)',
       target: 'Gói gia đình & cá nhân hóa cao cấp',
-      icon: '⭐',
       badge: 'Phổ Biến Nhất',
       priceMonthly: 79000,
       priceYearly: 59000, // 708k/year
@@ -67,7 +65,6 @@ export const PricingSection: React.FC = () => {
       id: 'pro-teacher',
       name: 'Sư Phạm & Lớp Học',
       target: 'Dành cho Thầy Cô & Nhà Trường',
-      icon: '🏫',
       badge: 'Giải Pháp Giáo Dục',
       priceMonthly: 149000,
       priceYearly: 119000,
@@ -153,24 +150,18 @@ export const PricingSection: React.FC = () => {
               }`}
             >
               {plan.highlight && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-amber-500 to-amber-400 text-amber-950 rounded-full text-xs font-black shadow-xs flex items-center gap-1">
-                  <Star className="w-3.5 h-3.5 fill-amber-950 text-amber-950" />
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-amber-500 to-amber-400 text-amber-950 rounded-full text-xs font-black shadow-xs">
                   <span>Gói Được Yêu Thích Nhất</span>
                 </div>
               )}
 
               <div className="space-y-5">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-3xl p-2 bg-slate-50 rounded-2xl border border-slate-100">
-                      {plan.icon}
-                    </span>
-                    <div>
-                      <h3 className="font-display font-black text-xl text-slate-800">
-                        {plan.name}
-                      </h3>
-                      <p className="text-xs font-bold text-slate-600">{plan.target}</p>
-                    </div>
+                  <div>
+                    <h3 className="font-display font-black text-xl text-slate-800">
+                      {plan.name}
+                    </h3>
+                    <p className="text-xs font-bold text-slate-600 mt-0.5">{plan.target}</p>
                   </div>
                 </div>
 

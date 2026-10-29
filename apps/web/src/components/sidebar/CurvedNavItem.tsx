@@ -64,12 +64,12 @@ export const CurvedNavItem: React.FC<CurvedNavItemProps> = ({
         title={collapsed ? item.label : undefined}
         className={`group relative flex items-center transition-all duration-200 select-none ${
           collapsed
-            ? `justify-center py-2.5 ${
+            ? `justify-center py-3 ${
                 isActive
                   ? 'ml-3 -mr-px rounded-l-2xl rounded-r-none'
                   : 'mx-2.5 rounded-2xl'
               }`
-            : `gap-3 pl-3 pr-3 py-2 ${
+            : `gap-3.5 pl-4 pr-3 py-3 ${
                 isActive
                   ? 'ml-3 -mr-px rounded-l-3xl rounded-r-none'
                   : 'mx-3 rounded-2xl'
@@ -80,16 +80,11 @@ export const CurvedNavItem: React.FC<CurvedNavItemProps> = ({
             : 'text-amber-950 hover:text-amber-950 hover:bg-amber-300/70 dark:text-amber-200/90 dark:hover:text-amber-100 dark:hover:bg-amber-900/40'
         }`}
       >
-        {/* Active side indicator / icon container */}
-        <div
-          className={`shrink-0 p-2 rounded-xl transition-all duration-200 ${
-            isActive
-              ? 'bg-amber-400 text-amber-950 shadow-tactile-yellow border-2 border-amber-500 scale-105'
-              : 'bg-amber-500/30 text-amber-950 dark:bg-amber-900/50 dark:text-amber-200 group-hover:bg-amber-500/50 group-hover:scale-105'
-          }`}
-        >
-          <Icon className="w-4.5 h-4.5 stroke-[2.4]" />
-        </div>
+        {/* Navigation Icon (icon only, no 3D box) */}
+        <Icon
+          className="w-7 h-7 shrink-0 transition-transform duration-200 group-hover:scale-110"
+          style={{ '--kid-icon-gold': isActive ? '#FFCA28' : '#FFF7D6' } as React.CSSProperties}
+        />
 
         {/* Text Label & Badge (when expanded) */}
         {!collapsed && (

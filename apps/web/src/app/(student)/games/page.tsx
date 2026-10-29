@@ -172,7 +172,7 @@ export default function GamesPage() {
             sound.playPop();
             setMap(null);
           }}
-          className="inline-flex items-center gap-2 text-sm font-black text-slate-600 hover:text-slate-900 bg-white px-4 py-2 rounded-2xl border border-kid-border"
+          className="inline-flex items-center gap-2 text-sm font-black text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 px-4 py-2 rounded-2xl border border-kid-border dark:border-slate-700"
           whileHover={{ x: -3 }}
           whileTap={{ scale: 0.97 }}
         >
@@ -180,26 +180,26 @@ export default function GamesPage() {
         </m.button>
 
         {/* Header Map */}
-        <div className="rounded-4xl bg-white border-2 border-kid-border p-6 shadow-xs flex items-center justify-between">
+        <div className="rounded-4xl bg-white dark:bg-slate-900/90 border-2 border-kid-border dark:border-slate-800 p-6 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-black text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+            <span className="text-xs font-black text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 px-3 py-1 rounded-full border border-amber-200 dark:border-amber-700/60">
               {map.setting} · {map.badge}
             </span>
-            <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800">
+            <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800 dark:text-white">
               {map.icon} {map.title}
             </h1>
-            <p className="text-sm font-bold text-slate-700">
+            <p className="text-sm font-bold text-slate-700 dark:text-slate-300">
               Thử thách {index + 1} / {map.questions.length} · Thu thập được {score} ⭐
             </p>
           </div>
 
-          <div className="w-16 h-16 rounded-3xl bg-amber-50 border-2 border-amber-200 flex items-center justify-center text-3xl">
+          <div className="w-16 h-16 rounded-3xl bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-200 dark:border-amber-700/60 flex items-center justify-center text-3xl">
             {map.icon}
           </div>
         </div>
 
         {/* Thanh tiến độ thử thách */}
-        <div className="w-full bg-slate-100 rounded-full h-3.5 p-0.5 border border-slate-200 overflow-hidden">
+        <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-3.5 p-0.5 border border-slate-200 dark:border-slate-700 overflow-hidden">
           <m.div
             className="bg-amber-400 h-full rounded-full shadow-inner"
             initial={false}
@@ -216,13 +216,13 @@ export default function GamesPage() {
           animate={{ opacity: 1, x: 0 }}
           exit={shouldReduceMotion ? undefined : { opacity: 0, x: -16 }}
           transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-4xl border-2 border-kid-border bg-white p-6 md:p-8 shadow-xs space-y-6"
+          className="rounded-4xl border-2 border-kid-border dark:border-slate-800 bg-white dark:bg-slate-900/90 p-6 md:p-8 shadow-xs space-y-6"
         >
           <div>
-            <span className="text-sm font-black text-slate-700 uppercase tracking-wider">
+            <span className="text-sm font-black text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               Chọn đáp án đúng để vượt ải:
             </span>
-            <h2 className="font-display mt-2 text-3xl md:text-4xl font-black text-slate-800">
+            <h2 className="font-display mt-2 text-3xl md:text-4xl font-black text-slate-800 dark:text-white">
               {question.prompt}
             </h2>
           </div>
@@ -234,15 +234,15 @@ export default function GamesPage() {
               const isAnswer = option === question.answer;
               const isChosen = option === selected;
 
-              let style = 'border-slate-200 border-b-4 hover:border-amber-300 text-slate-800 bg-white hover:bg-amber-50/40';
+              let style = 'border-slate-200 dark:border-slate-700 border-b-4 hover:border-amber-300 dark:hover:border-amber-500 text-slate-800 dark:text-white bg-white dark:bg-slate-800/80 hover:bg-amber-50/40 dark:hover:bg-slate-800';
 
               if (hasSelected) {
                 if (isAnswer) {
-                  style = 'border-emerald-500 bg-emerald-50 text-emerald-900 border-b-4 shadow-tactile-green';
+                  style = 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 border-b-4 shadow-tactile-green';
                 } else if (isChosen) {
-                  style = 'border-rose-400 bg-rose-50 text-rose-900 border-b-4 shadow-tactile-coral';
+                  style = 'border-rose-400 bg-rose-50 dark:bg-rose-950/60 text-rose-900 dark:text-rose-300 border-b-4 shadow-tactile-coral';
                 } else {
-                  style = 'border-slate-200 opacity-40 bg-slate-50';
+                  style = 'border-slate-200 dark:border-slate-700 opacity-40 bg-slate-50 dark:bg-slate-800';
                 }
               }
 
@@ -279,19 +279,19 @@ export default function GamesPage() {
               transition={{ duration: 0.2 }}
               className={`overflow-hidden rounded-3xl p-5 text-sm border-2 ${
                 isCorrect
-                  ? 'bg-emerald-50 border-emerald-300 text-emerald-900'
-                  : 'bg-amber-50 border-amber-300 text-amber-950'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-300'
+                  : 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-800 text-amber-950 dark:text-amber-300'
               }`}
             >
               <p className="flex items-center gap-2 font-black text-base font-display">
                 {isCorrect ? (
                   <>
-                    <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+                    <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                     Chính xác rồi! Bé nhận được thêm 1 ngôi sao ⭐
                   </>
                 ) : (
                   <>
-                    <XCircle className="h-5 w-5 text-rose-500" />
+                    <XCircle className="h-5 w-5 text-rose-500 dark:text-rose-400" />
                     Chưa chính xác rồi, cùng xem gợi ý của Cú Bi nhé!
                   </>
                 )}
@@ -334,18 +334,18 @@ export default function GamesPage() {
         animate="visible"
         className="mx-auto max-w-2xl space-y-6 text-center"
       >
-        <m.div variants={listItemVariants} className="rounded-4xl border-2 border-kid-border bg-white p-8 md:p-10 shadow-xs space-y-5">
+        <m.div variants={listItemVariants} className="rounded-4xl border-2 border-kid-border dark:border-slate-800 bg-white dark:bg-slate-900/90 p-8 md:p-10 shadow-xs space-y-5">
           <m.div
             initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.5, rotate: -12 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={gentleSpring}
             className="text-6xl"
           >🏆</m.div>
-          <h1 className="font-display text-3xl font-black text-slate-800">
+          <h1 className="font-display text-3xl font-black text-slate-800 dark:text-white">
             Chiến Thắng {map.title}!
           </h1>
-          <p className="text-slate-600 text-base font-semibold">
-            Bé đã hoàn thành xuất sắc và trả lời đúng <strong className="text-emerald-600 text-lg">{score}/{map.questions.length}</strong> thử thách.
+          <p className="text-slate-600 dark:text-slate-300 text-base font-semibold">
+            Bé đã hoàn thành xuất sắc và trả lời đúng <strong className="text-emerald-600 dark:text-emerald-400 text-lg">{score}/{map.questions.length}</strong> thử thách.
           </p>
 
           <div className="flex justify-center items-center gap-2 py-2">
@@ -397,17 +397,17 @@ export default function GamesPage() {
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800">
+          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800 dark:text-white">
             Bản Đồ Trò Chơi Toán Học Nhí
           </h1>
-          <p className="mt-1.5 text-sm font-bold text-slate-700">
+          <p className="mt-1.5 text-sm font-bold text-slate-700 dark:text-slate-300">
             Chọn một hòn đảo thử thách, giải các câu đố và thu thập đủ 18 ngôi sao vàng nhé!
           </p>
         </div>
 
-        <div className="flex items-center gap-2 bg-amber-50 px-4 py-2 rounded-2xl border-2 border-amber-200">
+        <div className="flex items-center gap-2 bg-amber-50 dark:bg-amber-950/60 px-4 py-2 rounded-2xl border-2 border-amber-200 dark:border-amber-700/60">
           <Star className="w-5 h-5 text-amber-500 fill-amber-400" />
-          <span className="font-display font-black text-sm text-amber-900">Tổng điểm: 120 Sao</span>
+          <span className="font-display font-black text-sm text-amber-900 dark:text-amber-200">Tổng điểm: 120 Sao</span>
         </div>
       </div>
 
@@ -419,15 +419,15 @@ export default function GamesPage() {
             whileHover={cardMotion.whileHover}
             whileTap={cardMotion.whileTap}
             transition={cardMotion.transition}
-            className="rounded-4xl border-2 border-kid-border bg-white shadow-xs transition-shadow hover:shadow-lg flex flex-col justify-between overflow-hidden group"
+            className="rounded-4xl border-2 border-kid-border dark:border-slate-800 bg-white dark:bg-slate-900/90 shadow-xs transition-shadow hover:shadow-lg flex flex-col justify-between overflow-hidden group"
           >
             {/* Header banner với màu tươi tắn */}
-            <div className="flex items-center justify-between p-6 border-b-2 border-kid-border bg-amber-50/40">
+            <div className="flex items-center justify-between p-6 border-b-2 border-kid-border dark:border-slate-800 bg-amber-50/40 dark:bg-slate-800/40">
               <div>
-                <span className="text-xs font-black text-slate-600 bg-white px-3 py-1 rounded-full border border-slate-200">
+                <span className="text-xs font-black text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700">
                   {item.setting} · {item.badge}
                 </span>
-                <h2 className="font-display mt-2 text-xl font-black text-slate-800 group-hover:text-amber-600 transition-colors">
+                <h2 className="font-display mt-2 text-xl font-black text-slate-800 dark:text-white group-hover:text-amber-500 transition-colors">
                   {item.title}
                 </h2>
               </div>
@@ -436,12 +436,12 @@ export default function GamesPage() {
 
             {/* Nội dung mô tả và nút play */}
             <div className="space-y-4 p-6">
-              <p className="text-sm font-semibold leading-relaxed text-slate-600">
+              <p className="text-sm font-semibold leading-relaxed text-slate-600 dark:text-slate-300">
                 {item.description}
               </p>
 
-              <div className="flex items-center justify-between border-t-2 border-kid-border pt-4">
-                <span className="inline-flex items-center gap-1.5 text-xs font-black text-amber-800 bg-amber-100 px-3 py-1 rounded-full">
+              <div className="flex items-center justify-between border-t-2 border-kid-border dark:border-slate-800 pt-4">
+                <span className="inline-flex items-center gap-1.5 text-xs font-black text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 px-3 py-1 rounded-full border border-amber-300 dark:border-amber-800">
                   <Gamepad2 className="h-4 w-4" /> {item.questions.length} thử thách
                 </span>
 

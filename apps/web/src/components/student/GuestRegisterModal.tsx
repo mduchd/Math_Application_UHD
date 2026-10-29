@@ -143,22 +143,22 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
       open={open}
       onClose={onClose}
       ariaLabel="Lưu kết quả và mở lộ trình học tập"
-      panelClassName="bg-white rounded-4xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-2 border-kid-border relative"
+      panelClassName="bg-white dark:bg-slate-900 rounded-4xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 border-2 border-kid-border dark:border-slate-800 relative"
     >
         {/* Nút đóng */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-black flex items-center justify-center text-sm"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-black flex items-center justify-center text-sm"
         >
           ✕
         </button>
 
         {/* Header chào đón */}
         <div className="text-center space-y-2">
-          <h2 className="font-display text-2xl md:text-3xl font-black text-slate-800">
+          <h2 className="font-display text-2xl md:text-3xl font-black text-slate-800 dark:text-white">
             Bé Đạt Cấp Độ {levelName}! 🎉
           </h2>
-          <p className="text-sm md:text-base text-slate-700 font-semibold leading-relaxed">
+          <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold leading-relaxed">
             Nhập tên và mã PIN 4 số đơn giản để bạn Cú Bi mở khóa Kế hoạch học tập nhé!
           </p>
         </div>
@@ -166,7 +166,7 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Nhập tên */}
           <div>
-            <label className="block text-xs font-black text-slate-700 mb-1.5 flex items-center gap-1">
+            <label className="block text-xs font-black text-slate-700 dark:text-slate-300 mb-1.5 flex items-center gap-1">
               <User className="w-3.5 h-3.5 text-amber-500" /> Tên của em là gì?
             </label>
             <input
@@ -178,13 +178,13 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
                 setFullName(e.target.value);
                 setError('');
               }}
-              className="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 text-sm font-bold focus:border-amber-400 focus:outline-none bg-amber-50/20"
+              className="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 text-sm font-bold focus:border-amber-400 focus:outline-none bg-amber-50/20 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400"
             />
           </div>
 
           {/* Chọn linh vật Mascot */}
           <div>
-            <label className="block text-xs font-black text-slate-700 mb-1.5">
+            <label className="block text-xs font-black text-slate-700 dark:text-slate-300 mb-1.5">
               Chọn bạn linh vật đồng hành cùng em:
             </label>
             <div className="grid grid-cols-5 gap-2">
@@ -202,12 +202,12 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
                   transition={gentleSpring}
                   className={`p-2 rounded-2xl border-2 flex flex-col items-center justify-center transition-colors select-none ${
                     selectedMascot === mascot.id
-                      ? 'border-amber-500 bg-amber-100 shadow-tactile-yellow scale-105'
-                      : 'border-slate-200 hover:border-amber-300 bg-white'
+                      ? 'border-amber-500 bg-amber-100 dark:bg-amber-950/60 shadow-tactile-yellow scale-105'
+                      : 'border-slate-200 dark:border-slate-700 hover:border-amber-300 dark:hover:border-amber-500 bg-white dark:bg-slate-800'
                   }`}
                 >
                   <span className="text-3xl">{mascot.icon}</span>
-                  <span className="text-[10px] font-black text-slate-700 mt-1 line-clamp-1">
+                  <span className="text-[10px] font-black text-slate-700 dark:text-slate-300 mt-1 line-clamp-1">
                     {mascot.label.split(' ')[0]}
                   </span>
                 </m.button>
@@ -217,7 +217,7 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
 
           {/* Nhập mã PIN 4 số */}
           <div>
-            <label className="block text-xs font-black text-slate-700 mb-1.5 flex items-center gap-1">
+            <label className="block text-xs font-black text-slate-700 dark:text-slate-300 mb-1.5 flex items-center gap-1">
               <KeyRound className="w-3.5 h-3.5 text-purple-500" /> Mã PIN bí mật 4 số:
             </label>
             <input
@@ -230,12 +230,12 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
                 setPin(e.target.value.replace(/[^0-9]/g, ''));
                 setError('');
               }}
-              className="w-full px-4 py-2.5 rounded-2xl border-2 border-slate-200 text-center font-display font-black text-xl tracking-widest focus:border-amber-400 focus:outline-none bg-amber-50/20"
+              className="w-full px-4 py-2.5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 text-center font-display font-black text-xl tracking-widest focus:border-amber-400 focus:outline-none bg-amber-50/20 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400"
             />
           </div>
 
           {error && (
-            <p className="text-xs font-black text-rose-600 text-center bg-rose-50 p-2 rounded-xl border border-rose-200">
+            <p className="text-xs font-black text-rose-600 dark:text-rose-400 text-center bg-rose-50 dark:bg-rose-950/40 p-2 rounded-xl border border-rose-200 dark:border-rose-800">
               {error}
             </p>
           )}
@@ -259,9 +259,9 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
               type="button"
               disabled={isSaving || isGuestSaving}
               onClick={handleContinueAsGuest}
-              className="w-full py-2.5 px-4 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-slate-950 hover:bg-slate-100 rounded-2xl transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+              className="w-full py-2.5 px-4 text-xs sm:text-sm font-extrabold text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-2xl transition-colors cursor-pointer flex items-center justify-center gap-1.5"
             >
-              <Gamepad2 className="w-4 h-4 text-amber-600" />
+              <Gamepad2 className="w-4 h-4 text-amber-600 dark:text-amber-400" />
               <span>
                 {isGuestSaving
                   ? 'Đang mở kế hoạch...'

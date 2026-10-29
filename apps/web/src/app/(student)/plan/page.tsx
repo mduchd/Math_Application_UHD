@@ -96,7 +96,7 @@ export default function AIPlanPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-10">
       {/* BANNER BẢN ĐỒ BÍ KÍP */}
-      <div className="bg-white border-2 border-kid-border rounded-4xl p-6 md:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6">
+      <div className="bg-white dark:bg-slate-900/90 border-2 border-kid-border dark:border-slate-800 rounded-4xl p-6 md:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6">
         <MascotOwl
           size="lg"
           mood="celebrating"
@@ -104,14 +104,14 @@ export default function AIPlanPage() {
         />
 
         <div className="space-y-3 flex-1 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 bg-amber-100 px-3.5 py-1.5 rounded-full text-xs font-black text-amber-900">
-            <Compass className="w-4 h-4 text-amber-600" />
+          <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-950/60 px-3.5 py-1.5 rounded-full text-xs font-black text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+            <Compass className="w-4 h-4 text-amber-600 dark:text-amber-400" />
             Bản Đồ Thám Hiểm Tri Thức
           </div>
-          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800">
+          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800 dark:text-white">
             Bí Kíp Học Tập Cá Nhân Hóa Của Bé
           </h1>
-          <p className="text-slate-600 text-sm md:text-base font-semibold leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base font-semibold leading-relaxed">
             Dựa trên kết quả khảo sát, bạn Cú Bi đã vẽ ra một chuyến hải trình 3 tuần để cùng bé khám phá các hòn đảo Toán học và Kỹ năng sống!
           </p>
 
@@ -122,26 +122,26 @@ export default function AIPlanPage() {
       </div>
 
       {/* ĐÁNH GIÁ NĂNG LỰC: BÙA CHÚ SIÊU NĂNG LỰC */}
-      <div className="bg-white rounded-4xl border-2 border-kid-border p-6 md:p-8 shadow-xs space-y-6">
-        <div className="border-b-2 border-kid-border pb-4">
-          <h2 className="font-display text-xl font-black text-slate-800">
+      <div className="bg-white dark:bg-slate-900/90 rounded-4xl border-2 border-kid-border dark:border-slate-800 p-6 md:p-8 shadow-xs space-y-6">
+        <div className="border-b-2 border-kid-border dark:border-slate-800 pb-4">
+          <h2 className="font-display text-xl font-black text-slate-800 dark:text-white">
             Lời Nhắn Nhủ Của Bạn Cú Bi 🦉
           </h2>
-          <p className="text-slate-600 text-sm font-semibold mt-2 leading-relaxed bg-amber-50/70 p-4 rounded-2xl border border-amber-200">
+          <p className="text-slate-600 dark:text-slate-300 text-sm font-semibold mt-2 leading-relaxed bg-amber-50/70 dark:bg-amber-950/40 p-4 rounded-2xl border border-amber-200 dark:border-amber-800/60">
             &ldquo;{planData.summary}&rdquo;
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Siêu năng lực */}
-          <div className="p-5 rounded-3xl bg-emerald-50/60 border-2 border-emerald-200 space-y-3">
-            <h3 className="font-display text-sm font-black text-emerald-900 flex items-center gap-2">
+          <div className="p-5 rounded-3xl bg-emerald-50/60 dark:bg-emerald-950/30 border-2 border-emerald-200 dark:border-emerald-800/60 space-y-3">
+            <h3 className="font-display text-sm font-black text-emerald-900 dark:text-emerald-300 flex items-center gap-2">
               <span className="text-lg">✨</span> Siêu Năng Lực Hiện Tại Của Bé
             </h3>
-            <ul className="text-xs md:text-sm text-slate-700 space-y-2">
+            <ul className="text-xs md:text-sm text-slate-700 dark:text-slate-300 space-y-2">
               {planData.strengths.map((s, idx) => (
                 <li key={idx} className="flex items-start gap-2 font-bold">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span>{s}</span>
                 </li>
               ))}
@@ -149,14 +149,14 @@ export default function AIPlanPage() {
           </div>
 
           {/* Thử thách cần vượt qua */}
-          <div className="p-5 rounded-3xl bg-amber-50/60 border-2 border-amber-200 space-y-3">
-            <h3 className="font-display text-sm font-black text-amber-900 flex items-center gap-2">
+          <div className="p-5 rounded-3xl bg-amber-50/60 dark:bg-amber-950/30 border-2 border-amber-200 dark:border-amber-800/60 space-y-3">
+            <h3 className="font-display text-sm font-black text-amber-900 dark:text-amber-300 flex items-center gap-2">
               <span className="text-lg">🎯</span> Thử Thách Cần Chinh Phục
             </h3>
-            <ul className="text-xs md:text-sm text-slate-700 space-y-2">
+            <ul className="text-xs md:text-sm text-slate-700 dark:text-slate-300 space-y-2">
               {planData.areasToImprove.map((a, idx) => (
                 <li key={idx} className="flex items-start gap-2 font-bold">
-                  <Target className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <Target className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                   <span>{a}</span>
                 </li>
               ))}
@@ -168,10 +168,10 @@ export default function AIPlanPage() {
       {/* LỘ TRÌNH 3 ĐẢO THÁM HIỂM (ISLAND QUEST TRAIL) */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-2xl font-black text-slate-800 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-black text-slate-800 dark:text-white flex items-center gap-2">
             <Calendar className="w-6 h-6 text-amber-500" /> Hành Trình 3 Hòn Đảo Nhiệm Vụ
           </h2>
-          <span className="text-xs font-black text-amber-700 bg-amber-100 px-3 py-1 rounded-full">
+          <span className="text-xs font-black text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 px-3 py-1 rounded-full border border-amber-300 dark:border-amber-800">
             Hoàn thành để nhận Cúp Vàng
           </span>
         </div>
@@ -185,27 +185,27 @@ export default function AIPlanPage() {
                 variants={listItemVariants}
                 whileHover={cardMotion.whileHover}
                 transition={gentleSpring}
-                className={`bg-white rounded-4xl border-2 p-6 md:p-8 shadow-xs transition-colors relative overflow-hidden ${
+                className={`bg-white dark:bg-slate-900/90 rounded-4xl border-2 p-6 md:p-8 shadow-xs transition-colors relative overflow-hidden ${
                   isCurrent
-                    ? 'border-amber-400 shadow-tactile-yellow'
-                    : 'border-kid-border hover:border-slate-300'
+                    ? 'border-amber-400 dark:border-amber-500 shadow-tactile-yellow'
+                    : 'border-kid-border dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                 }`}
               >
                 {/* Dải ruy băng chặng */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b-2 border-kid-border pb-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b-2 border-kid-border dark:border-slate-800 pb-4">
                   <div className="flex items-center gap-4">
                     <div
                       className={`w-14 h-14 rounded-3xl flex items-center justify-center text-3xl font-black border-2 ${
                         isCurrent
-                          ? 'bg-amber-100 border-amber-400 text-amber-950'
-                          : 'bg-slate-100 border-slate-200 text-slate-600'
+                          ? 'bg-amber-100 dark:bg-amber-950/60 border-amber-400 dark:border-amber-600 text-amber-950 dark:text-amber-200'
+                          : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
                       }`}
                     >
                       {week.islandIcon}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-display text-xs font-black px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                        <span className="font-display text-xs font-black px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                           Chặng {week.week}
                         </span>
                         {isCurrent && (
@@ -214,14 +214,14 @@ export default function AIPlanPage() {
                           </span>
                         )}
                       </div>
-                      <h3 className="font-display font-black text-slate-800 text-lg md:text-xl mt-0.5">
+                      <h3 className="font-display font-black text-slate-800 dark:text-white text-lg md:text-xl mt-0.5">
                         {week.islandName}: {week.title}
                       </h3>
-                      <p className="text-xs font-bold text-amber-700">Trọng tâm: {week.focus}</p>
+                      <p className="text-xs font-bold text-amber-700 dark:text-amber-400">Trọng tâm: {week.focus}</p>
                     </div>
                   </div>
 
-                  <span className="text-xs font-black text-slate-600 bg-slate-100 px-3 py-1.5 rounded-2xl border border-slate-200">
+                  <span className="text-xs font-black text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-2xl border border-slate-200 dark:border-slate-700">
                     ⏱️ {week.targetMinutes}
                   </span>
                 </div>
@@ -230,20 +230,20 @@ export default function AIPlanPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-5">
                   {/* Bài học gợi ý */}
                   <div className="space-y-2">
-                    <span className="font-display text-xs font-black text-slate-700 flex items-center gap-1.5">
+                    <span className="font-display text-xs font-black text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                       <BookOpen className="w-4 h-4 text-sky-500" /> Bài học khuyên làm:
                     </span>
                     <div className="space-y-2">
                       {week.lessons.map((lesson, lIdx) => (
                         <div
                           key={lIdx}
-                          className="p-3 rounded-2xl bg-sky-50/50 border border-sky-200 font-bold text-xs md:text-sm text-slate-800 flex items-center justify-between hover:bg-sky-50 transition-colors"
+                          className="p-3 rounded-2xl bg-sky-50/50 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-800 font-bold text-xs md:text-sm text-slate-800 dark:text-white flex items-center justify-between hover:bg-sky-50 dark:hover:bg-sky-950/50 transition-colors"
                         >
                           <span className="line-clamp-1">{lesson}</span>
                           <Link
                             href="/lessons"
                             onClick={() => sound.playPop()}
-                            className="text-xs font-black text-sky-600 hover:text-sky-800 shrink-0 ml-2"
+                            className="text-xs font-black text-sky-600 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 shrink-0 ml-2"
                           >
                             Học ngay →
                           </Link>
@@ -254,14 +254,14 @@ export default function AIPlanPage() {
 
                   {/* Trò chơi luyện tập */}
                   <div className="space-y-2">
-                    <span className="font-display text-xs font-black text-slate-700 flex items-center gap-1.5">
+                    <span className="font-display text-xs font-black text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                       <Gamepad2 className="w-4 h-4 text-pink-500" /> Trò chơi bổ trợ:
                     </span>
                     <div className="space-y-2">
                       {week.games.map((game, gIdx) => (
                         <div
                           key={gIdx}
-                          className="p-3 rounded-2xl bg-pink-50/50 border border-pink-200 font-bold text-xs md:text-sm text-slate-800 flex items-center justify-between hover:bg-pink-50 transition-colors"
+                          className="p-3 rounded-2xl bg-pink-50/50 dark:bg-pink-950/30 border border-pink-200 dark:border-pink-800 font-bold text-xs md:text-sm text-slate-800 dark:text-white flex items-center justify-between hover:bg-pink-50 dark:hover:bg-pink-950/50 transition-colors"
                         >
                           <span className="line-clamp-1">🎮 {game}</span>
                           <Link

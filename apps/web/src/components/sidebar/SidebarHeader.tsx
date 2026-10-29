@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { AppLogo } from '@/components/kid/AppLogo';
+import { KidChevronLeftIcon, KidChevronRightIcon } from '@/components/kid/icons';
 import { sound } from '@/lib/sound';
 
 interface SidebarHeaderProps {
@@ -61,9 +61,9 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
           aria-label={collapsed ? 'Mở rộng sidebar' : 'Thu gọn sidebar'}
         >
           {collapsed ? (
-            <ChevronRight className="w-3.5 h-3.5 stroke-[3]" />
+            <KidChevronRightIcon className="w-3.5 h-3.5" />
           ) : (
-            <ChevronLeft className="w-3.5 h-3.5 stroke-[3]" />
+            <KidChevronLeftIcon className="w-3.5 h-3.5" />
           )}
         </button>
       )}

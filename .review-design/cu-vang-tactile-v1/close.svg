@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="256" height="256">
+  <title>Đóng — Cú Vàng Tactile</title>
+  <rect width="24" height="24" rx="5" fill="#FDFBF7"/>
+  <path d="M12 3.6c4.6 0 8.4 3.8 8.4 8.4s-3.8 8.4-8.4 8.4S3.6 16.6 3.6 12 7.4 3.6 12 3.6Z" fill="#FFCA28" stroke="#4B2E16" stroke-width="2.15"/>
+  <path d="m8.7 8.7 6.6 6.6m0-6.6-6.6 6.6" fill="none" stroke="#4B2E16" stroke-width="2.25" stroke-linecap="round"/>
+  <path d="M12 5.5c1.5 0 2.8.5 3.9 1.4" fill="none" stroke="#FFF8D9" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

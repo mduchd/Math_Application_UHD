@@ -92,19 +92,19 @@ export const UpgradeGuestModal: React.FC<UpgradeGuestModalProps> = ({ open, onCl
       open={open}
       onClose={onClose}
       ariaLabel="Lưu tiến trình học tập của bé"
-      panelClassName="bg-white rounded-4xl max-w-lg w-full p-6 md:p-8 shadow-2xl border-2 border-kid-border relative"
+      panelClassName="bg-white dark:bg-slate-900 rounded-4xl max-w-lg w-full p-6 md:p-8 shadow-2xl border-2 border-kid-border dark:border-slate-800 relative"
     >
       {isSuccess ? (
         <div className="py-8 text-center space-y-4">
-          <div className="w-20 h-20 mx-auto rounded-full bg-emerald-100 flex items-center justify-center text-4xl shadow-inner">
+          <div className="w-20 h-20 mx-auto rounded-full bg-emerald-100 dark:bg-emerald-950/60 flex items-center justify-center text-4xl shadow-inner border border-emerald-300 dark:border-emerald-800">
             🎉
           </div>
           <div className="space-y-2">
-            <h2 className="font-display text-2xl md:text-3xl font-black text-slate-800">
+            <h2 className="font-display text-2xl md:text-3xl font-black text-slate-800 dark:text-white">
               Lưu Tài Khoản Thành Công!
             </h2>
-            <p className="text-slate-700 text-sm md:text-base font-bold">
-              Từ nay bé có thể đăng nhập bằng tên <span className="text-amber-800 font-black">{fullName}</span> và mã PIN vừa tạo bất cứ lúc nào!
+            <p className="text-slate-700 dark:text-slate-300 text-sm md:text-base font-bold">
+              Từ nay bé có thể đăng nhập bằng tên <span className="text-amber-800 dark:text-amber-300 font-black">{fullName}</span> và mã PIN vừa tạo bất cứ lúc nào!
             </p>
           </div>
         </div>
@@ -114,25 +114,25 @@ export const UpgradeGuestModal: React.FC<UpgradeGuestModalProps> = ({ open, onCl
           <button
             onClick={onClose}
             type="button"
-            className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-black flex items-center justify-center text-sm cursor-pointer"
+            className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-black flex items-center justify-center text-sm cursor-pointer"
           >
             ✕
           </button>
 
           <div className="text-center space-y-2">
-            <div className="w-16 h-16 mx-auto rounded-3xl bg-amber-100 border-2 border-amber-300 flex items-center justify-center text-3xl shadow-xs">
-              <ShieldCheck className="w-8 h-8 text-amber-700" />
+            <div className="w-16 h-16 mx-auto rounded-3xl bg-amber-100 dark:bg-amber-950/60 border-2 border-amber-300 dark:border-amber-700 flex items-center justify-center text-3xl shadow-xs">
+              <ShieldCheck className="w-8 h-8 text-amber-700 dark:text-amber-400" />
             </div>
-            <h2 className="font-display text-2xl font-black text-slate-800">
+            <h2 className="font-display text-2xl font-black text-slate-800 dark:text-white">
               Lưu Tiến Trình Học Tập Của Bé
             </h2>
-            <p className="text-slate-700 text-sm font-bold max-w-sm mx-auto">
+            <p className="text-slate-700 dark:text-slate-300 text-sm font-bold max-w-sm mx-auto">
               Tạo mã PIN 4 số để bảo lưu số sao, cúp vàng và bài làm khi học trên mọi thiết bị!
             </p>
           </div>
 
           {error && (
-            <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs md:text-sm font-bold text-center">
+            <div className="p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs md:text-sm font-bold text-center">
               {error}
             </div>
           )}
@@ -140,17 +140,17 @@ export const UpgradeGuestModal: React.FC<UpgradeGuestModalProps> = ({ open, onCl
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Tên học sinh */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-black text-slate-800 uppercase tracking-wide">
+              <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">
                 Tên hoặc Tên đăng nhập của bé:
               </label>
               <div className="relative">
-                <User className="w-4 h-4 text-amber-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <User className="w-4 h-4 text-amber-600 dark:text-amber-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   placeholder="Ví dụ: Minh Khôi"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-white border-2 border-slate-300 rounded-2xl text-sm font-bold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-200 transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 rounded-2xl text-sm font-bold text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-200 transition-all"
                   required
                 />
               </div>
@@ -158,11 +158,11 @@ export const UpgradeGuestModal: React.FC<UpgradeGuestModalProps> = ({ open, onCl
 
             {/* Mã PIN bí mật */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-black text-slate-800 uppercase tracking-wide">
+              <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">
                 Mã PIN bí mật (4 - 6 số):
               </label>
               <div className="relative">
-                <KeyRound className="w-4 h-4 text-purple-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <KeyRound className="w-4 h-4 text-purple-600 dark:text-purple-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="password"
                   inputMode="numeric"
@@ -170,18 +170,18 @@ export const UpgradeGuestModal: React.FC<UpgradeGuestModalProps> = ({ open, onCl
                   placeholder="Ví dụ: 1234"
                   value={pin}
                   onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ''))}
-                  className="w-full pl-10 pr-4 py-2.5 bg-white border-2 border-slate-300 rounded-2xl text-sm font-bold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 rounded-2xl text-sm font-bold text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all"
                   required
                 />
               </div>
-              <p className="text-xs font-semibold text-slate-600">
+              <p className="text-xs font-semibold text-slate-600 dark:text-slate-400">
                 💡 Bé nhớ ghi nhớ mã PIN này để đăng nhập vào lần học sau nhé!
               </p>
             </div>
 
             {/* Chọn khối lớp */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-black text-slate-800 uppercase tracking-wide">
+              <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">
                 Bé đang học lớp mấy?
               </label>
               <div className="grid grid-cols-5 gap-2">
@@ -196,7 +196,7 @@ export const UpgradeGuestModal: React.FC<UpgradeGuestModalProps> = ({ open, onCl
                     className={`py-2 rounded-2xl border-2 text-xs md:text-sm font-black transition-all cursor-pointer ${
                       gradeLevel === lvl
                         ? 'border-amber-500 bg-amber-400 text-amber-950 shadow-tactile-yellow'
-                        : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                        : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600'
                     }`}
                   >
                     Lớp {lvl}
@@ -207,7 +207,7 @@ export const UpgradeGuestModal: React.FC<UpgradeGuestModalProps> = ({ open, onCl
 
             {/* Chọn Linh vật đồng hành */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-black text-slate-800 uppercase tracking-wide">
+              <label className="block text-xs font-black text-slate-800 dark:text-slate-200 uppercase tracking-wide">
                 Chọn linh vật yêu thích:
               </label>
               <div className="grid grid-cols-5 gap-2">
@@ -221,12 +221,12 @@ export const UpgradeGuestModal: React.FC<UpgradeGuestModalProps> = ({ open, onCl
                     }}
                     className={`p-2.5 rounded-2xl border-2 flex flex-col items-center gap-1 transition-all cursor-pointer ${
                       selectedMascot === m.id
-                        ? 'border-amber-500 bg-amber-100 shadow-xs scale-105'
-                        : 'border-slate-200 bg-white hover:border-slate-300'
+                        ? 'border-amber-500 bg-amber-100 dark:bg-amber-950/60 shadow-xs scale-105'
+                        : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600'
                     }`}
                   >
                     <span className="text-2xl">{m.icon}</span>
-                    <span className="text-[10px] font-bold text-slate-800 truncate w-full text-center">
+                    <span className="text-[10px] font-bold text-slate-800 dark:text-slate-200 truncate w-full text-center">
                       {m.label.split(' ')[0]}
                     </span>
                   </button>

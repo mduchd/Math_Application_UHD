@@ -51,13 +51,13 @@ export default function LifeSkillsPage() {
     <div className="max-w-5xl mx-auto space-y-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-black text-orange-800 bg-orange-100 px-3.5 py-1.5 rounded-full border border-orange-300">
+          <span className="text-xs font-black text-orange-800 dark:text-orange-300 bg-orange-100 dark:bg-orange-950/60 px-3.5 py-1.5 rounded-full border border-orange-300 dark:border-orange-800">
             Giáo Dục Toàn Diện
           </span>
-          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800 mt-2">
+          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800 dark:text-white mt-2">
             Kỹ Năng Sống Cho Học Sinh Tiểu Học
           </h1>
-          <p className="text-slate-600 text-sm font-semibold mt-1">
+          <p className="text-slate-600 dark:text-slate-300 text-sm font-semibold mt-1">
             Những bài học tình huống thực tế giúp bé tự tin, an toàn và ứng xử lễ phép mỗi ngày.
           </p>
         </div>
@@ -70,19 +70,19 @@ export default function LifeSkillsPage() {
             variants={listItemVariants}
             whileHover={cardMotion.whileHover}
             transition={gentleSpring}
-            className="bg-white rounded-4xl border-2 border-kid-border p-6 md:p-8 shadow-xs hover:border-orange-300 transition-colors space-y-5"
+            className="bg-white dark:bg-slate-900/90 rounded-4xl border-2 border-kid-border dark:border-slate-800 p-6 md:p-8 shadow-xs hover:border-orange-300 dark:hover:border-orange-500 transition-colors space-y-5"
           >
             <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-orange-50 rounded-3xl border-2 border-orange-200 flex items-center justify-center text-4xl shrink-0">
+                <div className="w-16 h-16 bg-orange-50 dark:bg-orange-950/60 rounded-3xl border-2 border-orange-200 dark:border-orange-800 flex items-center justify-center text-4xl shrink-0">
                   {skill.icon}
                 </div>
                 <div className="space-y-1">
-                  <span className="text-xs font-black text-orange-800 bg-orange-100 px-3 py-0.5 rounded-full inline-block border border-orange-200">
+                  <span className="text-xs font-black text-orange-800 dark:text-orange-300 bg-orange-100 dark:bg-orange-950/60 px-3 py-0.5 rounded-full inline-block border border-orange-200 dark:border-orange-800">
                     {skill.category}
                   </span>
-                  <h3 className="font-display text-xl font-black text-slate-800">{skill.title}</h3>
-                  <p className="text-xs md:text-sm text-slate-600 font-semibold bg-amber-50/70 p-3 rounded-2xl border border-amber-200 mt-2">
+                  <h3 className="font-display text-xl font-black text-slate-800 dark:text-white">{skill.title}</h3>
+                  <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300 font-semibold bg-amber-50/70 dark:bg-amber-950/40 p-3 rounded-2xl border border-amber-200 dark:border-amber-800/60 mt-2">
                     💡 <strong>Tình huống:</strong> &ldquo;{skill.scenario}&rdquo;
                   </p>
                 </div>
@@ -93,14 +93,14 @@ export default function LifeSkillsPage() {
               </div>
             </div>
 
-            <div className="bg-slate-50/80 rounded-3xl p-5 border-2 border-slate-100 space-y-3">
-              <h4 className="font-display text-xs md:text-sm font-black text-slate-700 uppercase tracking-wide">
+            <div className="bg-slate-50/80 dark:bg-slate-800/60 rounded-3xl p-5 border-2 border-slate-100 dark:border-slate-700/60 space-y-3">
+              <h4 className="font-display text-xs md:text-sm font-black text-slate-700 dark:text-slate-200 uppercase tracking-wide">
                 Các bước bé nên làm:
               </h4>
               <ul className="space-y-2.5">
                 {skill.steps.map((st, i) => (
-                  <li key={i} className="flex items-start gap-3 text-xs md:text-sm font-bold text-slate-700">
-                    <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-xs shrink-0 mt-0.5 border border-emerald-300">
+                  <li key={i} className="flex items-start gap-3 text-xs md:text-sm font-bold text-slate-700 dark:text-slate-300">
+                    <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-black text-xs shrink-0 mt-0.5 border border-emerald-300 dark:border-emerald-800">
                       {i + 1}
                     </div>
                     <span>{st}</span>

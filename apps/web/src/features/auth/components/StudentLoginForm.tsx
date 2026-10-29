@@ -70,7 +70,7 @@ export const StudentLoginForm: React.FC<StudentLoginFormProps> = ({ redirectPath
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="auth-login-form flex flex-col gap-4">
       {error && (
         <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold text-center animate-in fade-in">
           {error}

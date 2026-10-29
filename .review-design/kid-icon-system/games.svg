@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="256" height="256" fill="none" color="#24334D">
+  <title>Biểu tượng Trò chơi</title>
+  <path d="M7.4 8.4h9.2c2.3 0 3.1 1.7 3.7 4.3l.5 2.2c.5 2.2-1.8 3.7-3.6 2.3l-2.2-1.7H9l-2.2 1.7c-1.8 1.4-4.1-.1-3.6-2.3l.5-2.2c.6-2.6 1.4-4.3 3.7-4.3Z" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M7.2 12.2v3M5.7 13.7h3M16.3 12.8h.01M18.2 14.7h.01" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/>
+  <path d="M12 11.8c.9 0 1.5.9 1.5 1.6 0 .9-.9 1.6-1.5 2.1-.6-.5-1.5-1.2-1.5-2.1 0-.7.6-1.6 1.5-1.6Z" fill="#FFCA28" stroke="#FFCA28" stroke-width=".55" stroke-linejoin="round"/>
+</svg>

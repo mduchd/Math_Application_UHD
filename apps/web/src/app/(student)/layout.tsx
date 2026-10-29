@@ -3,14 +3,14 @@
 import React, { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import {
-  Users,
-  BrainCircuit,
-  BookOpen,
-  GraduationCap,
-  Gamepad2,
-  HeartHandshake,
-  Sparkles,
-} from 'lucide-react';
+  KidAssessmentIcon,
+  KidClassroomIcon,
+  KidGamesIcon,
+  KidLearnIcon,
+  KidLessonIcon,
+  KidLifeSkillsIcon,
+  KidPlanIcon,
+} from '@/components/kid/icons';
 import { useAppStore } from '@/stores/useAppStore';
 import { sound } from '@/lib/sound';
 import { PageTransition } from '@/components/motion/PageTransition';
@@ -25,42 +25,42 @@ const studentNavItems: SidebarNavItem[] = [
   {
     href: '/classroom',
     label: 'Lớp học của em',
-    icon: Users,
+    icon: KidClassroomIcon,
     badge: { text: '3 lớp', variant: 'emerald' },
   },
   {
     href: '/assessment',
     label: 'Khảo sát năng lực',
-    icon: Sparkles,
+    icon: KidAssessmentIcon,
     badge: { text: 'AI', variant: 'amber' },
   },
   {
     href: '/plan',
     label: 'Kế hoạch học AI',
-    icon: BrainCircuit,
+    icon: KidPlanIcon,
     badge: { text: 'Mới', variant: 'purple' },
   },
   {
     href: '/library',
     label: 'Thư viện ôn tập',
-    icon: BookOpen,
+    icon: KidLearnIcon,
   },
   {
     href: '/lessons',
     label: 'Bài học',
-    icon: GraduationCap,
+    icon: KidLessonIcon,
     badge: { text: '12 bài', variant: 'sky' },
   },
   {
     href: '/games',
     label: 'Trò chơi trí tuệ',
-    icon: Gamepad2,
+    icon: KidGamesIcon,
     badge: { text: 'HOT 🔥', variant: 'rose' },
   },
   {
     href: '/life-skills',
     label: 'Kỹ năng sống',
-    icon: HeartHandshake,
+    icon: KidLifeSkillsIcon,
     badge: { text: '+50 ⭐', variant: 'amber' },
   },
 ];

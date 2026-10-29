@@ -1,32 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  Monitor,
-  Laptop,
-  Download,
-  Apple,
-  Sparkles,
-  ShieldCheck,
-  CheckCircle2,
-  FolderDown,
-  ExternalLink,
-  Keyboard,
-  Eye,
-  School,
-  HardDrive,
-  Cpu,
-  RefreshCw,
-  Terminal,
-} from 'lucide-react';
-import { AppLogo } from '@/components/kid/AppLogo';
-import { TactileButton } from '@/components/kid/TactileButton';
+import { Apple, Eye, Keyboard, ShieldCheck, School } from 'lucide-react';
 import { AppDownloadModal } from './AppDownloadModal';
 import { sound } from '@/lib/sound';
 
 export const AppDownloadSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [downloadingOs, setDownloadingOs] = useState<string | null>(null);
+  const [, setDownloadingOs] = useState<string | null>(null);
 
   const handleDownload = (osName: string, fileName: string) => {
     sound.playPop();
@@ -75,15 +56,9 @@ export const AppDownloadSection: React.FC = () => {
       id="tai-app"
       className="py-16 sm:py-24 bg-gradient-to-b from-amber-400 via-amber-300 to-amber-400 text-slate-900 relative overflow-hidden"
     >
-      {/* Background Decorative Circles & Stars */}
+      {/* Background Soft Glows */}
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-12 right-12 text-amber-100/80 text-3xl font-black select-none pointer-events-none animate-pulse">
-        ✦
-      </div>
-      <div className="absolute bottom-16 left-10 text-amber-100/80 text-2xl font-black select-none pointer-events-none">
-        ★
-      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Showcase Container */}
@@ -105,7 +80,7 @@ export const AppDownloadSection: React.FC = () => {
               <div className="space-y-3">
                 <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-tight">
                   Tải Ứng Dụng Toán Vui Cho{' '}
-                  <span className="text-amber-600 block sm:inline">Máy Tính (Desktop App)</span> 💻
+                  <span className="text-amber-600 block sm:inline">Máy Tính (Desktop App)</span>
                 </h2>
                 <p className="text-base sm:text-lg font-bold text-slate-700 leading-relaxed">
                   Cài đặt trực tiếp lên máy tính bàn (PC), Laptop hoặc Bảng thông minh lớp học. Chạy độc lập, tốc độ
@@ -136,7 +111,6 @@ export const AppDownloadSection: React.FC = () => {
                       Tải Cho Windows (.exe)
                     </div>
                   </div>
-                  <FolderDown className="w-5 h-5 text-sky-400 shrink-0 group-hover:translate-y-0.5 transition-transform" />
                 </button>
 
                 {/* macOS Button */}
@@ -159,7 +133,6 @@ export const AppDownloadSection: React.FC = () => {
                       Tải Cho macOS (.dmg)
                     </div>
                   </div>
-                  <FolderDown className="w-5 h-5 text-amber-400 shrink-0 group-hover:translate-y-0.5 transition-transform" />
                 </button>
               </div>
 
@@ -173,7 +146,7 @@ export const AppDownloadSection: React.FC = () => {
                   }}
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-amber-100 hover:bg-amber-200 text-amber-950 font-black text-xs sm:text-sm border-2 border-amber-300 transition-all shadow-xs"
                 >
-                  <School className="w-4 h-4 text-amber-700" />
+                  <School className="w-4 h-4 text-amber-800" />
                   <span>Bản Cài Đặt Phòng Máy Trường Học (.MSI)</span>
                 </button>
 
@@ -183,19 +156,15 @@ export const AppDownloadSection: React.FC = () => {
                     sound.playPop();
                     setIsModalOpen(true);
                   }}
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs sm:text-sm border border-slate-300 transition-all"
+                  className="inline-flex items-center px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs sm:text-sm border border-slate-300 transition-all"
                 >
-                  <Monitor className="w-4 h-4 text-slate-600" />
-                  <span>Cài Đặt Web App Desktop (PWA)</span>
+                  Cài Đặt Web App Desktop (PWA)
                 </button>
               </div>
 
               {/* Safe Download Footnote */}
-              <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-slate-700 pt-2 border-t border-slate-200">
-                <div className="flex items-center gap-1.5 text-emerald-800">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span>Chữ ký số an toàn (Code-Signed &amp; Sạch 100%)</span>
-                </div>
+              <div className="flex flex-wrap items-center gap-3 text-xs font-bold text-slate-700 pt-2 border-t border-slate-200">
+                <span className="text-emerald-800">Chữ ký số an toàn (Code-Signed &amp; Sạch 100%)</span>
                 <span>•</span>
                 <span className="text-slate-600">Tương thích Windows 10, Windows 11</span>
                 <span>•</span>
@@ -207,8 +176,8 @@ export const AppDownloadSection: React.FC = () => {
             <div className="lg:col-span-5 flex justify-center relative">
               {/* Floating Top Badge */}
               <div className="absolute -top-5 -right-2 z-20 hidden sm:block">
-                <div className="bg-amber-400 border-2 border-amber-500 text-amber-950 font-black text-xs px-3.5 py-1.5 rounded-2xl shadow-lg flex items-center gap-1.5 animate-bounce">
-                  <span>⚡ Phím số Numpad sẵn sàng!</span>
+                <div className="bg-amber-400 border-2 border-amber-500 text-amber-950 font-black text-xs px-3.5 py-1.5 rounded-2xl shadow-lg flex items-center gap-1.5">
+                  <span>Phím số Numpad tiện lợi</span>
                 </div>
               </div>
 
@@ -236,17 +205,12 @@ export const AppDownloadSection: React.FC = () => {
                   <div className="bg-gradient-to-b from-amber-50 via-white to-amber-100 rounded-xl overflow-hidden p-4 space-y-3.5 border border-amber-200">
                     {/* Header inside desktop app */}
                     <div className="flex items-center justify-between pb-2 border-b border-amber-200">
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-lg bg-amber-400 flex items-center justify-center text-xs font-black shadow-xs">
-                          🦉
-                        </div>
-                        <div>
-                          <div className="text-xs font-black text-slate-900">Phòng Máy Lớp 3A</div>
-                          <div className="text-[10px] font-bold text-amber-700">Chế độ thi Violympic có bấm giờ</div>
-                        </div>
+                      <div>
+                        <div className="text-xs font-black text-slate-900">Phòng Máy Lớp 3A</div>
+                        <div className="text-[10px] font-bold text-amber-700">Chế độ thi Violympic có bấm giờ</div>
                       </div>
-                      <div className="flex items-center gap-1.5 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-300 text-amber-950 text-xs font-black">
-                        <span>⏱️ 14:28 còn lại</span>
+                      <div className="flex items-center gap-1 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-300 text-amber-950 text-xs font-black">
+                        <span>14:28 còn lại</span>
                       </div>
                     </div>
 
@@ -268,7 +232,7 @@ export const AppDownloadSection: React.FC = () => {
                         </div>
                         <div className="p-2 rounded-lg bg-emerald-500 border-2 border-emerald-600 text-center text-xs font-black text-white shadow-sm flex items-center justify-between px-3">
                           <span className="text-emerald-200 text-[10px]">Phím [2]</span>
-                          <span>64 cm ✓</span>
+                          <span>64 cm</span>
                         </div>
                         <div className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-center text-xs font-black text-slate-700 flex items-center justify-between px-3">
                           <span className="text-slate-400 text-[10px]">Phím [3]</span>
@@ -303,12 +267,12 @@ export const AppDownloadSection: React.FC = () => {
               return (
                 <div
                   key={index}
-                  className="p-4 rounded-3xl bg-slate-50 border-2 border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 transition-all space-y-2 group"
+                  className="p-4 rounded-3xl bg-slate-50 border-2 border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 transition-all space-y-2.5 group"
                 >
                   <div
-                    className={`w-10 h-10 rounded-2xl flex items-center justify-center border-2 ${item.color} shadow-xs group-hover:scale-105 transition-transform`}
+                    className={`w-9 h-9 rounded-xl flex items-center justify-center border ${item.color} shadow-xs group-hover:scale-105 transition-transform`}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-4.5 h-4.5" />
                   </div>
                   <h4 className="font-display font-black text-sm text-slate-900 group-hover:text-amber-950 transition-colors">
                     {item.title}

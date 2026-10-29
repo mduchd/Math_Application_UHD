@@ -6,6 +6,17 @@
   --bg-cream: #FDFBF7;
 }
 
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-plus-jakarta-sans), system-ui, sans-serif;
+  }
+}
+
 .dark,
 [data-theme="dark"] {
   --bg-cream: #0B1120;
@@ -23,6 +34,53 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* Keep authentication cards centered when they fit, but never center-crop them on short screens. */
+.auth-viewport-shell {
+  place-items: safe center;
+}
+
+@media (min-width: 1024px) and (max-height: 900px) {
+  .auth-viewport-shell {
+    padding-block: 1rem;
+  }
+
+  .auth-card {
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .auth-form-column {
+    padding-block: 0.5rem;
+  }
+
+  .auth-form-stack {
+    gap: 0.75rem;
+  }
+
+  .auth-login-form {
+    gap: 0.75rem;
+  }
+
+  .auth-role-switcher {
+    padding: 0.25rem;
+  }
+
+  .auth-role-switcher button {
+    padding-block: 0.5rem;
+  }
+
+  .auth-footer {
+    display: none;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .auth-hero-banner {
+    min-height: 520px;
+    padding: 1.25rem;
+  }
 }
 
 .dark body {
@@ -56,22 +114,22 @@ body {
 @layer components {
   /* Commercial Kid Typography Primitives (Bold, Crisp, High Contrast) */
   .text-kid-h1 {
-    @apply font-display text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight;
+    @apply font-display text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight;
   }
   .text-kid-h2 {
-    @apply font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-800 tracking-tight leading-snug;
+    @apply font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-800 dark:text-white tracking-tight leading-snug;
   }
   .text-kid-h3 {
-    @apply font-display text-xl sm:text-2xl font-bold text-slate-800 leading-snug;
+    @apply font-display text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 leading-snug;
   }
   .text-kid-body {
-    @apply font-body text-base md:text-lg font-semibold text-slate-800 leading-relaxed;
+    @apply font-body text-base md:text-lg font-semibold text-slate-800 dark:text-slate-200 leading-relaxed;
   }
   .text-kid-body-bold {
-    @apply font-body text-base md:text-lg font-bold text-slate-900 leading-relaxed;
+    @apply font-body text-base md:text-lg font-bold text-slate-900 dark:text-white leading-relaxed;
   }
   .text-kid-sub {
-    @apply font-body text-sm md:text-base font-bold text-slate-700 leading-normal;
+    @apply font-body text-sm md:text-base font-bold text-slate-700 dark:text-slate-300 leading-normal;
   }
   .text-kid-badge {
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs sm:text-sm font-extrabold select-none shadow-sm border-2;
@@ -93,7 +151,7 @@ body {
     @apply relative font-extrabold text-white bg-kid-purple border-2 border-kid-purple-deep shadow-tactile-purple select-none;
   }
   .btn-tactile-white {
-    @apply relative font-extrabold text-slate-800 bg-white border-2 border-slate-300 shadow-tactile-white select-none;
+    @apply relative font-extrabold text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 shadow-tactile-white dark:shadow-none select-none;
   }
 }
 

@@ -79,15 +79,15 @@ export default function StudentClassroomPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Tiêu đề & Nút Nhập mã vào lớp */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 md:p-8 rounded-4xl border-2 border-kid-border shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-4xl border-2 border-kid-border dark:border-slate-800 shadow-xs">
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full text-xs font-black">
-            <School className="w-4 h-4 text-emerald-600" /> Không Gian Lớp Học
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 rounded-full text-xs font-black border border-emerald-300 dark:border-emerald-800">
+            <School className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Không Gian Lớp Học
           </div>
-          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800">
+          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800 dark:text-white">
             Lớp Học Của Bé 🏫
           </h1>
-          <p className="text-slate-600 text-xs md:text-sm font-semibold">
+          <p className="text-slate-600 dark:text-slate-300 text-xs md:text-sm font-semibold">
             Nơi kết nối với Thầy Cô, bạn bè cùng lớp và hoàn thành các bài tập hàng tuần.
           </p>
         </div>
@@ -116,14 +116,14 @@ export default function StudentClassroomPage() {
             exit={{ opacity: 0, y: -10 }}
             className={`p-4 rounded-3xl border-2 flex items-center gap-3 font-bold text-sm ${
               message.type === 'success'
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                : 'bg-rose-50 border-rose-200 text-rose-800'
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300'
+                : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300'
             }`}
           >
             {message.type === 'success' ? (
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
             ) : (
-              <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+              <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0" />
             )}
             <span>{message.text}</span>
           </m.div>
@@ -132,22 +132,22 @@ export default function StudentClassroomPage() {
 
       {/* Danh sách lớp bé đang tham gia */}
       <div className="space-y-4">
-        <h2 className="text-base font-black text-slate-700 flex items-center gap-2">
+        <h2 className="text-base font-black text-slate-700 dark:text-slate-200 flex items-center gap-2">
           <Users className="w-5 h-5 text-amber-500" /> Lớp học của em ({classes.length})
         </h2>
 
         {loading ? (
-          <div className="p-12 text-center bg-white rounded-4xl border-2 border-kid-border">
+          <div className="p-12 text-center bg-white dark:bg-slate-900/90 rounded-4xl border-2 border-kid-border dark:border-slate-800">
             <Loader2 className="w-8 h-8 text-amber-500 animate-spin mx-auto mb-3" />
-            <p className="text-sm font-bold text-slate-700">Đang tải danh sách lớp học của bé...</p>
+            <p className="text-sm font-bold text-slate-700 dark:text-slate-300">Đang tải danh sách lớp học của bé...</p>
           </div>
         ) : classes.length === 0 ? (
-          <div className="p-10 text-center bg-white rounded-4xl border-2 border-dashed border-slate-200 space-y-3">
+          <div className="p-10 text-center bg-white dark:bg-slate-900/90 rounded-4xl border-2 border-dashed border-slate-200 dark:border-slate-700 space-y-3">
             <span className="text-4xl">🎒</span>
-            <p className="font-extrabold text-slate-800 text-base">
+            <p className="font-extrabold text-slate-800 dark:text-white text-base">
               Bé chưa tham gia lớp học nào!
             </p>
-            <p className="text-sm text-slate-700 font-semibold max-w-sm mx-auto">
+            <p className="text-sm text-slate-700 dark:text-slate-300 font-semibold max-w-sm mx-auto">
               Bé hãy xin Thầy Cô mã tham gia (gồm 6 ký tự) và bấm &quot;Nhập Mã Vào Lớp&quot; ở trên nhé!
             </p>
           </div>
@@ -168,41 +168,41 @@ export default function StudentClassroomPage() {
                   whileHover={cardMotion.whileHover}
                   whileTap={cardMotion.whileTap}
                   transition={cardMotion.transition}
-                  className={`bg-white rounded-3xl p-6 border-2 flex flex-col justify-between gap-4 shadow-sm select-none ${
-                    isApproved ? 'border-emerald-200' : isPending ? 'border-amber-200' : 'border-rose-200'
+                  className={`bg-white dark:bg-slate-900/90 rounded-3xl p-6 border-2 flex flex-col justify-between gap-4 shadow-sm select-none ${
+                    isApproved ? 'border-emerald-200 dark:border-emerald-800' : isPending ? 'border-amber-200 dark:border-amber-700' : 'border-rose-200 dark:border-rose-800'
                   }`}
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="text-2xl">🏫</span>
                       {isApproved ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-black rounded-full">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Đã Vào Lớp
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-black rounded-full border border-emerald-300 dark:border-emerald-800">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> Đã Vào Lớp
                         </span>
                       ) : isPending ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-100 text-amber-900 text-xs font-black rounded-full">
-                          <Clock className="w-3.5 h-3.5 text-amber-600 animate-spin" /> Chờ Thầy Cô Duyệt
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 text-xs font-black rounded-full border border-amber-300 dark:border-amber-800">
+                          <Clock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 animate-spin" /> Chờ Thầy Cô Duyệt
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-rose-100 text-rose-800 text-xs font-black rounded-full">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 text-xs font-black rounded-full border border-rose-300 dark:border-rose-800">
                           Từ Chối
                         </span>
                       )}
                     </div>
 
                     <div>
-                      <h3 className="font-display font-black text-lg text-slate-800">
+                      <h3 className="font-display font-black text-lg text-slate-800 dark:text-white">
                         {c.name}
                       </h3>
-                      <p className="text-sm font-bold text-slate-700 mt-0.5">
-                        Giáo viên: <span className="text-slate-900 font-black">{c.teacherName}</span>
+                      <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mt-0.5">
+                        Giáo viên: <span className="text-slate-900 dark:text-white font-black">{c.teacherName}</span>
                       </p>
                     </div>
                   </div>
 
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs sm:text-sm">
-                    <span className="font-extrabold text-slate-700">Mã Lớp:</span>
-                    <span className="font-mono font-black text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-lg border border-amber-200">
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs sm:text-sm">
+                    <span className="font-extrabold text-slate-700 dark:text-slate-300">Mã Lớp:</span>
+                    <span className="font-mono font-black text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 px-2.5 py-0.5 rounded-lg border border-amber-200 dark:border-amber-800">
                       {c.joinCode}
                     </span>
                   </div>
@@ -218,23 +218,23 @@ export default function StudentClassroomPage() {
         open={showJoinModal}
         onClose={() => setShowJoinModal(false)}
         ariaLabel="Nhập mã tham gia lớp học"
-        panelClassName="bg-white rounded-4xl max-w-md w-full p-6 md:p-8 space-y-6 border-2 border-kid-border shadow-2xl relative"
+        panelClassName="bg-white dark:bg-slate-900 rounded-4xl max-w-md w-full p-6 md:p-8 space-y-6 border-2 border-kid-border dark:border-slate-800 shadow-2xl relative"
       >
         <button
           onClick={() => setShowJoinModal(false)}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-black flex items-center justify-center text-sm"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-300 font-black flex items-center justify-center text-sm"
         >
           ✕
         </button>
 
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+          <div className="w-12 h-12 bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-2xl border border-amber-300 dark:border-amber-700">
             🔑
           </div>
-          <h3 className="font-display text-2xl font-black text-slate-800">
+          <h3 className="font-display text-2xl font-black text-slate-800 dark:text-white">
             Tham Gia Lớp Mới
           </h3>
-          <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold leading-relaxed">
             Nhập mã xác nhận 6 ký tự do Thầy/Cô cung cấp (ví dụ: TOAN3A)
           </p>
         </div>
@@ -248,7 +248,7 @@ export default function StudentClassroomPage() {
               placeholder="VD: TOAN3A"
               value={inputCode}
               onChange={(e) => setInputCode(e.target.value.toUpperCase())}
-              className="w-full text-center font-display font-black text-2xl tracking-widest px-4 py-3 bg-amber-50/30 border-2 border-amber-200 rounded-2xl focus:border-amber-400 focus:outline-none placeholder:text-slate-300 uppercase"
+              className="w-full text-center font-display font-black text-2xl tracking-widest px-4 py-3 bg-amber-50/30 dark:bg-slate-800 border-2 border-amber-200 dark:border-slate-700 rounded-2xl focus:border-amber-400 focus:outline-none placeholder:text-slate-300 dark:placeholder:text-slate-500 text-slate-900 dark:text-white uppercase"
             />
           </div>
 

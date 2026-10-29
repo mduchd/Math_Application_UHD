@@ -3,46 +3,13 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { m } from 'framer-motion';
-import {
-  ArrowRight,
-  Bot,
-  Mail,
-  ShieldCheck,
-  Award,
-  BookOpen,
-  GraduationCap,
-  HeartHandshake,
-  Brain,
-  CheckCircle2,
-  Star,
-  Gamepad2,
-} from 'lucide-react';
-import { MascotOwl } from '@/components/kid/MascotOwl';
+import { ArrowRight, Mail, CheckCircle2 } from 'lucide-react';
 import { cardMotion, listItemVariants, staggerContainerVariants } from '@/lib/motion';
 import { sound } from '@/lib/sound';
-import { loginAsGuest } from '@/lib/api';
-import { useAppStore } from '@/stores/useAppStore';
 
 export const HeroSection: React.FC = () => {
   const router = useRouter();
-  const setUser = useAppStore((state) => state.setUser);
   const [email, setEmail] = useState('');
-  const [guestLoading, setGuestLoading] = useState(false);
-
-  const handleGuestTrial = async () => {
-    sound.playPop();
-    setGuestLoading(true);
-    try {
-      const res = await loginAsGuest();
-      setUser(res.user);
-      sound.playSuccess();
-      router.push('/classroom');
-    } catch {
-      router.push('/assessment');
-    } finally {
-      setGuestLoading(false);
-    }
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,15 +20,6 @@ export const HeroSection: React.FC = () => {
       router.push('/assessment');
     }
   };
-
-  const partnerLogos = [
-    { name: 'Bộ Giáo Dục & ĐT', icon: GraduationCap, label: 'Chuẩn GDPT 2026' },
-    { name: 'Toán Tư Duy CPA', icon: Brain, label: 'Hình ảnh hóa trực quan' },
-    { name: 'Kỹ Năng Sống Chuẩn', icon: HeartHandshake, label: 'Bảo Vệ Toàn Diện' },
-    { name: 'Gia Sư AI DeepSeek', icon: Bot, label: 'Đối thoại thông minh' },
-    { name: 'Đổi Mới Giáo Dục', icon: Award, label: 'Top EdTech Tiểu Học' },
-    { name: 'Thầy Cô Tin Tưởng', icon: BookOpen, label: '1.200+ Lớp Học' },
-  ];
 
   return (
     <section className="relative min-h-screen w-full flex flex-col justify-center items-center overflow-hidden bg-gradient-to-b from-amber-500 via-amber-400 to-amber-500 text-slate-900 pt-24 pb-12 sm:pt-28 sm:pb-16 selection:bg-amber-700 selection:text-white">
@@ -174,26 +132,15 @@ export const HeroSection: React.FC = () => {
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
             </form>
-
-            {/* Chế độ khách 1 chạm */}
-            <div className="flex items-center justify-center pt-3">
-              <button
-                type="button"
-                onClick={handleGuestTrial}
-                disabled={guestLoading}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-extrabold text-xs sm:text-sm border border-white/40 shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer disabled:opacity-60"
-              >
-                <Gamepad2 className="w-4 h-4 text-yellow-200" />
-                <span>{guestLoading ? 'Đang chuẩn bị lớp học...' : 'Trải nghiệm ngay không cần tài khoản 🚀'}</span>
-              </button>
-            </div>
-
-            <div className="flex items-center justify-center gap-5 sm:gap-7 mt-3 text-xs sm:text-sm font-bold text-white drop-shadow-sm">
+            <div className="flex items-center justify-center gap-4 sm:gap-6 mt-3 text-xs sm:text-sm font-bold text-white drop-shadow-sm">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-300" /> Miễn phí 100% không quảng cáo
+                <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                <span>Miễn phí 100% không quảng cáo</span>
               </span>
+              <span className="text-white/60">•</span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-300" /> Chuẩn Bộ GD&amp;ĐT 2026
+                <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                <span>Chuẩn Bộ GD&amp;ĐT 2026</span>
               </span>
             </div>
           </m.div>

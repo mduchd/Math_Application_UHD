@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="256" height="256">
+  <title>Hồ sơ — Cú Vàng Tactile</title>
+  <rect width="24" height="24" rx="5" fill="#FDFBF7"/>
+  <path d="M7.1 6.3 9 4.1l3 1.4 3-1.4 1.9 2.2v5.2c0 3-2.2 5.5-4.9 5.5s-4.9-2.5-4.9-5.5V6.3Z" fill="#FFCA28" stroke="#4B2E16" stroke-width="2.05" stroke-linejoin="round"/>
+  <circle cx="9.4" cy="10.1" r="1.55" fill="#FFF8D9" stroke="#4B2E16" stroke-width="1.2"/>
+  <circle cx="14.6" cy="10.1" r="1.55" fill="#FFF8D9" stroke="#4B2E16" stroke-width="1.2"/>
+  <circle cx="9.7" cy="10.3" r=".55" fill="#38BDF8"/>
+  <circle cx="14.3" cy="10.3" r=".55" fill="#38BDF8"/>
+  <path d="M10.4 16.6c-3.8.4-6.1 1.8-6.6 3.8h16.4c-.5-2-2.8-3.4-6.6-3.8" fill="#FFCA28" stroke="#4B2E16" stroke-width="2.05" stroke-linejoin="round"/>
+  <path d="m12 12.1-1 1.3h2l-1-1.3Z" fill="#38BDF8" stroke="#4B2E16" stroke-width=".8" stroke-linejoin="round"/>
+</svg>

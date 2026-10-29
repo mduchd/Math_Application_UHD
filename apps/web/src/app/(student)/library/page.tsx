@@ -95,14 +95,14 @@ export default function LibraryPage() {
       {/* Tiêu đề & Nút Tạo mới */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-black text-amber-900 bg-amber-100 px-3.5 py-1.5 rounded-full border border-amber-300">
+          <span className="text-xs font-black text-amber-900 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 px-3.5 py-1.5 rounded-full border border-amber-300 dark:border-amber-800">
             Kho Ôn Tập Tự Học
           </span>
-          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800 mt-2">
+          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800 dark:text-white mt-2">
             Thư Viện Của Bạn
           </h1>
-          <p className="text-slate-600 text-sm font-semibold mt-1">
-            Nơi lưu trữ các bộ bài tập bé tự tạo. Bé có thể để <strong className="text-emerald-600 font-bold">Công khai</strong> cho cả lớp cùng làm, hoặc <strong className="text-slate-700 font-bold">Riêng tư</strong> để tự ôn!
+          <p className="text-slate-600 dark:text-slate-300 text-sm font-semibold mt-1">
+            Nơi lưu trữ các bộ bài tập bé tự tạo. Bé có thể để <strong className="text-emerald-600 dark:text-emerald-400 font-bold">Công khai</strong> cho cả lớp cùng làm, hoặc <strong className="text-slate-700 dark:text-slate-200 font-bold">Riêng tư</strong> để tự ôn!
           </p>
         </div>
 
@@ -133,7 +133,7 @@ export default function LibraryPage() {
           className={`px-4 py-2 rounded-2xl text-xs md:text-sm font-black transition-colors select-none border-2 ${
             filter === 'ALL'
               ? 'bg-amber-400 border-amber-500 text-amber-950 shadow-tactile-yellow'
-              : 'bg-white text-slate-700 border-slate-200 hover:border-amber-300'
+              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:border-amber-300 dark:hover:border-amber-400'
           }`}
         >
           Tất cả ({items.length})
@@ -150,7 +150,7 @@ export default function LibraryPage() {
           className={`px-4 py-2 rounded-2xl text-xs md:text-sm font-black transition-colors flex items-center gap-1.5 select-none border-2 ${
             filter === 'PUBLIC'
               ? 'bg-emerald-500 border-emerald-600 text-white shadow-tactile-green'
-              : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300'
+              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:border-emerald-300 dark:hover:border-emerald-500'
           }`}
         >
           <Globe2 className="w-3.5 h-3.5" />
@@ -168,7 +168,7 @@ export default function LibraryPage() {
           className={`px-4 py-2 rounded-2xl text-xs md:text-sm font-black transition-colors flex items-center gap-1.5 select-none border-2 ${
             filter === 'PRIVATE'
               ? 'bg-slate-700 border-slate-800 text-white shadow-md'
-              : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
+              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
           }`}
         >
           <Lock className="w-3.5 h-3.5" />
@@ -178,15 +178,15 @@ export default function LibraryPage() {
 
       {/* Danh sách các bài tập trong thư viện */}
       {loading ? (
-        <div className="p-12 text-center bg-white rounded-4xl border-2 border-kid-border">
+        <div className="p-12 text-center bg-white dark:bg-slate-900/90 rounded-4xl border-2 border-kid-border dark:border-slate-800">
           <Loader2 className="w-8 h-8 text-amber-500 animate-spin mx-auto mb-2" />
-          <p className="text-sm font-bold text-slate-700">Đang mở kho tài liệu thư viện...</p>
+          <p className="text-sm font-bold text-slate-700 dark:text-slate-300">Đang mở kho tài liệu thư viện...</p>
         </div>
       ) : filteredItems.length === 0 ? (
-        <div className="p-10 text-center bg-white rounded-4xl border-2 border-dashed border-slate-200 space-y-3">
+        <div className="p-10 text-center bg-white dark:bg-slate-900/90 rounded-4xl border-2 border-dashed border-slate-200 dark:border-slate-700 space-y-3">
           <span className="text-4xl">📚</span>
-          <p className="font-extrabold text-slate-800 text-base">Chưa có bài tập nào trong mục này!</p>
-          <p className="text-sm text-slate-700 font-semibold max-w-sm mx-auto">
+          <p className="font-extrabold text-slate-800 dark:text-white text-base">Chưa có bài tập nào trong mục này!</p>
+          <p className="text-sm text-slate-700 dark:text-slate-300 font-semibold max-w-sm mx-auto">
             Bé hãy bấm &quot;Tạo Bộ Bài Tập Mới&quot; để tự soạn bài ôn tập riêng cho mình nhé.
           </p>
         </div>
@@ -209,11 +209,11 @@ export default function LibraryPage() {
                 exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.14 } }}
                 whileHover={cardMotion.whileHover}
                 transition={gentleSpring}
-                className="bg-white rounded-4xl border-2 border-kid-border p-6 shadow-xs hover:border-amber-400 hover:shadow-tactile-yellow transition-colors flex flex-col justify-between space-y-4"
+                className="bg-white dark:bg-slate-900/90 rounded-4xl border-2 border-kid-border dark:border-slate-800 p-6 shadow-xs hover:border-amber-400 dark:hover:border-amber-500 hover:shadow-tactile-yellow transition-colors flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-black text-sky-800 bg-sky-100 px-3 py-1 rounded-full border border-sky-200">
+                    <span className="text-xs font-black text-sky-800 dark:text-sky-300 bg-sky-100 dark:bg-sky-950/60 px-3 py-1 rounded-full border border-sky-200 dark:border-sky-800">
                       {item.subject}
                     </span>
 
@@ -224,8 +224,8 @@ export default function LibraryPage() {
                       transition={gentleSpring}
                       className={`inline-flex items-center gap-1.5 text-xs font-black px-3 py-1 rounded-full border-2 transition-colors select-none ${
                         item.visibility === 'PUBLIC'
-                          ? 'bg-emerald-100 text-emerald-800 border-emerald-300 hover:bg-emerald-200'
-                          : 'bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200'
+                          ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800 hover:bg-emerald-200 dark:hover:bg-emerald-900/60'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
                       }`}
                       title="Bấm để đổi chế độ Công khai hoặc Riêng tư"
                     >
@@ -243,24 +243,24 @@ export default function LibraryPage() {
                     </m.button>
                   </div>
 
-                  <h3 className="font-display font-black text-slate-800 text-base leading-snug line-clamp-2">
+                  <h3 className="font-display font-black text-slate-800 dark:text-white text-base leading-snug line-clamp-2">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-700 font-bold">
+                  <p className="text-xs text-slate-700 dark:text-slate-300 font-bold">
                     {item.questionsCount} câu hỏi • Tác giả: {item.authorName}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t-2 border-kid-border flex items-center justify-between">
+                <div className="pt-3 border-t-2 border-kid-border dark:border-slate-800 flex items-center justify-between">
                   <button
                     onClick={() => sound.playPop()}
-                    className="text-sm font-black text-amber-800 hover:text-amber-950"
+                    className="text-sm font-black text-amber-800 dark:text-amber-300 hover:text-amber-950 dark:hover:text-amber-200"
                   >
                     Vào ôn bài ngay →
                   </button>
                   <button
                     onClick={() => toggleVisibility(item.id)}
-                    className="text-xs font-bold text-slate-600 hover:text-slate-800 underline"
+                    className="text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 underline"
                   >
                     Đổi quyền
                   </button>
@@ -276,13 +276,13 @@ export default function LibraryPage() {
         open={showCreateModal}
         onClose={() => setShowCreateModal(false)}
         ariaLabel="Tạo bộ ôn tập mới"
-        panelClassName="bg-white rounded-4xl max-w-md w-full p-6 md:p-8 shadow-2xl space-y-6 border-2 border-kid-border relative"
+        panelClassName="bg-white dark:bg-slate-900 rounded-4xl max-w-md w-full p-6 md:p-8 shadow-2xl space-y-6 border-2 border-kid-border dark:border-slate-800 relative"
       >
-        <div className="flex items-center justify-between border-b-2 border-kid-border pb-3">
-          <h3 className="font-display text-lg font-black text-slate-800">Tạo Bộ Ôn Tập Mới</h3>
+        <div className="flex items-center justify-between border-b-2 border-kid-border dark:border-slate-800 pb-3">
+          <h3 className="font-display text-lg font-black text-slate-800 dark:text-white">Tạo Bộ Ôn Tập Mới</h3>
           <button
             onClick={() => setShowCreateModal(false)}
-            className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-black flex items-center justify-center text-sm"
+            className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-300 font-black flex items-center justify-center text-sm"
           >
             ✕
           </button>
@@ -299,16 +299,16 @@ export default function LibraryPage() {
               placeholder="Ví dụ: Ôn tập 5 câu đố vui Toán học"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border-2 border-slate-200 text-sm font-semibold focus:border-amber-400 focus:outline-none bg-amber-50/20"
+              className="w-full px-4 py-2.5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 text-sm font-semibold focus:border-amber-400 focus:outline-none bg-amber-50/20 dark:bg-slate-800 text-slate-800 dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-black text-slate-700 mb-1.5">Môn học:</label>
+            <label className="block text-xs font-black text-slate-700 dark:text-slate-300 mb-1.5">Môn học:</label>
             <select
               value={newSubject}
               onChange={(e) => setNewSubject(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border-2 border-slate-200 text-sm font-bold focus:border-amber-400 focus:outline-none bg-white"
+              className="w-full px-4 py-2.5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 text-sm font-bold focus:border-amber-400 focus:outline-none bg-white dark:bg-slate-800 text-slate-800 dark:text-white"
             >
               <option value="Toán học">Toán học</option>
               <option value="Tiếng Việt">Tiếng Việt</option>
@@ -319,7 +319,7 @@ export default function LibraryPage() {
 
           {/* LỰA CHỌN TRẠNG THÁI: CÔNG KHAI HOẶC RIÊNG TƯ */}
           <div>
-            <label className="block text-xs font-black text-slate-700 mb-2">
+            <label className="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2">
               Trạng thái chia sẻ:
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -335,15 +335,15 @@ export default function LibraryPage() {
                 transition={gentleSpring}
                 className={`p-3.5 rounded-2xl border-2 text-left transition-colors ${
                   newVisibility === 'PRIVATE'
-                    ? 'border-slate-800 bg-slate-100 text-slate-900 font-black shadow-tactile-white'
-                    : 'border-slate-200 text-slate-600 bg-white'
+                    ? 'border-slate-800 dark:border-slate-600 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-black shadow-tactile-white dark:shadow-none'
+                    : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900/60'
                 }`}
               >
                 <div className="flex items-center gap-1.5 text-xs font-black mb-1">
                   <Lock className="w-3.5 h-3.5" />
                   <span>Riêng tư</span>
                 </div>
-                <p className="text-xs text-slate-700 font-bold">Chỉ mình em xem và luyện tập</p>
+                <p className="text-xs text-slate-700 dark:text-slate-300 font-bold">Chỉ mình em xem và luyện tập</p>
               </m.button>
 
               <m.button
@@ -358,15 +358,15 @@ export default function LibraryPage() {
                 transition={gentleSpring}
                 className={`p-3.5 rounded-2xl border-2 text-left transition-colors ${
                   newVisibility === 'PUBLIC'
-                    ? 'border-emerald-500 bg-emerald-50 text-emerald-950 font-black shadow-tactile-green'
-                    : 'border-slate-200 text-slate-600 bg-white'
+                    ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-950 dark:text-emerald-200 font-black shadow-tactile-green'
+                    : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900/60'
                 }`}
               >
-                <div className="flex items-center gap-1.5 text-xs font-black mb-1 text-emerald-700">
+                <div className="flex items-center gap-1.5 text-xs font-black mb-1 text-emerald-700 dark:text-emerald-400">
                   <Globe2 className="w-3.5 h-3.5" />
                   <span>Công khai</span>
                 </div>
-                <p className="text-xs text-slate-700 font-bold">Cho phép bạn bè cùng ôn tập</p>
+                <p className="text-xs text-slate-700 dark:text-slate-300 font-bold">Cho phép bạn bè cùng ôn tập</p>
               </m.button>
             </div>
           </div>

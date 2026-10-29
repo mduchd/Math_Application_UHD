@@ -51,6 +51,25 @@ Mọi dòng chữ trên giao diện phần mềm giáo dục trẻ em đều ph�
     * **Đi thẳng vào Tiêu đề (Direct & Punchy)**: Mở đầu khối bằng Tiêu đề to rõ, đậm nét (`font-black`), dùng typography sinh động và trực diện.
     * **Khi nào mới được dùng Badge/Tag?**: CHỈ dùng Badge khi biểu thị **trạng thái dữ liệu cụ thể của từng item** (ví dụ: nhãn trạng thái `"Đã hoàn thành"`, `"Đang học"`, huy hiệu điểm số `"+10 Sao"`, cấp độ bài tập `"Cơ bản"`). Khi dùng, Badge phải gắn liền bên trong card của item đó, KHÔNG dùng làm tiêu đề phụ lơ lửng đầu trang.
 
+### 2.4. Quy Chuẩn Icon Có Chủ Đích - ⛔ CẤM "AI SLOP ICON"
+* **Kid Icon System là bộ icon chuẩn duy nhất toàn app**: Bộ SVG vẽ riêng của thương hiệu, đặt tại `apps/web/src/components/kid/icons/`, thay thế cả icon môn học lẫn icon thao tác hệ thống: tìm kiếm, đóng, quay lại, chevron, menu, cài đặt, chỉnh sửa, xoá, lọc, sắp xếp và trạng thái form. Không import icon mới từ `lucide-react`, `react-icons`, Heroicons, Phosphor hoặc bất kỳ thư viện icon UI nào. Các import Lucide hiện có là technical debt, cần được migrate dần khi từng màn hình được chỉnh sửa. Logo, mascot và minh hoạ là asset thương hiệu riêng, không phải icon system và được phép có phong cách khác.
+* **Tiêu chuẩn Kid Icon System**:
+  * Mỗi icon là SVG vẽ riêng, dùng `viewBox="0 0 24 24"`, đầu nét/góc bo tròn và silhouette đủ rõ khi xem ở 20px. Viền lấy `currentColor`; mảng vàng nhận diện dùng `var(--kid-icon-gold, #FFCA28)`. Không dùng ảnh raster, emoji hoặc SVG sinh tự động làm icon production.
+  * `strokeWidth={2.3}` là chuẩn của Kid Icon; tránh chi tiết nhỏ, ký tự bên trong icon, gradient, hiệu ứng kính hoặc bóng đổ. Màu thuộc về context/token giao diện, không bị hard-code vào SVG.
+  * Bắt đầu với navigation/action cốt lõi (Trang chủ, Học tập, Tìm kiếm, Trò chơi, Hồ sơ, Cài đặt, Đóng, Quay lại, Chevron), sau đó là nhóm có giá trị nhận diện cao (Toán, Tiếng Việt, Khoa học, Đọc sách, Khám phá, Huy hiệu thành tích và Ngôi sao điểm). Chỉ thêm icon mới khi có khái niệm nghiệp vụ lặp lại — không vẽ icon riêng cho từng câu chữ hoặc card.
+* **Nguyên tắc quyết định**: Chỉ dùng icon khi nó làm rõ một **action, trạng thái, loại nội dung hoặc dữ liệu thật**. Nếu bỏ icon mà người dùng vẫn hiểu giao diện, hãy bỏ icon. Icon không phải vật liệu lấp đầy khoảng trống.
+* ⛔ **CẤM icon trang trí tự động**:
+  * Không rải `Sparkles`, `Star`, `Rocket`, `Zap`, `Wand2`, `Brain`, `Trophy`, trái tim hoặc dấu check quanh hero, tiêu đề, CTA, card, empty state hay nền trang chỉ để tạo cảm giác “AI-generated”.
+  * Các icon trên chỉ hợp lệ khi chúng khớp dữ liệu thực tế: ví dụ `Star` cho số sao đã nhận, `Trophy` cho thành tích đạt được, `Sparkles` trong nội dung bài học thật sự nói về phép màu. Không dùng chúng như một biểu tượng mặc định của “trải nghiệm vui nhộn”.
+  * Không đặt một icon ngẫu nhiên trong ô vuông/ô tròn màu, gradient hoặc bóng đổ trên mọi card. Tránh tạo các dải icon lơ lửng hoặc các cụm hình học không mang thông tin.
+* **Ngữ nghĩa & tính nhất quán**:
+  * Với thao tác tiêu chuẩn, chọn icon có nghĩa quy ước và khớp nhãn chữ (`Search`, `Settings`, `ChevronRight`, `Trash2`...). Không dùng icon mơ hồ để thay cho từ ngữ rõ ràng.
+  * Kid Icon dùng outline với `strokeWidth={2.25}`. Dùng `size-4` (16px) cho control phụ, `size-5` (20px) cho action/navigation và `size-6` (24px) cho action chính; không tự đặt kích thước lẻ. Chỉ được fill icon phần thưởng khi biểu thị điểm hoặc thành tích đã đạt.
+  * Không trộn bừa outline/filled/3D/emoji. Giữ đồng bộ size, stroke weight, màu sắc và vùng chạm.
+  * Nút chỉ có icon phải có `aria-label` và tooltip. Icon trạng thái cần đi kèm text hoặc accessible name; không dựa vào màu/icon đơn lẻ để truyền thông tin quan trọng.
+  * Emoji trong câu chữ khích lệ vẫn được phép theo mục 5, nhưng không thay thế icon chức năng và không dùng như hoạ tiết trang trí lặp lại.
+* **Thay thế được ưu tiên**: Dùng hierarchy typography, khoảng trắng, màu semantic, dữ liệu thật, minh hoạ/mascot có chủ đề hoặc ảnh nội dung thay vì icon chung chung. Một màn hình ít icon nhưng có ý nghĩa luôn tốt hơn một màn hình đầy icon.
+
 ---
 
 ## 3. 🎨 MA TRẬN CẶP MÀU TƯƠNG PHẢN (COLOR CONTRAST RULES)
@@ -104,6 +123,7 @@ Mọi dòng chữ trên giao diện phần mềm giáo dục trẻ em đều ph�
 | ❌ Hành vi CẤM | ✅ Giải pháp BẮT BUỘC |
 | :--- | :--- |
 | **Tạo Eyebrow Pill/Micro-tag trên đầu Tiêu đề** (như `<div className="rounded-full"><Sparkles /> ...</div>`) | **BỎ HẲN tag này**. Mở đầu trực diện bằng Tiêu đề chính `H1`/`H2` to rõ bản (`font-black`) và Mascot sinh động. Badge chỉ dùng gắn trong card cho trạng thái dữ liệu cụ thể. |
+| **Rải icon "AI slop"** (`Sparkles`, `Rocket`, `Zap`, icon trong ô màu...) ở mọi hero/card/CTA | Bỏ icon nếu không có nghĩa rõ ràng; dùng icon quy ước cho action, hoặc dùng mascot/minh hoạ có chủ đề và dữ liệu thật. |
 | Dùng `text-gray-400`, `text-slate-400`, `text-zinc-400` | Đổi sang `text-slate-700` hoặc `text-slate-800` |
 | Dùng `font-light`, `font-normal` cho chữ nội dung | Đổi sang `font-semibold` (600) hoặc `font-bold` (700) |
 | Dùng `text-white` trên nền vàng nhạt/vàng cam | Đổi sang `text-amber-950 font-black` |
@@ -114,6 +134,7 @@ Mọi dòng chữ trên giao diện phần mềm giáo dục trẻ em đều ph�
 
 ## 7. 🤖 CHECKLIST BẮT BUỘC CHO AGENT TRƯỚC KHI COMMIT/HOÀN THÀNH
 - [ ] **Không có Eyebrow Pill**: Không gắn tag/viên thuốc lấp lánh nhỏ phía trên tiêu đề H1/H2/Hero. Tiêu đề đi thẳng vào trọng tâm.
+- [ ] **Icon có chủ đích**: Mọi icon UI mới dùng Kid Icon System; không có import icon thư viện bên thứ ba. Mỗi icon có nghĩa cụ thể; không có icon trang trí tự động, icon trong ô màu lặp lại hay `Sparkles`/`Rocket`/`Zap` vô cớ.
 - [ ] **Weight**: Toàn bộ tiêu đề $\ge$ `font-extrabold`, body $\ge$ `font-semibold`. Không có `font-normal` hay `font-light`.
 - [ ] **Contrast**: Màu chữ trên nền sáng là `text-slate-800`/`900` hoặc `text-slate-700`. Không có xám nhạt `gray-400`.
 - [ ] **Sharpness**: Chữ sắc nét, có padding thoáng đãng, leading thoải mái (`leading-relaxed`).

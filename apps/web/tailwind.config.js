@@ -11,10 +11,10 @@ module.exports = {
         '3': '3px',
       },
       fontFamily: {
-        // The same complete Vietnamese family is used for text and headings,
-        // so accented letters never fall back to a mismatched typeface.
-        display: ['var(--font-nunito)', 'system-ui', 'sans-serif'],
-        body: ['var(--font-nunito)', 'system-ui', 'sans-serif'],
+        // Distinct tokens keep the visual hierarchy intentional while both
+        // families retain Vietnamese glyph coverage through next/font.
+        display: ['var(--font-plus-jakarta-sans)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       colors: {
         kid: {

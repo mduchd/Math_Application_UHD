@@ -19,7 +19,7 @@ export const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ role, onChange }) =>
   };
 
   return (
-    <div className="relative p-1.5 bg-amber-50 rounded-2xl grid grid-cols-2 gap-1.5 select-none border-2 border-amber-200/80">
+    <div className="auth-role-switcher relative p-1.5 bg-amber-50 rounded-2xl grid grid-cols-2 gap-1.5 select-none border-2 border-amber-200/80">
       <button
         type="button"
         onClick={() => handleSelect('student')}

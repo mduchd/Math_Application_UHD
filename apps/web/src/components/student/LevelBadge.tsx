@@ -43,7 +43,7 @@ export const LevelBadge: React.FC<LevelBadgeProps> = ({ level, score }) => {
       <span className="text-lg">{configs.icon}</span>
       <span>{configs.label}</span>
       {score !== undefined && (
-        <span className="bg-white/80 px-2 py-0.5 rounded-xl text-xs font-black border border-black/10">
+        <span className="bg-white/80 dark:bg-black/40 px-2 py-0.5 rounded-xl text-xs font-black border border-black/10 dark:border-white/10">
           {score} điểm
         </span>
       )}

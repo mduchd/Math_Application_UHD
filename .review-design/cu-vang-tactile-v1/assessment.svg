@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="256" height="256">
+  <title>Khảo sát — Cú Vàng Tactile</title>
+  <rect width="24" height="24" rx="5" fill="#FDFBF7"/>
+  <rect x="5" y="4" width="14" height="16.5" rx="3" fill="#FFF8D9" stroke="#4B2E16" stroke-width="2.15"/>
+  <path d="M9.2 4h5.6v3H9.2z" fill="#38BDF8" stroke="#4B2E16" stroke-width="1.55" stroke-linejoin="round"/>
+  <path d="m8.3 12.3 2 2 5.4-5.4" fill="none" stroke="#4B2E16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M8.6 17.4h6.8" fill="none" stroke="#FFB300" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

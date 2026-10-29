@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { m } from 'framer-motion';
-import { Star, Sparkles, Crown, ArrowRight, Shirt } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { TactileButton } from '@/components/kid/TactileButton';
+import { MascotOwl } from '@/components/kid/MascotOwl';
 import { sound } from '@/lib/sound';
 
 export const GamificationRanks: React.FC = () => {
@@ -14,29 +14,29 @@ export const GamificationRanks: React.FC = () => {
     {
       level: 1,
       title: 'Mầm Non Tri Thức',
-      icon: '🌱',
-      starsRequired: '0 - 100 ⭐',
+      levelTag: 'Cấp 1',
+      starsRequired: '0 - 100 sao',
       badgeColor: 'border-emerald-300 bg-emerald-50 text-emerald-900',
       description: 'Làm quen bài tập đầu tiên, tích lũy thói quen học tập tự giác mỗi ngày.',
-      unlockedItem: '🎒 Ba Lô Vàng Thông Thái',
+      unlockedItem: 'Ba Lô Vàng Thông Thái',
     },
     {
       level: 2,
       title: 'Tú Tài Siêu Đẳng',
-      icon: '📜',
-      starsRequired: '101 - 300 ⭐',
+      levelTag: 'Cấp 2',
+      starsRequired: '101 - 300 sao',
       badgeColor: 'border-sky-300 bg-sky-50 text-sky-900',
       description: 'Thành thạo các phép tính nhanh và phản xạ kỹ năng an toàn xuất sắc.',
-      unlockedItem: '👓 Kính Tri Thức & Kính Lúp',
+      unlockedItem: 'Kính Tri Thức & Kính Lúp',
     },
     {
       level: 3,
       title: 'Trạng Nguyên Nhí',
-      icon: '👑',
-      starsRequired: '301+ ⭐',
+      levelTag: 'Cấp 3',
+      starsRequired: '301+ sao',
       badgeColor: 'border-purple-300 bg-purple-50 text-purple-900',
       description: 'Đạt danh hiệu học sinh thông thái xuất sắc nhất trường, vinh danh bảng vàng!',
-      unlockedItem: '🎓 Mũ Trạng Nguyên & Huy Hiệu Vàng',
+      unlockedItem: 'Mũ Trạng Nguyên & Huy Hiệu Vàng',
     },
   ];
 
@@ -46,10 +46,10 @@ export const GamificationRanks: React.FC = () => {
         {/* Section Header */}
         <div className="text-center space-y-3 max-w-3xl mx-auto mb-12">
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black text-slate-800 tracking-tight">
-            Chinh Phục Cấp Bậc & Vinh Danh Bảng Vàng
+            Chinh Phục Cấp Bậc &amp; Vinh Danh Bảng Vàng
           </h2>
           <p className="text-slate-600 text-sm sm:text-base font-bold">
-            Mỗi bài giải đúng là một bước tiến rực rỡ! Bé tích lũy Sao Vàng để đổi phụ kiện độc quyền cho chú Cú Vàng của riêng mình.
+            Mỗi bài giải đúng là một bước tiến rực rỡ! Bé tích lũy sao để đổi phụ kiện độc quyền cho chú Cú Vàng của riêng mình.
           </p>
         </div>
 
@@ -62,8 +62,8 @@ export const GamificationRanks: React.FC = () => {
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl sm:text-4xl p-2 bg-white rounded-2xl shadow-xs border border-slate-100">
-                    {rank.icon}
+                  <span className="font-display font-black text-xs uppercase tracking-wider px-3 py-1 bg-white rounded-full border border-slate-200/80 shadow-2xs">
+                    {rank.levelTag}
                   </span>
                   <span className="px-3 py-1 bg-white/90 rounded-full text-xs font-black shadow-2xs">
                     {rank.starsRequired}
@@ -71,9 +71,6 @@ export const GamificationRanks: React.FC = () => {
                 </div>
 
                 <div className="space-y-1">
-                  <span className="text-[11px] font-black uppercase tracking-wider opacity-70">
-                    Cấp Bậc {rank.level}
-                  </span>
                   <h3 className="font-display text-xl sm:text-2xl font-black text-slate-800">
                     {rank.title}
                   </h3>
@@ -85,9 +82,8 @@ export const GamificationRanks: React.FC = () => {
 
               {/* Unlocked Reward Box */}
               <div className="mt-5 pt-4 border-t border-slate-200/60 bg-white/70 p-3 rounded-2xl border border-white">
-                <div className="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
-                  <Shirt className="w-3.5 h-3.5 text-purple-600" />
-                  <span>Phần Thưởng Mở Khóa:</span>
+                <div className="text-xs font-black uppercase tracking-wider text-slate-700">
+                  Phần Thưởng Mở Khóa:
                 </div>
                 <div className="text-sm font-black text-slate-900 mt-1">
                   {rank.unlockedItem}
@@ -99,9 +95,9 @@ export const GamificationRanks: React.FC = () => {
 
         {/* Bottom Mascot Showcase Strip */}
         <div className="bg-white border-3 border-amber-300 rounded-4xl p-6 sm:p-8 shadow-md flex flex-wrap items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="text-4xl sm:text-5xl p-3 bg-amber-100 rounded-3xl border-2 border-amber-300 shadow-xs">
-              🦉✨
+          <div className="flex items-center gap-5">
+            <div className="shrink-0 p-1 bg-amber-100 rounded-3xl border-2 border-amber-300 shadow-xs">
+              <MascotOwl mood="happy" size="md" />
             </div>
             <div className="space-y-1">
               <h4 className="font-display font-black text-lg sm:text-xl text-slate-800">

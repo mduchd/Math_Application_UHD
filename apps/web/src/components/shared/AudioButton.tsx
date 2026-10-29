@@ -43,13 +43,14 @@ export const AudioButton: React.FC<AudioButtonProps> = ({ textToRead }) => {
     <m.button
       type="button"
       onClick={handleSpeak}
-      whileHover={{ y: -1, scale: 1.015 }}
-      whileTap={{ y: 1, scale: 0.98 }}
+      whileHover={{ opacity: 0.82 }}
+      whileTap={{ opacity: 0.7 }}
       transition={playfulSpring}
-      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl text-xs md:text-sm font-black transition-colors select-none border-2 border-b-4 ${
+      aria-pressed={isPlaying}
+      className={`inline-flex min-h-11 items-center gap-2 rounded-xl px-3.5 py-1.5 text-sm font-extrabold transition-colors select-none ${
         isPlaying
-          ? 'bg-amber-300 border-amber-500 text-amber-950 shadow-none'
-          : 'bg-white border-amber-300 text-amber-800 hover:bg-amber-50 shadow-xs'
+          ? 'bg-amber-200 text-amber-950'
+          : 'bg-amber-50 text-amber-900 hover:bg-amber-100'
       }`}
       title="Bấm để nghe đọc câu hỏi"
     >

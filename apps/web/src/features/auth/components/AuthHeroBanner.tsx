@@ -14,7 +14,7 @@ export const AuthHeroBanner: React.FC<AuthHeroBannerProps> = ({ role, mode = 'lo
   const isTeacher = role === 'teacher';
 
   return (
-    <div className="relative rounded-[28px] overflow-hidden bg-gradient-to-br from-[#FFD54F] via-[#FFCA28] to-[#FFB300] text-amber-950 p-6 sm:p-8 flex flex-col justify-between shadow-sm border-2 border-amber-400/60 h-full min-h-[460px] lg:min-h-[580px]">
+    <div className="auth-hero-banner relative rounded-[28px] overflow-hidden bg-gradient-to-br from-[#FFD54F] via-[#FFCA28] to-[#FFB300] text-amber-950 p-6 sm:p-8 flex flex-col justify-between shadow-sm border-2 border-amber-400/60 h-full min-h-[460px] lg:min-h-[580px]">
       {/* Decorative ambient radial blurs */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-600/20 rounded-full blur-3xl pointer-events-none" />

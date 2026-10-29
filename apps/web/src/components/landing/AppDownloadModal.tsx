@@ -8,14 +8,8 @@ import {
   Copy,
   Check,
   ShieldCheck,
-  Sparkles,
-  ExternalLink,
-  Laptop,
   Apple,
-  School,
   CheckCircle2,
-  FolderDown,
-  Terminal,
 } from 'lucide-react';
 import { MotionDialog } from '@/components/motion/MotionDialog';
 import { AppLogo } from '@/components/kid/AppLogo';
@@ -131,14 +125,10 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ open, onClos
           <Monitor className="w-6 h-6 text-amber-400 stroke-[2.2]" />
         </div>
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 border border-amber-300 text-amber-950 text-xs font-black">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            <span>Phần Mềm Máy Tính (Desktop App)</span>
-          </div>
-          <h3 className="font-display font-black text-xl sm:text-2xl text-slate-900 tracking-tight mt-1">
-            Trung Tâm Tải Ứng Dụng Máy Tính 💻
+          <h3 className="font-display font-black text-xl sm:text-2xl text-slate-900 tracking-tight">
+            Trung Tâm Tải Ứng Dụng Máy Tính
           </h3>
-          <p className="text-xs sm:text-sm font-bold text-slate-700">
+          <p className="text-xs sm:text-sm font-bold text-slate-700 mt-0.5">
             Dành cho Laptop, PC gia đình, phòng máy tin học &amp; bảng tương tác trường học
           </p>
         </div>
@@ -193,7 +183,6 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ open, onClos
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
-          <School className="w-4 h-4 text-amber-700 shrink-0" />
           <span>Trường Học (.msi)</span>
         </button>
 
@@ -209,7 +198,6 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ open, onClos
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
-          <Laptop className="w-4 h-4 text-purple-600 shrink-0" />
           <span>Web Desktop</span>
         </button>
       </div>
@@ -260,7 +248,7 @@ export const AppDownloadModal: React.FC<AppDownloadModalProps> = ({ open, onClos
               onClick={handleTriggerDownload}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-slate-950 hover:bg-slate-800 text-white font-black text-sm shadow-md transition-all active:translate-y-0.5 border border-slate-900"
             >
-              <FolderDown className="w-4 h-4 text-amber-400 stroke-[2.5]" />
+              <Download className="w-4 h-4 text-amber-400 stroke-[2.5]" />
               <span>{downloadStarted ? 'Đang Bắt Đầu Tải...' : `Tải Xuống Ngay (${currentInfo.size})`}</span>
             </button>
           )}

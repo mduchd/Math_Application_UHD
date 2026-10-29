@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { m } from 'framer-motion';
-import { Users, KeyRound, BarChart3, CheckCircle2, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { KeyRound, BarChart3, BookOpen, ShieldCheck, ArrowRight } from 'lucide-react';
 import { TactileButton } from '@/components/kid/TactileButton';
 import { sound } from '@/lib/sound';
 import { getStoredToken } from '@/lib/api';
@@ -38,8 +38,8 @@ export const TeacherSection: React.FC = () => {
 
             {/* Feature Highlights Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="bg-white p-4 rounded-3xl border-2 border-emerald-200 shadow-xs space-y-1.5">
-                <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-black">
+              <div className="bg-white p-4 rounded-3xl border-2 border-emerald-200 shadow-xs space-y-2">
+                <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center">
                   <KeyRound className="w-4 h-4" />
                 </div>
                 <h4 className="font-display font-black text-slate-800 text-base">
@@ -50,8 +50,8 @@ export const TeacherSection: React.FC = () => {
                 </p>
               </div>
 
-              <div className="bg-white p-4 rounded-3xl border-2 border-emerald-200 shadow-xs space-y-1.5">
-                <div className="w-8 h-8 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center font-black">
+              <div className="bg-white p-4 rounded-3xl border-2 border-emerald-200 shadow-xs space-y-2">
+                <div className="w-8 h-8 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center">
                   <BarChart3 className="w-4 h-4" />
                 </div>
                 <h4 className="font-display font-black text-slate-800 text-base">
@@ -62,9 +62,9 @@ export const TeacherSection: React.FC = () => {
                 </p>
               </div>
 
-              <div className="bg-white p-4 rounded-3xl border-2 border-emerald-200 shadow-xs space-y-1.5">
-                <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-black">
-                  <Sparkles className="w-4 h-4" />
+              <div className="bg-white p-4 rounded-3xl border-2 border-emerald-200 shadow-xs space-y-2">
+                <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center">
+                  <BookOpen className="w-4 h-4" />
                 </div>
                 <h4 className="font-display font-black text-slate-800 text-base">
                   Ngân Hàng Bài Tập 5 Khối
@@ -74,12 +74,12 @@ export const TeacherSection: React.FC = () => {
                 </p>
               </div>
 
-              <div className="bg-white p-4 rounded-3xl border-2 border-emerald-200 shadow-xs space-y-1.5">
-                <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center font-black">
+              <div className="bg-white p-4 rounded-3xl border-2 border-emerald-200 shadow-xs space-y-2">
+                <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <h4 className="font-display font-black text-slate-800 text-base">
-                  Duyệt Học Sinh & Bảo Mật
+                  Duyệt Học Sinh &amp; Bảo Mật
                 </h4>
                 <p className="text-slate-700 text-sm font-semibold leading-relaxed">
                   Kiểm soát tuyệt đối thành viên trong lớp học, tránh người ngoài vào quấy rầy không gian học trò.
@@ -117,8 +117,8 @@ export const TeacherSection: React.FC = () => {
             <div className="bg-white border-4 border-emerald-300 rounded-5xl p-6 sm:p-7 shadow-xl space-y-5 relative">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-black text-lg shadow-xs">
-                    🏫
+                  <div className="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-display font-black text-sm shadow-xs">
+                    3A
                   </div>
                   <div>
                     <h3 className="font-display font-black text-slate-800 text-base">

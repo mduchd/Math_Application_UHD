@@ -123,6 +123,15 @@ apps/api/src/
    - **Độ tương phản & Sắc nét (WCAG AAA $\ge 7:1$)**: Màu chữ trên nền sáng bắt buộc là `text-slate-800` hoặc `text-slate-900`. Chữ trên nền vàng (`bg-kid-yellow`) bắt buộc là `text-amber-950` (CẤM chữ trắng trên nền vàng). CẤM dùng `text-gray-400`, `text-slate-400`, `text-zinc-400` cho nội dung đọc.
    - **Kích thước tối thiểu**: Không dùng font nhỏ hơn `14px` (`text-sm`) cho nội dung đọc hiểu.
    - **Văn phong thương mại cho trẻ em**: Lời thoại thân thiện, khích lệ ("Bạn", "Chúng mình"), nút bấm có động từ hành động + emoji sinh động, thông báo lỗi nhẹ nhàng khích lệ thử lại.
+5. **Icon có chủ đích, không “AI slop”**:
+   - **Kid Icon System là bộ icon chuẩn duy nhất của sản phẩm**, đặt trong `apps/web/src/components/kid/icons/`, thay thế cả icon thương hiệu lẫn icon thao tác hệ thống: tìm kiếm, đóng, quay lại, điều hướng, cài đặt, chỉnh sửa và xoá. Không import icon mới từ `lucide-react` hoặc cài thêm thư viện icon UI khác. Các import Lucide đã tồn tại là technical debt cần migrate dần sang Kid Icon System.
+   - Mỗi `KidIcon` phải là SVG vẽ riêng, có một silhouette dễ nhận diện, nét bo tròn đồng nhất và `viewBox` 24×24. Viền dùng `currentColor`; mảng nhận diện dùng token `--kid-icon-gold` (mặc định `#FFCA28`) để gắn với Cú Vàng. Không dùng ảnh raster, emoji hoặc SVG sinh tự động làm icon production. Logo, mascot và minh hoạ vẫn là asset thương hiệu riêng.
+   - Chỉ thêm icon khi nó truyền tải **một hành động, trạng thái hoặc loại nội dung cụ thể** mà chữ hoặc bố cục không thể hiện rõ hơn. Không thêm icon chỉ để lấp chỗ trống, làm giao diện “trông vui hơn”, hoặc vì một mẫu UI có sẵn dùng icon.
+   - ⛔ Không tự động rải các icon chung chung như `Sparkles`, `Star`, `Rocket`, `Zap`, `Wand2`, `Brain`, `Trophy` vào tiêu đề, hero, card, CTA hoặc nền trang. Chúng chỉ được dùng khi đúng với dữ liệu/thành tích thực tế (ví dụ: số sao bé vừa nhận), không phải trang trí.
+   - Với các action/navigation chuẩn, dùng icon có nghĩa quy ước rõ ràng và khớp chính xác với nhãn: `Search` cho tìm kiếm, `Settings` cho cài đặt, `ChevronRight` cho điều hướng tiếp. Nếu nhãn chữ đã đủ rõ, ưu tiên bỏ icon hơn là chọn một icon mơ hồ.
+   - Dùng outline Kid Icon với `strokeWidth={2.25}`; dùng `size-4` (16px) cho control phụ, `size-5` (20px) cho action/navigation, `size-6` (24px) cho action chính. Chỉ dùng filled icon phần thưởng khi biểu thị điểm hoặc thành tích đã đạt. Không trộn icon 3D, emoji, filled và outline ngẫu nhiên; không tạo icon gradient/bóng đổ/circular tile chỉ để trang trí.
+   - Không biến mọi card, nút hay dòng thông tin thành một icon trong ô vuông/ô tròn màu sắc. Icon chỉ là tín hiệu phụ; nội dung, typography và hình minh hoạ/mascot có chủ đề mới là trọng tâm thị giác.
+   - Icon-only button bắt buộc có `aria-label` và tooltip; icon mang nghĩa trạng thái phải đi kèm text hoặc nhãn hỗ trợ. Emoji được phép trong microcopy theo quy chuẩn trẻ em, nhưng không dùng để thay thế icon chức năng hoặc làm họa tiết rải ngẫu nhiên.
 
 ---
 
@@ -166,4 +175,5 @@ Trước khi hoàn thành bất kỳ tác vụ nào, AI Agent phải rà soát:
   - Màu chữ có tương phản sắc nét ($\ge 7:1$) không? Có dùng `text-gray-400`/`text-slate-400` gây mờ mắt trẻ không?
   - Cỡ chữ có bị nhỏ hơn `14px` không? Nút bấm vàng có dùng chữ `text-amber-950` không?
   - Văn phong thương mại thân thiện, tích cực, đúng ngữ pháp tiếng Việt chưa?
+- [ ] **Icon có chủ đích**: Mỗi icon có mang nghĩa hành động/trạng thái/dữ liệu cụ thể không? Đã bỏ icon trang trí chung chung, icon trong ô màu lặp lại và các icon “Sparkles/Star/Rocket/Zap” không gắn với nội dung thực tế chưa?
 - [ ] **Khả năng Scale & Maintain**: Người khác có dễ dàng đọc hiểu, bảo trì và viết test cho module này không?

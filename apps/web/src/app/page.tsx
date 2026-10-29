@@ -13,6 +13,9 @@ import { LandingFooter } from '@/components/landing/LandingFooter';
 import { LandingBackToTop } from '@/components/landing/LandingBackToTop';
 import { LandingAIChatbot } from '@/components/landing/LandingAIChatbot';
 
+// Giữ component để có thể mở lại khi gói đăng ký sẵn sàng.
+const showPricingSection = false;
+
 export const metadata = {
   title: 'Toán Vui | Nền Tảng Học Toán Tiểu Học Thông Minh Tích Hợp AI',
   description:
@@ -46,8 +49,8 @@ export default function HomePage() {
       {/* 8. Social Proof: Testimonials & Stats Counter */}
       <TestimonialsStats />
 
-      {/* 9. SaaS Pricing Plans (Free, Family Pro, School Pro) */}
-      <PricingSection />
+      {/* 9. Gói đăng ký — tạm ẩn khỏi trang chủ */}
+      {showPricingSection && <PricingSection />}
 
       {/* 10. Multi-Platform Mobile & Tablet App Download Section */}
       <AppDownloadSection />

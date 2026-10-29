@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { LogOut, LogIn } from 'lucide-react';
+import { KidLoginIcon, KidLogoutIcon } from '@/components/kid/icons';
 import { ThemeToggle } from '@/features/theme';
 import { sound } from '@/lib/sound';
 import { SidebarHeader } from './SidebarHeader';
@@ -72,8 +72,8 @@ export const CurvedSidebar: React.FC<CurvedSidebarProps> = ({
         href="/"
       />
 
-      {/* 2. Navigation Items (Liền mạch, hoàn toàn KHÔNG cuộn scrollbar, KHÔNG viền biên) */}
-      <div className="flex-1 py-1 space-y-1 overflow-hidden flex flex-col justify-center">
+      {/* 2. Navigation Items (Được xếp từ trên xuống, khoảng cách đều thoáng) */}
+      <div className="flex-1 pt-6 pb-4 space-y-3 flex flex-col justify-start">
         {items.map((item) => {
           const isActive = currentPath === item.href;
           return (
@@ -100,7 +100,7 @@ export const CurvedSidebar: React.FC<CurvedSidebarProps> = ({
               className="h-10 w-10 rounded-2xl border-2 border-amber-300/80 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 hover:bg-rose-50 hover:border-rose-300 hover:text-rose-600 text-amber-950 dark:text-amber-200 shadow-xs flex items-center justify-center transition-all cursor-pointer shrink-0"
               aria-label="Đăng xuất"
             >
-              <LogOut className="w-4 h-4 stroke-[2.5]" />
+              <KidLogoutIcon className="w-4 h-4" />
             </button>
           ) : (
             <Link
@@ -108,7 +108,7 @@ export const CurvedSidebar: React.FC<CurvedSidebarProps> = ({
               title="Đăng nhập"
               className="h-10 w-10 rounded-2xl border-2 border-amber-300/80 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 hover:bg-white text-amber-950 dark:text-amber-200 shadow-xs flex items-center justify-center transition-all cursor-pointer shrink-0"
             >
-              <LogIn className="w-4 h-4 stroke-[2.5]" />
+              <KidLoginIcon className="w-4 h-4" />
             </Link>
           )}
         </div>
