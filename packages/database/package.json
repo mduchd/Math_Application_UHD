@@ -5,7 +5,7 @@
   "scripts": {
     "build": "prisma generate",
     "generate": "prisma generate",
-    "push": "prisma db push",
+    "push": "prisma db push --accept-data-loss",
     "migrate": "prisma migrate dev",
     "studio": "prisma studio",
     "lint": "eslint index.ts",

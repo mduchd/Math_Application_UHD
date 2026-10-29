@@ -9,6 +9,8 @@ import { TestimonialsStats } from '@/components/landing/TestimonialsStats';
 import { PricingSection } from '@/components/landing/PricingSection';
 import { FaqAccordion } from '@/components/landing/FaqAccordion';
 import { LandingFooter } from '@/components/landing/LandingFooter';
+import { LandingBackToTop } from '@/components/landing/LandingBackToTop';
+import { LandingAIMascot } from '@/components/landing/LandingAIMascot';
 
 export const metadata = {
   title: 'Trường Học Thông Thái | Nền Tảng Học Toán & Kỹ Năng Sống Tiểu Học Tích Hợp AI',
@@ -51,6 +53,12 @@ export default function HomePage() {
 
       {/* 11. Final Call To Action & Footer */}
       <LandingFooter />
+
+      {/* 12. Floating Back To Top Button */}
+      <LandingBackToTop />
+
+      {/* 13. Interactive Mascot AI with Zoom Mode */}
+      <LandingAIMascot />
     </main>
   );
 }
