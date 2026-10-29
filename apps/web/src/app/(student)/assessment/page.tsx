@@ -153,14 +153,11 @@ export default function AssessmentPage() {
       {/* BANNER THÂN THIỆN CÓ LINH VẬT CÚ BI BÁC HỌC */}
       <div className="bg-white border-2 border-kid-border rounded-4xl p-6 shadow-xs flex flex-col sm:flex-row items-center gap-5">
         <MascotOwl size="md" mood={isSubmitted ? 'celebrating' : 'thinking'} />
-        <div className="text-center sm:text-left flex-1 space-y-1">
-          <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-900 text-xs font-black px-3 py-1 rounded-full">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" /> Thử Thách Khởi Động
-          </span>
+        <div className="text-center sm:text-left flex-1 space-y-1.5">
           <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800">
             Khảo Sát Năng Lực Đầu Vào
           </h1>
-          <p className="text-slate-500 text-sm font-semibold">
+          <p className="text-slate-700 text-sm font-bold">
             Bé hãy tự tin chọn đáp án nhé! Cú Bi sẽ gợi ý kế hoạch học tập siêu vui phù hợp với bé.
           </p>
         </div>

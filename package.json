@@ -7,7 +7,9 @@
     "packages/*"
   ],
   "scripts": {
+    "clean": "node -e \"const fs = require('fs'); ['apps/web/.next', 'apps/api/dist'].forEach(p => fs.rmSync(p, { recursive: true, force: true }));\"",
     "dev:web": "npm run dev --workspace=apps/web",
+    "dev:web:clean": "npm run clean --workspace=apps/web && npm run dev --workspace=apps/web",
     "dev:api": "npm run start:dev --workspace=apps/api",
     "build": "npm run build:web",
     "build:web": "npm run build --workspace=packages/types && npm run build --workspace=apps/web",

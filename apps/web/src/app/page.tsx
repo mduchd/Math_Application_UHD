@@ -7,15 +7,16 @@ import { TeacherSection } from '@/components/landing/TeacherSection';
 import { GamificationRanks } from '@/components/landing/GamificationRanks';
 import { TestimonialsStats } from '@/components/landing/TestimonialsStats';
 import { PricingSection } from '@/components/landing/PricingSection';
+import { AppDownloadSection } from '@/components/landing/AppDownloadSection';
 import { FaqAccordion } from '@/components/landing/FaqAccordion';
 import { LandingFooter } from '@/components/landing/LandingFooter';
 import { LandingBackToTop } from '@/components/landing/LandingBackToTop';
 import { LandingAIChatbot } from '@/components/landing/LandingAIChatbot';
 
 export const metadata = {
-  title: 'Trường Học Thông Thái | Nền Tảng Học Toán & Kỹ Năng Sống Tiểu Học Tích Hợp AI',
+  title: 'Toán Vui | Nền Tảng Học Toán Tiểu Học Thông Minh Tích Hợp AI',
   description:
-    'Nền tảng học tập thông minh cho học sinh cấp Tiểu học (Lớp 1 - 5). Tích hợp Toán học trực quan, Kỹ năng sống an toàn, Gia sư AI DeepSeek và Không gian quản lý lớp học cho giáo viên.',
+    'Nền tảng học Toán thông minh cho học sinh cấp Tiểu học (Lớp 1 - 5). Tích hợp Toán học trực quan, bài tập tương tác, Gia sư AI DeepSeek và Không gian quản lý lớp học cho giáo viên.',
 };
 
 export default function HomePage() {
@@ -48,16 +49,19 @@ export default function HomePage() {
       {/* 9. SaaS Pricing Plans (Free, Family Pro, School Pro) */}
       <PricingSection />
 
-      {/* 10. Interactive FAQ Accordion */}
+      {/* 10. Multi-Platform Mobile & Tablet App Download Section */}
+      <AppDownloadSection />
+
+      {/* 11. Interactive FAQ Accordion */}
       <FaqAccordion />
 
-      {/* 11. Final Call To Action & Footer */}
+      {/* 12. Final Call To Action & Footer */}
       <LandingFooter />
 
-      {/* 12. Floating Back To Top Button */}
+      {/* 13. Floating Back To Top Button */}
       <LandingBackToTop />
 
-      {/* 13. Interactive Mascot AI Chatbot with Fullscreen Mode */}
+      {/* 14. Interactive Mascot AI Chatbot with Fullscreen Mode */}
       <LandingAIChatbot />
     </main>
   );

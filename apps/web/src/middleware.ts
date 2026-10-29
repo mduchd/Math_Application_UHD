@@ -5,6 +5,7 @@ export function middleware(request: NextRequest) {
 
   const token = request.cookies.get('kid_auth_token')?.value;
   const role = request.cookies.get('kid_user_role')?.value;
+  const isGuest = request.cookies.get('kid_is_guest')?.value === 'true';
 
   const isTeacherRoute =
     pathname.startsWith('/classes') ||
@@ -23,8 +24,8 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/login') ||
     pathname.startsWith('/register');
 
-  // Đang vào trang auth nhưng đã đăng nhập
-  if (isAuthRoute && token) {
+  // Đang vào trang auth nhưng đã đăng nhập tài khoản chính thức (không phải khách trải nghiệm)
+  if (isAuthRoute && token && !isGuest) {
     if (role === 'TEACHER') {
       return NextResponse.redirect(new URL('/classes', request.url));
     }

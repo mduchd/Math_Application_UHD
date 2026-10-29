@@ -36,6 +36,21 @@ Mọi dòng chữ trên giao diện phần mềm giáo dục trẻ em đều ph�
   * **Body chính (Đề bài, Nội dung)**: `text-base` đến `text-lg` (16px - 18px), `leading-relaxed` (1.625).
   * **Subtext / Chú thích phụ**: `text-sm` (14px), bắt buộc `font-bold` và màu tương phản cao (`text-slate-700`).
 
+### 2.3. Quy Chuẩn Về Thẻ & Huy Hiệu (Badges, Tags, Chips) - ⛔ CẤM EYEBROW PILL TRÊN TIÊU ĐỀ
+* ⛔ **TUYỆT ĐỐI CẤM KHUÔN MẪU "EYEBROW TAG / PILL BADGE" TRÊN ĐẦU TIÊU ĐỀ**:
+  * **Hành vi bị cấm**: Đặt một thanh pill/badge nhỏ dạng viên thuốc bo tròn (như `<div className="rounded-full inline-flex ..."><Sparkles /> ...</div>`) lơ lửng ngay phía trên tiêu đề chính (`H1`, `H2` hoặc Section Header).
+  * **Lý do**: Đây là "tật xấu" sao chép máy móc từ các landing page SaaS B2B của người lớn. Đối với học sinh tiểu học:
+    1. Trẻ em **hoàn toàn không đọc** các dòng chữ nhỏ li ti này, chỉ gây rác thị giác (visual clutter) và làm rối mắt.
+    2. Chiếm diện tích vàng và làm giảm lực tác động trực diện của Tiêu đề chính to bản (`font-black`) cùng hình ảnh linh vật (Mascot).
+    3. Nhồi nhét câu chữ dài vào thanh pill hẹp vi phạm nguyên tắc thông tin cô đọng, rõ ràng.
+  * ❌ **Ví dụ vi phạm cần loại bỏ ngay**:
+    * `❌ <span className="rounded-full ..."><Sparkles /> Khám Phá Thế Giới Toán Diệu Kỳ</span> <h2>Học vui mỗi ngày...</h2>`
+    * `❌ <span className="rounded-full ..."><Sparkles /> Ứng Dụng Học Tập Di Động Dành Cho Bé Lớp 1 - 5</span> <h2>Tải Ứng Dụng...</h2>`
+    * `❌ <span className="rounded-full ..."><Sparkles /> Thử Thách Khởi Động</span> <h1>Khảo Sát Năng Lực...</h1>`
+  * ✅ **Giải pháp chuẩn**:
+    * **Đi thẳng vào Tiêu đề (Direct & Punchy)**: Mở đầu khối bằng Tiêu đề to rõ, đậm nét (`font-black`), dùng typography sinh động và trực diện.
+    * **Khi nào mới được dùng Badge/Tag?**: CHỈ dùng Badge khi biểu thị **trạng thái dữ liệu cụ thể của từng item** (ví dụ: nhãn trạng thái `"Đã hoàn thành"`, `"Đang học"`, huy hiệu điểm số `"+10 Sao"`, cấp độ bài tập `"Cơ bản"`). Khi dùng, Badge phải gắn liền bên trong card của item đó, KHÔNG dùng làm tiêu đề phụ lơ lửng đầu trang.
+
 ---
 
 ## 3. 🎨 MA TRẬN CẶP MÀU TƯƠNG PHẢN (COLOR CONTRAST RULES)
@@ -88,6 +103,7 @@ Mọi dòng chữ trên giao diện phần mềm giáo dục trẻ em đều ph�
 
 | ❌ Hành vi CẤM | ✅ Giải pháp BẮT BUỘC |
 | :--- | :--- |
+| **Tạo Eyebrow Pill/Micro-tag trên đầu Tiêu đề** (như `<div className="rounded-full"><Sparkles /> ...</div>`) | **BỎ HẲN tag này**. Mở đầu trực diện bằng Tiêu đề chính `H1`/`H2` to rõ bản (`font-black`) và Mascot sinh động. Badge chỉ dùng gắn trong card cho trạng thái dữ liệu cụ thể. |
 | Dùng `text-gray-400`, `text-slate-400`, `text-zinc-400` | Đổi sang `text-slate-700` hoặc `text-slate-800` |
 | Dùng `font-light`, `font-normal` cho chữ nội dung | Đổi sang `font-semibold` (600) hoặc `font-bold` (700) |
 | Dùng `text-white` trên nền vàng nhạt/vàng cam | Đổi sang `text-amber-950 font-black` |
@@ -97,6 +113,7 @@ Mọi dòng chữ trên giao diện phần mềm giáo dục trẻ em đều ph�
 ---
 
 ## 7. 🤖 CHECKLIST BẮT BUỘC CHO AGENT TRƯỚC KHI COMMIT/HOÀN THÀNH
+- [ ] **Không có Eyebrow Pill**: Không gắn tag/viên thuốc lấp lánh nhỏ phía trên tiêu đề H1/H2/Hero. Tiêu đề đi thẳng vào trọng tâm.
 - [ ] **Weight**: Toàn bộ tiêu đề $\ge$ `font-extrabold`, body $\ge$ `font-semibold`. Không có `font-normal` hay `font-light`.
 - [ ] **Contrast**: Màu chữ trên nền sáng là `text-slate-800`/`900` hoặc `text-slate-700`. Không có xám nhạt `gray-400`.
 - [ ] **Sharpness**: Chữ sắc nét, có padding thoáng đãng, leading thoải mái (`leading-relaxed`).

@@ -63,7 +63,7 @@ export default function LifeSkillsPage() {
         </div>
       </div>
 
-      <m.div variants={staggerContainerVariants} initial="hidden" animate="visible" className="space-y-6">
+      <m.div variants={staggerContainerVariants} initial={false} animate="visible" className="space-y-6">
         {skills.map((skill) => (
           <m.div
             key={skill.id}

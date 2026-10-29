@@ -10,6 +10,7 @@ export interface User {
   avatarUrl?: string;
   googleId?: string;
   gradeLevel?: number; // 1 to 5 for primary school
+  isGuest?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -42,6 +43,19 @@ export interface StudentRegisterInput {
 export interface StudentLoginInput {
   identifier: string; // Username hoặc Full name
   pin: string;
+}
+
+export interface GuestAuthInput {
+  fullName?: string;
+  avatarMascot?: string;
+  gradeLevel?: number;
+}
+
+export interface UpgradeGuestInput {
+  fullName?: string;
+  pin: string;
+  avatarMascot?: string;
+  gradeLevel?: number;
 }
 
 export interface GoogleAuthInput {

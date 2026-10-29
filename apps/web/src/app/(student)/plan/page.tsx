@@ -176,7 +176,7 @@ export default function AIPlanPage() {
           </span>
         </div>
 
-        <m.div variants={staggerContainerVariants} initial="hidden" animate="visible" className="space-y-6">
+        <m.div variants={staggerContainerVariants} initial={false} animate="visible" className="space-y-6">
           {planData.weeks.map((week, idx) => {
             const isCurrent = week.status === 'CURRENT';
             return (

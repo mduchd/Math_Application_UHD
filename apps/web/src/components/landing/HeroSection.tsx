@@ -15,14 +15,34 @@ import {
   Brain,
   CheckCircle2,
   Star,
+  Gamepad2,
 } from 'lucide-react';
 import { MascotOwl } from '@/components/kid/MascotOwl';
 import { cardMotion, listItemVariants, staggerContainerVariants } from '@/lib/motion';
 import { sound } from '@/lib/sound';
+import { loginAsGuest } from '@/lib/api';
+import { useAppStore } from '@/stores/useAppStore';
 
 export const HeroSection: React.FC = () => {
   const router = useRouter();
+  const setUser = useAppStore((state) => state.setUser);
   const [email, setEmail] = useState('');
+  const [guestLoading, setGuestLoading] = useState(false);
+
+  const handleGuestTrial = async () => {
+    sound.playPop();
+    setGuestLoading(true);
+    try {
+      const res = await loginAsGuest();
+      setUser(res.user);
+      sound.playSuccess();
+      router.push('/classroom');
+    } catch {
+      router.push('/assessment');
+    } finally {
+      setGuestLoading(false);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,7 +131,7 @@ export const HeroSection: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center my-auto">
         <m.div
           variants={staggerContainerVariants}
-          initial="hidden"
+          initial={false}
           animate="visible"
           className="space-y-6 sm:space-y-8"
         >
@@ -154,6 +174,19 @@ export const HeroSection: React.FC = () => {
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
             </form>
+
+            {/* Chế độ khách 1 chạm */}
+            <div className="flex items-center justify-center pt-3">
+              <button
+                type="button"
+                onClick={handleGuestTrial}
+                disabled={guestLoading}
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-extrabold text-xs sm:text-sm border border-white/40 shadow-xs transition-all hover:scale-105 active:scale-95 cursor-pointer disabled:opacity-60"
+              >
+                <Gamepad2 className="w-4 h-4 text-yellow-200" />
+                <span>{guestLoading ? 'Đang chuẩn bị lớp học...' : 'Trải nghiệm ngay không cần tài khoản 🚀'}</span>
+              </button>
+            </div>
 
             <div className="flex items-center justify-center gap-5 sm:gap-7 mt-3 text-xs sm:text-sm font-bold text-white drop-shadow-sm">
               <span className="flex items-center gap-1.5">

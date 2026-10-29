@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
   content: string;
@@ -47,10 +49,57 @@ function getPedagogicalResponse(userText: string): string {
     if (subMatch) {
       const a = parseInt(subMatch[1], 10);
       const b = parseInt(subMatch[2], 10);
-      return `🦉 **Cú Vàng bật mí kết quả nè:**\n\n**${a} - ${b} = ${a - b}** 🌟\n\nBé làm bài rất chăm chỉ! Hãy tiếp tục rèn luyện mỗi ngày để tích lũy thêm thật nhiều Sao Vàng nhé!`;
+      return `🦉 **Cú Vàng bật mí kết quả nè:**\n\nPhép trừ: **${a} - ${b} = ${a - b}** 🌟\n\n💡 *Cách tính nhẩm dễ nhớ:* Bé trừ tròn chục trước, sau đó trừ tiếp hàng đơn vị nhé! Bé làm bài rất chăm chỉ, thưởng bé 1 Sao Vàng ảo ⭐!`;
     }
 
-    return `🦉 **Cú Vàng rất sẵn lòng cùng bé chinh phục môn Toán!**\n\nTại Trường Học Thông Thái, các bài toán từ Lớp 1 đến Lớp 5 đều được minh họa bằng hình ảnh que tính, bánh pizza phân số và sơ đồ đoạn thẳng sinh động:\n- **Lớp 1 - 2:** Phép cộng trừ trong phạm vi 100, bảng cửu chương trực quan.\n- **Lớp 3:** Phép nhân chia 3 chữ số, hình học & tính chu vi.\n- **Lớp 4 - 5:** Phân số, số thập phân, tỉ số phần trăm và toán chuyển động.\n\n👉 Bé có thể thử làm bài khảo sát 3 phút tại mục **"Khảo Sát Khởi Động"** để Cú Vàng tặng bé ngay 50 Sao Vàng đầu tiên nhé!`;
+    // Division match like "56 : 8" or "72 / 9"
+    const divMatch = text.match(/(\d+)\s*[:/]\s*(\d+)/);
+    if (divMatch) {
+      const a = parseInt(divMatch[1], 10);
+      const b = parseInt(divMatch[2], 10);
+      if (b === 0) {
+        return `🦉 **Ối! Bé lưu ý nhé:** Trong toán học, chúng mình **không thể chia cho số 0** đâu nè! Thử một số khác lớn hơn 0 nhé! 😊`;
+      }
+      const quotient = Math.floor(a / b);
+      const remainder = a % b;
+      if (remainder === 0) {
+        return `🦉 **Kết quả phép chia chuẩn xác:**\n\n**${a} : ${b} = ${quotient}** 🎉\n\n⭐ Phép chia hết không có dư! Bé thuộc bảng chia rất cừ khôi đấy!`;
+      }
+      return `🦉 **Kết quả phép chia có dư nè:**\n\n**${a} : ${b} = ${quotient} (dư ${remainder})** ✨\n\n💡 *Cách thử lại:* (${b} × ${quotient}) + ${remainder} = ${a}. Bé thử tính lại xem đúng chưa nhé!`;
+    }
+
+    // Chu vi / diện tích hình học
+    if (text.includes('chu vi') && (text.includes('chữ nhật') || text.includes('hcn'))) {
+      return `📐 **Công thức tính Chu Vi Hình Chữ Nhật (Lớp 3 - 5):**\n\n**Chu vi = (Chiều dài + Chiều rộng) × 2** *(cùng đơn vị đo)*\n\nVí dụ: Chiều dài là 8cm, chiều rộng là 5cm:\n👉 Chu vi = (8 + 5) × 2 = **26 cm** ⭐`;
+    }
+
+    if (text.includes('diện tích') && (text.includes('chữ nhật') || text.includes('hcn'))) {
+      return `📐 **Công thức tính Diện Tích Hình Chữ Nhật (Lớp 3 - 5):**\n\n**Diện tích = Chiều dài × Chiều rộng** *(cùng đơn vị đo)*\n\nVí dụ: Chiều dài 6cm, chiều rộng 4cm:\n👉 Diện tích = 6 × 4 = **24 cm²** (xăng-ti-mét vuông) 🌟`;
+    }
+
+    if (text.includes('chu vi') && text.includes('vuông')) {
+      return `🟦 **Công thức tính Chu Vi Hình Vuông (Lớp 3 - 5):**\n\n**Chu vi = Độ dài một cạnh × 4**\n\nVí dụ: Hình vuông có cạnh 5cm:\n👉 Chu vi = 5 × 4 = **20 cm** 👏`;
+    }
+
+    if (text.includes('diện tích') && text.includes('vuông')) {
+      return `🟦 **Công thức tính Diện Tích Hình Vuông (Lớp 3 - 5):**\n\n**Diện tích = Cạnh × Cạnh**\n\nVí dụ: Hình vuông có cạnh 6cm:\n👉 Diện tích = 6 × 6 = **36 cm²** 🌟`;
+    }
+
+    // Mẹo tính nhẩm
+    if (text.includes('tính nhẩm') || text.includes('mẹo') || text.includes('nhanh')) {
+      return `⚡ **Bí Quyết Tính Nhẩm Siêu Tốc Của Cú Vàng:**\n\n1. **Nhân một số với 11:**\n- Ví dụ: 25 × 11\n- Lấy 2 + 5 = 7, chèn số 7 vào giữa 2 và 5 👉 Kết quả là **275**! Siêu nhanh đúng không nào!\n\n2. **Cộng nhẩm bằng cách làm tròn chục:**\n- Ví dụ: 48 + 35 = (48 + 2) + 33 = 50 + 33 = **83**!`;
+    }
+
+    // Đố vui toán học
+    if (text.includes('đố') || text.includes('câu đố') || text.includes('thử tài')) {
+      const riddles = [
+        `🎲 **Cú Vàng đố bé nhé:**\n\n"Bác thợ mộc cưa một khúc gỗ dài 6 mét thành các đoạn dài 2 mét. Mỗi lần cưa mất 5 phút. Hỏi bác thợ mộc cưa xong khúc gỗ trong bao nhiêu phút?"\n\n*(Gợi ý: Cắt được mấy đoạn thì cần mấy lần cưa nhỉ? Hãy nhắn câu trả lời cho Cú Vàng nhé!)* 🦉`,
+        `🎲 **Thử tài toán học tí hon:**\n\n"Một đàn vịt đi qua cầu. 1 con đi trước 2 con, 1 con đi giữa 2 con, 1 con đi sau 2 con. Hỏi đàn vịt có tất cả bao nhiêu con?"\n\n*(Nhắn đáp án cho Cú Vàng nào!)* ✨`,
+      ];
+      return riddles[Math.floor(Math.random() * riddles.length)];
+    }
+
+    return `🦉 **Cú Vàng rất sẵn lòng cùng bé chinh phục môn Toán!**\n\nTại Toán Vui, các bài toán từ Lớp 1 đến Lớp 5 đều được minh họa bằng hình ảnh que tính, bánh pizza phân số và sơ đồ đoạn thẳng sinh động:\n- **Lớp 1 - 2:** Phép cộng trừ trong phạm vi 100, bảng cửu chương trực quan.\n- **Lớp 3:** Phép nhân chia 3 chữ số, hình học & tính chu vi.\n- **Lớp 4 - 5:** Phân số, số thập phân, tỉ số phần trăm và toán chuyển động.\n\n👉 Bé có thể thử làm bài khảo sát 3 phút tại mục **"Khảo Sát Khởi Động"** để Cú Vàng tặng bé ngay 50 Sao Vàng đầu tiên nhé!`;
   }
 
   // 2. Life Skills & Safety for Kids
@@ -121,6 +170,9 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const messages: ChatMessage[] = body.messages || [];
+    const studentContext = body.studentContext || {};
+    const gradeLevel = studentContext.gradeLevel ? `Lớp ${studentContext.gradeLevel}` : 'Tiểu học (Lớp 1 - 5)';
+    const studentName = studentContext.name ? `Bạn nhỏ "${studentContext.name}"` : 'bé';
 
     if (!Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json(
@@ -141,13 +193,15 @@ export async function POST(req: Request) {
       try {
         const systemPrompt = {
           role: 'system',
-          content: `Bạn là "Cú Vàng Thông Thái" 🦉✨ - Trợ lý gia sư AI và linh vật chính thức của nền tảng giáo dục tiểu học "Trường Học Thông Thái" (Kid E-Learning).
-Quy tắc ứng xử và phong cách:
-- Luôn xưng "Cú Vàng" và gọi người dùng là "bạn", "bé", hoặc "ba mẹ / thầy cô".
-- Giọng văn vui tươi, lễ phép, khích lệ tinh thần học tập, giàu tính giáo dục và an toàn cho trẻ em tiểu học.
-- Kiến thức chuyên sâu về: Toán tiểu học Lớp 1-5 theo chương trình mới GDPT, Kỹ năng sống an toàn cho trẻ nhỏ (phòng tránh đuối nước, người lạ, an toàn mạng), và hướng dẫn sử dụng nền tảng (học thử 0đ, làm bài test khởi động, mã PIN lớp học, tích Sao Vàng đổi trang phục Cú Vàng).
-- Câu trả lời rõ ràng, súc tích, định dạng gạch đầu dòng dễ nhìn, kèm emoji sinh động.
-- Tuyệt đối không cung cấp nội dung độc hại, không dùng từ ngữ tiêu cực hoặc bạo lực.`,
+          content: `Bạn là "Cú Vàng Thông Thái" 🦉✨ - Gia sư AI dạy Toán tiểu học đồng hành cùng học sinh trên ứng dụng "Toán Vui".
+Hiện tại bạn đang trò chuyện và hướng dẫn học tập cho ${studentName}, học sinh trình độ ${gradeLevel}.
+Quy tắc ứng xử và phong cách sư phạm:
+- Luôn xưng "Cú Vàng" và xưng hô thân mật với bé: "bé", "bạn nhỏ", hoặc tên của bé.
+- Giọng văn trong sáng, vui tươi, động viên khích lệ, dùng các emoji sinh động (🌟, 🦉, 🧮, ✨, 👏).
+- Hướng dẫn giải toán theo từng bước trực quan (vẽ que tính, đoạn thẳng, chia bánh, chia kẹo).
+- Khi bé hỏi bài, hãy gợi ý cách tư duy từng bước trước hoặc giải thích dễ hiểu, không đưa ra đáp án cụt lủn.
+- Kiến thức chuẩn Chương trình Giáo dục Phổ thông mới môn Toán Lớp 1 - 5.
+- Tuyệt đối an toàn cho trẻ em, không đề cập nội dung người lớn hay bạo lực.`,
         };
 
         const apiResponse = await fetch(`${baseURL}/chat/completions`, {

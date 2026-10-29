@@ -397,13 +397,10 @@ export default function GamesPage() {
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <span className="inline-flex items-center gap-1 rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-black text-pink-600">
-            <Sparkles className="h-3.5 w-3.5" /> Vừa chơi vừa học
-          </span>
-          <h1 className="font-display mt-2 text-2xl md:text-3xl font-black text-slate-800">
+          <h1 className="font-display text-2xl md:text-3xl font-black text-slate-800">
             Bản Đồ Trò Chơi Toán Học Nhí
           </h1>
-          <p className="mt-1 text-sm font-semibold text-slate-500">
+          <p className="mt-1.5 text-sm font-bold text-slate-700">
             Chọn một hòn đảo thử thách, giải các câu đố và thu thập đủ 18 ngôi sao vàng nhé!
           </p>
         </div>

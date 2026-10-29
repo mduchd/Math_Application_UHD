@@ -48,7 +48,7 @@ export const AppLogo: React.FC<AppLogoProps> = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="shrink-0 transition-transform hover:scale-105 select-none"
-      aria-label="Logo Bé Thông Thái"
+      aria-label="Logo Toán Vui"
     >
       <defs>
         {/* Squircle Background Gradients */}
@@ -248,7 +248,7 @@ export const AppLogo: React.FC<AppLogoProps> = ({
             className={`font-black tracking-tight text-slate-800 leading-none ${textStyles.title}`}
             style={{ fontFamily: 'var(--font-nunito), system-ui, sans-serif' }}
           >
-            Bé Thông Thái
+            Toán Vui
           </span>
           {/* AI Chip Pill */}
           <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded-full bg-amber-100 border border-amber-300 text-[10px] font-black text-amber-900 leading-none">
@@ -259,7 +259,7 @@ export const AppLogo: React.FC<AppLogoProps> = ({
           <span
             className={`font-extrabold text-amber-600 tracking-wider uppercase mt-1 leading-none ${textStyles.sub}`}
           >
-            Toán &amp; Kỹ Năng Sống Tiểu Học
+            Toán Tiểu Học Lớp 1 - 5
           </span>
         )}
       </div>

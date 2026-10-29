@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { m } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { Sparkles, KeyRound, User, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Sparkles, KeyRound, User, CheckCircle2, ArrowRight, Gamepad2 } from 'lucide-react';
 import { useAppStore } from '@/stores/useAppStore';
-import { registerStudent, submitAssessment } from '@/lib/api';
+import { registerStudent, loginAsGuest, submitAssessment } from '@/lib/api';
 import { TactileButton } from '@/components/kid/TactileButton';
 import { sound } from '@/lib/sound';
 import { MotionDialog } from '@/components/motion/MotionDialog';
@@ -44,12 +44,50 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
   const [pin, setPin] = useState('');
   const [error, setError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const [isGuestSaving, setIsGuestSaving] = useState(false);
 
   const levelName = {
     BASIC: 'Cơ bản',
     APPLIED: 'Vận dụng',
     ADVANCED: 'Vận dụng cao',
   }[level];
+
+  const handleContinueAsGuest = async () => {
+    setIsGuestSaving(true);
+    setError('');
+    try {
+      const mascotObj = MASCOTS.find((m) => m.id === selectedMascot);
+      const authRes = await loginAsGuest({
+        fullName: fullName.trim() || undefined,
+        avatarMascot: mascotObj?.icon || '🦉',
+        gradeLevel: 3,
+      });
+      const user = authRes.user;
+
+      const answersMap: Record<string, string> = submissionData.answers || {};
+      const { gradeResult, learningPlan } = await submitAssessment(user.id, answersMap);
+
+      setUser(user);
+      setSubmission({
+        id: gradeResult.id,
+        studentId: user.id,
+        totalQuestions: gradeResult.totalQuestions,
+        correctAnswersCount: gradeResult.correctCount,
+        score: gradeResult.score,
+        proficiencyLevel: gradeResult.proficiencyLevel,
+        answers: submissionData.answers || [],
+        questionsReview: submissionData.questionsReview || [],
+        completedAt: gradeResult.completedAt,
+      });
+      setPlan(learningPlan);
+      sound.playSuccess();
+      router.push('/plan');
+    } catch (caughtError) {
+      setError(caughtError instanceof Error ? caughtError.message : 'Không thể khởi tạo chế độ khách.');
+    } finally {
+      setIsGuestSaving(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,10 +155,6 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
 
         {/* Header chào đón */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-950 rounded-full text-xs font-black">
-            <Sparkles className="w-4 h-4 text-amber-600" />
-            Lưu Kết Quả & Mở Lộ Trình
-          </div>
           <h2 className="font-display text-2xl md:text-3xl font-black text-slate-800">
             Bé Đạt Cấp Độ {levelName}! 🎉
           </h2>
@@ -207,12 +241,12 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
           )}
 
           {/* Nút hoàn tất Tactile */}
-          <div className="pt-2">
+          <div className="pt-2 space-y-2">
             <TactileButton
               variant="green"
               size="lg"
               type="submit"
-              disabled={isSaving}
+              disabled={isSaving || isGuestSaving}
               isLoading={isSaving}
               loadingText="Đang lưu bài làm..."
               className="w-full font-display font-black text-base"
@@ -220,6 +254,20 @@ export const GuestRegisterModal: React.FC<GuestRegisterModalProps> = ({
               <span>🌟 Lưu Bài Làm & Mở Bí Kíp AI</span>
               <ArrowRight className="w-5 h-5" />
             </TactileButton>
+
+            <button
+              type="button"
+              disabled={isSaving || isGuestSaving}
+              onClick={handleContinueAsGuest}
+              className="w-full py-2.5 px-4 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-slate-950 hover:bg-slate-100 rounded-2xl transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              <Gamepad2 className="w-4 h-4 text-amber-600" />
+              <span>
+                {isGuestSaving
+                  ? 'Đang mở kế hoạch...'
+                  : 'Hoặc xem ngay với Chế độ Khách (Bỏ qua tạo mã PIN)'}
+              </span>
+            </button>
           </div>
         </form>
     </MotionDialog>

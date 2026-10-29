@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { m, AnimatePresence } from 'framer-motion';
 import {
   LogIn,
@@ -12,11 +13,18 @@ import {
   GraduationCap,
   HelpCircle,
   ChevronDown,
+  Smartphone,
+  Monitor,
+  Gamepad2,
 } from 'lucide-react';
 import { AppLogo } from '@/components/kid/AppLogo';
 import { sound } from '@/lib/sound';
+import { loginAsGuest } from '@/lib/api';
+import { useAppStore } from '@/stores/useAppStore';
 
 export const LandingNavbar: React.FC = () => {
+  const router = useRouter();
+  const setUser = useAppStore((state) => state.setUser);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -32,6 +40,7 @@ export const LandingNavbar: React.FC = () => {
   const navLinks = [
     { label: 'Chương Trình', href: '#chuong-trinh', icon: BookOpen },
     { label: 'Khám Phá', href: '#kham-pha', icon: Sparkles },
+    { label: 'Tải App Máy Tính', href: '#tai-app', icon: Monitor },
     { label: 'Thầy Cô', href: '#thay-co', icon: GraduationCap },
     { label: 'Hỏi Đáp', href: '#hoi-dap', icon: HelpCircle },
   ];
@@ -120,7 +129,7 @@ export const LandingNavbar: React.FC = () => {
               >
                 <AppLogo size="sm" variant="icon" />
                 <span className="font-display font-black text-base sm:text-lg text-slate-900 tracking-tight leading-none group-hover:text-amber-600 transition-colors">
-                  Trường Học Thông Thái
+                  Toán Vui
                 </span>
               </Link>
 
@@ -149,6 +158,14 @@ export const LandingNavbar: React.FC = () => {
                 </button>
 
                 <button
+                  onClick={() => handleNavClick('#tai-app')}
+                  className="px-3 py-1.5 text-xs sm:text-sm font-extrabold text-amber-800 hover:text-amber-950 hover:bg-amber-100/70 rounded-full transition-all inline-flex items-center gap-1"
+                >
+                  <Monitor className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Bản Máy Tính</span>
+                </button>
+
+                <button
                   onClick={() => handleNavClick('#hoi-dap')}
                   className="px-3 py-1.5 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-slate-950 hover:bg-slate-100/70 rounded-full transition-all"
                 >
@@ -159,6 +176,25 @@ export const LandingNavbar: React.FC = () => {
 
             {/* BÊN PHẢI: Nút Đăng nhập + Mobile hamburger button */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              {/* Nút Chơi thử khách trên Desktop */}
+              <button
+                type="button"
+                onClick={async () => {
+                  sound.playPop();
+                  try {
+                    const res = await loginAsGuest();
+                    setUser(res.user);
+                    router.push('/classroom');
+                  } catch {
+                    router.push('/assessment');
+                  }
+                }}
+                className="hidden lg:flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-slate-950 hover:bg-slate-100 rounded-full transition-all cursor-pointer"
+              >
+                <Gamepad2 className="w-3.5 h-3.5 text-amber-600" />
+                <span>Chơi thử</span>
+              </button>
+
               {/* Nút Đăng nhập - Tone Vàng Hổ Phách nổi bật */}
               <Link
                 href="/login"
@@ -229,6 +265,24 @@ export const LandingNavbar: React.FC = () => {
                 <LogIn className="w-4 h-4 text-amber-950 stroke-[2.5]" />
                 <span>Đăng Nhập Tài Khoản</span>
               </Link>
+              <button
+                type="button"
+                onClick={async () => {
+                  sound.playPop();
+                  setMobileMenuOpen(false);
+                  try {
+                    const res = await loginAsGuest();
+                    setUser(res.user);
+                    router.push('/classroom');
+                  } catch {
+                    router.push('/assessment');
+                  }
+                }}
+                className="w-full py-2.5 bg-sky-50 hover:bg-sky-100 text-sky-950 font-extrabold text-xs rounded-full border border-sky-300 text-center flex items-center justify-center gap-2 transition-all cursor-pointer"
+              >
+                <Gamepad2 className="w-4 h-4 text-sky-600" />
+                <span>Trải Nghiệm Nhanh (Chế Độ Khách)</span>
+              </button>
             </div>
           </m.div>
         )}

@@ -6,11 +6,13 @@ import type {
   ClassroomMember,
   CreateLibraryItemDto,
   GoogleAuthInput,
+  GuestAuthInput,
   LibraryItem,
   StudentLoginInput,
   StudentRegisterInput,
   TeacherLoginInput,
   TeacherRegisterInput,
+  UpgradeGuestInput,
   User,
 } from '@kid-elearning/types';
 import Cookies from 'js-cookie';
@@ -19,6 +21,7 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api
 
 const TOKEN_KEY = 'kid_auth_token';
 const USER_KEY = 'kid_user';
+const GUEST_KEY = 'kid_is_guest';
 
 export function getStoredToken(): string | null {
   if (typeof window === 'undefined') return null;
@@ -29,6 +32,7 @@ export function setStoredAuth(token: string, user: User) {
   if (typeof window === 'undefined') return;
   Cookies.set(TOKEN_KEY, token, { expires: 7, sameSite: 'lax' });
   Cookies.set('kid_user_role', user.role, { expires: 7, sameSite: 'lax' });
+  Cookies.set(GUEST_KEY, user.isGuest ? 'true' : 'false', { expires: 7, sameSite: 'lax' });
   localStorage.setItem(TOKEN_KEY, token);
   localStorage.setItem(USER_KEY, JSON.stringify(user));
 }
@@ -37,6 +41,7 @@ export function clearStoredAuth() {
   if (typeof window === 'undefined') return;
   Cookies.remove(TOKEN_KEY);
   Cookies.remove('kid_user_role');
+  Cookies.remove(GUEST_KEY);
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
   localStorage.removeItem('kid_submission');
@@ -149,6 +154,24 @@ export async function registerStudent(input: StudentRegisterInput): Promise<Auth
 
 export async function loginStudent(input: StudentLoginInput): Promise<AuthResponse> {
   const res = await request<AuthResponse>('/auth/login/student', {
+    method: 'POST',
+    body: JSON.stringify(input),
+  });
+  setStoredAuth(res.accessToken, res.user);
+  return res;
+}
+
+export async function loginAsGuest(input?: GuestAuthInput): Promise<AuthResponse> {
+  const res = await request<AuthResponse>('/auth/guest', {
+    method: 'POST',
+    body: JSON.stringify(input || {}),
+  });
+  setStoredAuth(res.accessToken, res.user);
+  return res;
+}
+
+export async function upgradeGuest(input: UpgradeGuestInput): Promise<AuthResponse> {
+  const res = await request<AuthResponse>('/auth/upgrade-guest', {
     method: 'POST',
     body: JSON.stringify(input),
   });

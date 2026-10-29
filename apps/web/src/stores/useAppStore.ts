@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { User, AssessmentSubmission, AILearningPlan } from '@kid-elearning/types';
 import { clearStoredAuth, getStoredUser, setStoredAuth } from '@/lib/api';
 
+export type { User };
+
 interface AppState {
   currentUser: User | null;
   currentSubmission: AssessmentSubmission | null;

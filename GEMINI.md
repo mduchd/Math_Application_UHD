@@ -118,6 +118,7 @@ apps/api/src/
    - Khi một phần UI có trạng thái riêng biệt hoặc lặp lại theo danh sách (như item trong bảng, item trong list), tách thành component vệ tinh trong cùng thư mục `components/`.
 4. **Quy chuẩn Typography & Text Thương mại cho Trẻ Em (Kid Commercial Typography)**:
    - *Chi tiết quy chuẩn*: Xem tại [.agents/rules/kid-commercial-typography.md](file:///.agents/rules/kid-commercial-typography.md).
+   - **CẤM Eyebrow Pill / Micro-tag trên đầu tiêu đề**: Tuyệt đối KHÔNG tạo các viên thuốc nhỏ chứa icon (Sparkles, Star...) lơ lửng bên trên tiêu đề (`inline-flex rounded-full border px-3 py-1 text-xs...`). Giao diện trẻ em cần đi thẳng vào Tiêu đề chính to bản (`font-black`) và Mascot linh vật sinh động, loại bỏ hoàn toàn khuôn mẫu sáo rỗng của SaaS B2B. Tag/Badge chỉ được dùng bên trong item card để biểu thị trạng thái dữ liệu (Status) cụ thể.
    - **Độ đậm (Weight)**: Tiêu đề bắt buộc `font-black` (900) hoặc `font-extrabold` (800). Nội dung thân (body) bắt buộc `font-semibold` (600) hoặc `font-bold` (700). Nút bấm/Thẻ bắt buộc `font-extrabold`. Tuyệt đối CẤM `font-light`, `font-thin`, `font-normal`.
    - **Độ tương phản & Sắc nét (WCAG AAA $\ge 7:1$)**: Màu chữ trên nền sáng bắt buộc là `text-slate-800` hoặc `text-slate-900`. Chữ trên nền vàng (`bg-kid-yellow`) bắt buộc là `text-amber-950` (CẤM chữ trắng trên nền vàng). CẤM dùng `text-gray-400`, `text-slate-400`, `text-zinc-400` cho nội dung đọc.
    - **Kích thước tối thiểu**: Không dùng font nhỏ hơn `14px` (`text-sm`) cho nội dung đọc hiểu.
@@ -160,6 +161,7 @@ Trước khi hoàn thành bất kỳ tác vụ nào, AI Agent phải rà soát:
 - [ ] **Đúng vị trí phân tầng**: Code đã nằm đúng tầng kiến trúc (Controller $\rightarrow$ Service $\rightarrow$ Repository) chưa?
 - [ ] **Type Safety**: Toàn bộ dữ liệu vào/ra có type/interface rõ ràng, không có `any` không?
 - [ ] **Typography & Độ Tương Phản**:
+  - **Không có Eyebrow Pill**: Đã loại bỏ các tag nhỏ/viên thuốc lơ lửng trên đầu tiêu đề? Tiêu đề có mở đầu trực diện không?
   - Tiêu đề $\ge$ `font-extrabold` (800/900)? Body $\ge$ `font-semibold` (600/700)? Có bị sót `font-light/normal` không?
   - Màu chữ có tương phản sắc nét ($\ge 7:1$) không? Có dùng `text-gray-400`/`text-slate-400` gây mờ mắt trẻ không?
   - Cỡ chữ có bị nhỏ hơn `14px` không? Nút bấm vàng có dùng chữ `text-amber-950` không?

@@ -79,10 +79,10 @@ export const LandingFooter: React.FC = () => {
               <AppLogo size="sm" variant="icon" />
               <div className="flex flex-col">
                 <span className="font-display font-black text-lg text-slate-900 tracking-tight leading-none">
-                  Trường Học Thông Thái
+                  Toán Vui
                 </span>
                 <span className="text-[11px] font-extrabold text-amber-700 font-display mt-0.5">
-                  Toán &amp; Kỹ Năng Sống Tiểu Học
+                  Toán Tiểu Học Lớp 1 - 5
                 </span>
               </div>
             </div>
@@ -120,6 +120,11 @@ export const LandingFooter: React.FC = () => {
               <li>
                 <Link href="/library" className="hover:text-amber-700 hover:translate-x-1 transition-all inline-block">
                   Kho Thư Viện Bài Học
+                </Link>
+              </li>
+              <li>
+                <Link href="#tai-app" className="hover:text-amber-700 hover:translate-x-1 transition-all inline-block text-amber-900 font-black">
+                  💻 Tải App Máy Tính (Windows &amp; Mac)
                 </Link>
               </li>
             </ul>
@@ -194,7 +199,7 @@ export const LandingFooter: React.FC = () => {
         {/* Bottom Copyright */}
         <div className="pt-6 border-t-2 border-kid-border/80 text-center sm:flex sm:items-center sm:justify-between text-xs font-bold text-slate-700 space-y-2 sm:space-y-0">
           <div>
-            © 2026 Trường Học Thông Thái (Kid E-Learning). Tận tâm vì tương lai thế hệ măng non.
+            © 2026 Toán Vui (Kid E-Learning). Tận tâm vì tương lai thế hệ măng non.
           </div>
           <div className="flex items-center justify-center gap-1.5">
             <span>Thiết kế vì tình yêu măng non Việt Nam</span>

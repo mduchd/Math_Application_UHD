@@ -32,7 +32,7 @@ export default function StudentsPage() {
           <span className="text-sm font-bold text-slate-700">Tổng số: {studentsList.length} học sinh</span>
         </div>
 
-        <m.div variants={staggerContainerVariants} initial="hidden" animate="visible" className="divide-y divide-slate-100">
+        <m.div variants={staggerContainerVariants} initial={false} animate="visible" className="divide-y divide-slate-100">
           {studentsList.map((stu) => (
             <m.div
               key={stu.id}

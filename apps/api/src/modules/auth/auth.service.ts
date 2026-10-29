@@ -2,6 +2,7 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -13,6 +14,8 @@ import { LoginTeacherDto } from './dto/login-teacher.dto';
 import { RegisterStudentDto } from './dto/register-student.dto';
 import { LoginStudentDto } from './dto/login-student.dto';
 import { GoogleAuthDto } from './dto/google-auth.dto';
+import { GuestLoginDto } from './dto/guest-login.dto';
+import { UpgradeGuestDto } from './dto/upgrade-guest.dto';
 
 @Injectable()
 export class AuthService {
@@ -24,14 +27,19 @@ export class AuthService {
 
   private sanitizeUser(user: any) {
     const { passwordHash, pinHash, ...safeUser } = user;
-    return safeUser;
+    const isGuest = !passwordHash && !pinHash && !user.googleId;
+    return {
+      ...safeUser,
+      isGuest,
+    };
   }
 
-  private generateToken(user: { id: string; role: string; fullName: string }) {
+  private generateToken(user: { id: string; role: string; fullName: string; isGuest?: boolean }) {
     const payload = {
       sub: user.id,
       role: user.role,
       fullName: user.fullName,
+      isGuest: !!user.isGuest,
     };
     return this.jwtService.sign(payload);
   }
@@ -254,6 +262,75 @@ export class AuthService {
     const accessToken = this.generateToken(user);
     return {
       user: this.sanitizeUser(user),
+      accessToken,
+    };
+  }
+
+  // --- CHẾ ĐỘ KHÁCH (GUEST MODE) ---
+  async loginAsGuest(dto: GuestLoginDto) {
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    const fullName = dto.fullName?.trim() || `Bé Khám Phá #${randomSuffix}`;
+    const avatarMascot = dto.avatarMascot || '🦉';
+    const gradeLevel = dto.gradeLevel ?? 3;
+
+    const user = await prisma.user.create({
+      data: {
+        role: 'STUDENT',
+        fullName,
+        avatarMascot,
+        gradeLevel,
+      },
+    });
+
+    const accessToken = this.generateToken({ ...user, isGuest: true });
+    return {
+      user: this.sanitizeUser(user),
+      accessToken,
+    };
+  }
+
+  async upgradeGuest(userId: string, dto: UpgradeGuestDto) {
+    const existing = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!existing) {
+      throw new NotFoundException('Không tìm thấy tài khoản người dùng.');
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const pinHash = await bcrypt.hash(dto.pin, salt);
+
+    const fullName = dto.fullName?.trim() || existing.fullName;
+    const avatarMascot = dto.avatarMascot || existing.avatarMascot || '🦉';
+    const gradeLevel = dto.gradeLevel ?? existing.gradeLevel ?? 3;
+
+    // Sinh username thân thiện nếu chưa có
+    let username = existing.username;
+    if (!username) {
+      const namePart = fullName
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9]/g, '')
+        .toLowerCase();
+      const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+      username = `${namePart || 'kid'}_${randomSuffix}`;
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        fullName,
+        username,
+        pinHash,
+        avatarMascot,
+        gradeLevel,
+      },
+    });
+
+    const accessToken = this.generateToken({ ...updatedUser, isGuest: false });
+    return {
+      user: this.sanitizeUser(updatedUser),
       accessToken,
     };
   }

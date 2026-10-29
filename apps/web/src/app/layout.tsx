@@ -14,8 +14,8 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: 'Trường Học Thông Thái | Nền Tảng Học Toán & Kỹ Năng Sống Tiểu Học Tích Hợp AI',
-  description: 'Hệ thống học tập, khảo sát đánh giá năng lực và kỹ năng sống sinh động dành cho học sinh tiểu học',
+  title: 'Toán Vui | Nền Tảng Học Toán Tiểu Học Thông Minh Tích Hợp AI',
+  description: 'Hệ thống học toán vui nhộn, khảo sát đánh giá năng lực tư duy toán học dành cho học sinh tiểu học Lớp 1 - 5',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: '/apple-touch-icon.png' }],
   },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
