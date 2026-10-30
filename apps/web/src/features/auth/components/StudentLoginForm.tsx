@@ -145,17 +145,14 @@ export const StudentLoginForm: React.FC<StudentLoginFormProps> = ({ redirectPath
         onError={(err) => setError(err)}
       />
 
-      {/* Guest Mode Direct Access */}
-      <div className="pt-1">
-        <button
-          type="button"
-          disabled={loading || guestLoading}
-          onClick={handleGuestLogin}
-          className="w-full rounded-2xl border-2 border-sky-300 bg-sky-50 px-4 py-3 text-sm font-extrabold text-sky-950 shadow-sm transition-all hover:bg-sky-100 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {guestLoading ? 'Đang chuẩn bị...' : 'Dùng thử không cần tài khoản'}
-        </button>
-      </div>
+      <button
+        type="button"
+        disabled={loading || guestLoading}
+        onClick={handleGuestLogin}
+        className="mx-auto text-sm font-extrabold text-sky-800 underline underline-offset-4 transition-colors hover:text-sky-950 disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {guestLoading ? 'Đang chuẩn bị...' : 'Dùng thử không cần tài khoản'}
+      </button>
 
       {/* Footer Switcher */}
       <div className="text-center pt-2 space-y-1.5">

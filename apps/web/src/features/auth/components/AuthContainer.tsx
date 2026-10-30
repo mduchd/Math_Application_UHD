@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { AppLogo } from '@/components/kid/AppLogo';
 import { AuthRole } from '../types';
 import { AuthHeroBanner } from './AuthHeroBanner';
 import { RoleSwitcher } from './RoleSwitcher';
@@ -46,16 +44,8 @@ export const AuthContainer: React.FC<AuthContainerProps> = ({
         </div>
 
         {/* Right Column: Clean Form Section */}
-        <div className="auth-form-column lg:col-span-6 flex flex-col justify-between py-2 sm:py-4 px-1 sm:px-4">
+        <div className="auth-form-column lg:col-span-6 flex flex-col justify-center px-1 py-2 sm:px-4 sm:py-4">
           <div className="auth-form-stack flex flex-col gap-6">
-            
-            {/* Brand */}
-            <div>
-              <Link href="/" className="inline-block transition-transform hover:scale-105">
-                <AppLogo size="sm" variant="horizontal" withSubtitle={false} />
-              </Link>
-            </div>
-
             {/* Header Titles */}
             <div className="space-y-1.5">
               <h1 className="text-2xl sm:text-3xl font-display font-black text-slate-900 tracking-tight">
