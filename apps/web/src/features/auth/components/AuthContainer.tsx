@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 import { AppLogo } from '@/components/kid/AppLogo';
 import { AuthRole } from '../types';
 import { AuthHeroBanner } from './AuthHeroBanner';
@@ -33,7 +32,7 @@ export const AuthContainer: React.FC<AuthContainerProps> = ({
 
   return (
     <main className="auth-viewport-shell grid min-h-dvh w-full overflow-x-hidden bg-[#FDFBF7] p-3 font-body sm:p-6 lg:p-8">
-      {/* Soft Brand Yellow Ambient Glowing Orbs */}
+      {/* Soft brand ambience */}
       <div className="pointer-events-none fixed -right-24 -top-24 h-96 w-96 rounded-full bg-amber-300/30 blur-3xl" />
       <div className="pointer-events-none fixed -bottom-24 -left-24 h-96 w-96 rounded-full bg-yellow-300/25 blur-3xl" />
       <div className="pointer-events-none fixed left-1/4 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-orange-100/40 blur-3xl" />
@@ -50,17 +49,10 @@ export const AuthContainer: React.FC<AuthContainerProps> = ({
         <div className="auth-form-column lg:col-span-6 flex flex-col justify-between py-2 sm:py-4 px-1 sm:px-4">
           <div className="auth-form-stack flex flex-col gap-6">
             
-            {/* Top Bar: Brand Logo & Back Link */}
-            <div className="flex items-center justify-between">
+            {/* Brand */}
+            <div>
               <Link href="/" className="inline-block transition-transform hover:scale-105">
                 <AppLogo size="sm" variant="horizontal" withSubtitle={false} />
-              </Link>
-              <Link
-                href="/"
-                className="text-xs font-bold text-amber-900 hover:text-amber-950 transition-colors inline-flex items-center gap-1 p-1.5 rounded-xl hover:bg-amber-50"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Trang chủ</span>
               </Link>
             </div>
 
@@ -68,15 +60,19 @@ export const AuthContainer: React.FC<AuthContainerProps> = ({
             <div className="space-y-1.5">
               <h1 className="text-2xl sm:text-3xl font-display font-black text-slate-900 tracking-tight">
                 {isLogin ? (
-                  role === 'student' ? 'Chào Mừng Bé Quay Lại! 👋' : 'Chào Mừng Thầy/Cô! 📚'
+                  role === 'student' ? 'Chào mừng trở lại' : 'Đăng nhập tài khoản'
                 ) : (
-                  role === 'student' ? 'Tạo Tài Khoản Bé Học! 🎒' : 'Đăng Ký Tài Khoản Mới! 📋'
+                  role === 'student' ? 'Tạo tài khoản' : 'Tạo tài khoản giáo viên'
                 )}
               </h1>
-              <p className="text-xs sm:text-sm font-semibold text-slate-600">
+              <p className="text-sm font-bold text-slate-700">
                 {isLogin
-                  ? 'Vui lòng nhập thông tin tài khoản để cùng Cú Bi vào lớp'
-                  : 'Điền thông tin bên dưới để bắt đầu chuyến du hành tri thức'}
+                  ? role === 'student'
+                    ? 'Đăng nhập để tiếp tục học cùng Cú Bi.'
+                    : 'Đăng nhập để quản lý lớp học.'
+                  : role === 'student'
+                    ? 'Tạo hồ sơ để bắt đầu học.'
+                    : 'Thiết lập tài khoản để quản lý lớp học.'}
               </p>
             </div>
 
@@ -96,13 +92,6 @@ export const AuthContainer: React.FC<AuthContainerProps> = ({
               <TeacherRegisterForm />
             )}
 
-          </div>
-
-          {/* Bottom Brand Note */}
-          <div className="auth-footer pt-6 mt-4 border-t border-amber-100 text-center">
-            <p className="text-[11px] font-bold text-amber-900/70">
-              © {new Date().getFullYear()} Toán Vui Cùng Cú Bi. Nền tảng học Toán thông minh chuẩn giáo dục tiểu học.
-            </p>
           </div>
         </div>
 

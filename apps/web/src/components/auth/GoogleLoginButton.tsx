@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { authenticateWithGoogle } from '@/lib/api';
 import { useAppStore } from '@/stores/useAppStore';
@@ -8,8 +8,24 @@ import { sound } from '@/lib/sound';
 
 declare global {
   interface Window {
-    google?: any;
+    google?: GoogleIdentityApi;
   }
+}
+
+interface GoogleCredentialResponse {
+  credential: string;
+}
+
+interface GoogleIdentityApi {
+  accounts: {
+    id: {
+      initialize: (configuration: {
+        client_id: string;
+        callback: (response: GoogleCredentialResponse) => void;
+      }) => void;
+      prompt: () => void;
+    };
+  };
 }
 
 interface GoogleLoginButtonProps {
@@ -32,7 +48,7 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
   const [loading, setLoading] = useState(false);
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
 
-  const handleCredentialResponse = async (response: any) => {
+  const handleCredentialResponse = useCallback(async (response: GoogleCredentialResponse) => {
     setLoading(true);
     try {
       const authRes = await authenticateWithGoogle({
@@ -50,13 +66,13 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
           redirectPath || (authRes.user.role === 'TEACHER' ? '/classes' : '/classroom');
         router.push(destination);
       }
-    } catch (err: any) {
-      const msg = err?.message || 'Đăng nhập Google không thành công.';
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Đăng nhập Google không thành công.';
       if (onError) onError(msg);
     } finally {
       setLoading(false);
     }
-  };
+  }, [onError, onSuccess, redirectPath, role, router, setUser]);
 
   const handleFallbackGoogleLogin = async () => {
     // Chế độ demo nhanh khi chưa kích hoạt client ID thực trên Cloud Console
@@ -88,8 +104,8 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
           redirectPath || (authRes.user.role === 'TEACHER' ? '/classes' : '/classroom');
         router.push(destination);
       }
-    } catch (err: any) {
-      if (onError) onError(err?.message || 'Lỗi kết nối tài khoản Google');
+    } catch (err: unknown) {
+      if (onError) onError(err instanceof Error ? err.message : 'Lỗi kết nối tài khoản Google');
     } finally {
       setLoading(false);
     }
@@ -118,7 +134,7 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
         document.body.removeChild(script);
       }
     };
-  }, [clientId]);
+  }, [clientId, handleCredentialResponse]);
 
   const handleButtonClick = () => {
     if (window.google?.accounts?.id && clientId && !clientId.includes('mock-google-client-id')) {
@@ -157,9 +173,7 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
       <span>
         {loading
           ? 'Đang kết nối Google...'
-          : role === 'TEACHER'
-            ? 'Đăng nhập với Google'
-            : 'Vào nhanh bằng tài khoản Google'}
+          : 'Tiếp tục với Google'}
       </span>
     </button>
   );

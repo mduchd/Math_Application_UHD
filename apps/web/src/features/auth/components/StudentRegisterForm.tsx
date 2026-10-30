@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { User, KeyRound, GraduationCap, ArrowRight } from 'lucide-react';
 import { registerStudent } from '@/lib/api';
 import { useAppStore } from '@/stores/useAppStore';
 import { sound } from '@/lib/sound';
@@ -47,8 +46,8 @@ export const StudentRegisterForm: React.FC = () => {
       setUser(res.user);
       sound.playSuccess();
       router.push('/classroom');
-    } catch (err: any) {
-      setError(err?.message || 'Không thể tạo tài khoản. Bé hãy thử lại nhé!');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Không thể tạo tài khoản. Bé hãy thử lại nhé!');
     } finally {
       setLoading(false);
     }
@@ -57,26 +56,26 @@ export const StudentRegisterForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold text-center animate-in fade-in">
+        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-3.5 text-center text-sm font-bold text-rose-700 animate-in fade-in">
           {error}
         </div>
       )}
 
       {/* Input: Tên học sinh */}
       <InputField
-        label="Tên của em là gì?"
-        icon={<User className="w-4 h-4 text-amber-500" />}
+        label="Tên của bé"
         type="text"
         placeholder="Ví dụ: Nguyễn Minh Khôi"
         value={studentName}
         onChange={(e) => setStudentName(e.target.value)}
+        autoComplete="name"
         required
       />
 
-      {/* Chọn bạn linh vật đồng hành */}
+      {/* Chọn linh vật */}
       <div>
-        <label className="block text-xs font-black text-slate-800 mb-2">
-          Chọn bạn linh vật đồng hành:
+        <label className="mb-2 block text-sm font-black text-slate-800">
+          Chọn linh vật
         </label>
         <div className="grid grid-cols-5 gap-2">
           {AUTH_MASCOTS.map((mItem) => {
@@ -96,8 +95,8 @@ export const StudentRegisterForm: React.FC = () => {
                 }`}
               >
                 <span className="text-xl sm:text-2xl">{mItem.icon}</span>
-                <span className={`text-[10px] font-black mt-1 line-clamp-1 ${
-                  isSelected ? 'text-amber-950 font-black' : 'text-slate-600'
+                <span className={`mt-1 text-sm font-black leading-tight ${
+                  isSelected ? 'text-amber-950 font-black' : 'text-slate-700'
                 }`}>
                   {mItem.label}
                 </span>
@@ -109,9 +108,8 @@ export const StudentRegisterForm: React.FC = () => {
 
       {/* Khối lớp */}
       <div>
-        <label className="block text-xs font-black text-slate-800 mb-2 flex items-center gap-1.5">
-          <GraduationCap className="w-4 h-4 text-blue-500" />
-          <span>Em đang học khối lớp mấy?</span>
+        <label className="mb-2 block text-sm font-black text-slate-800">
+          Lớp đang học
         </label>
         <div className="grid grid-cols-5 gap-1.5">
           {[1, 2, 3, 4, 5].map((grade) => {
@@ -124,7 +122,7 @@ export const StudentRegisterForm: React.FC = () => {
                   sound.playPop();
                   setGradeLevel(grade);
                 }}
-                className={`py-2.5 rounded-xl text-xs font-black border-2 transition-all ${
+                className={`rounded-xl border-2 py-2.5 text-sm font-black transition-all ${
                   isSelected
                     ? 'bg-amber-400 border-amber-500 text-amber-950 shadow-sm font-black'
                     : 'bg-slate-50/70 border-slate-200 text-slate-700 hover:border-amber-200'
@@ -139,13 +137,14 @@ export const StudentRegisterForm: React.FC = () => {
 
       {/* Đặt mã PIN */}
       <InputField
-        label="Đặt mã PIN bí mật (4-6 số):"
-        icon={<KeyRound className="w-4 h-4 text-purple-500" />}
+        label="Mã PIN (4–6 số)"
         isPassword
         maxLength={6}
-        placeholder="Nhập 4-6 số bí mật để đăng nhập sau này"
+        placeholder="Nhập mã PIN"
         value={studentPin}
         onChange={(e) => setStudentPin(e.target.value.replace(/[^0-9]/g, ''))}
+        autoComplete="new-password"
+        inputMode="numeric"
         required
       />
 
@@ -153,10 +152,9 @@ export const StudentRegisterForm: React.FC = () => {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 px-6 rounded-2xl bg-amber-400 hover:bg-amber-500 active:scale-[0.99] text-amber-950 border-2 border-amber-500 shadow-tactile-yellow font-display font-black text-sm sm:text-base transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+        className="w-full rounded-2xl border-2 border-amber-500 bg-amber-400 px-6 py-3.5 text-sm font-black text-amber-950 shadow-tactile-yellow transition-all hover:bg-amber-500 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
       >
-        <span>{loading ? 'Đang tạo hồ sơ học tập...' : 'Hoàn Tất & Vào Học Thôi!'}</span>
-        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-amber-950" />
+        {loading ? 'Đang tạo tài khoản...' : 'Tạo tài khoản'}
       </button>
 
       {/* Or Divider */}
@@ -164,8 +162,8 @@ export const StudentRegisterForm: React.FC = () => {
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-slate-200" />
         </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-3 text-slate-500 font-extrabold">hoặc đăng ký nhanh</span>
+        <div className="relative flex justify-center text-sm">
+          <span className="bg-white px-3 font-extrabold text-slate-700">Hoặc</span>
         </div>
       </div>
 
@@ -177,13 +175,13 @@ export const StudentRegisterForm: React.FC = () => {
 
       {/* Footer Switcher */}
       <div className="text-center pt-2">
-        <p className="text-xs sm:text-sm text-slate-700 font-bold">
-          Bé đã có tài khoản rồi?{' '}
+        <p className="text-sm font-bold text-slate-700">
+          Đã có tài khoản?{' '}
           <Link
             href="/login?role=student"
             className="text-amber-800 hover:text-amber-950 font-black underline underline-offset-2"
           >
-            Đăng nhập tại đây
+            Đăng nhập
           </Link>
         </p>
       </div>

@@ -1,34 +1,12 @@
 'use client';
 
 import React from 'react';
-import { m, useReducedMotion } from 'framer-motion';
 
 export const AuthIllustration: React.FC = () => {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <div className="relative w-full aspect-[4/3] max-w-[390px] mx-auto select-none flex items-center justify-center">
       {/* Ambient background glow behind illustration */}
       <div className="absolute inset-0 bg-amber-300/30 rounded-full blur-2xl transform scale-90 -z-0 pointer-events-none" />
-
-      {/* Floating Math & Star Badges */}
-      <m.div
-        animate={shouldReduceMotion ? undefined : { y: [-4, 4, -4], rotate: [-2, 2, -2] }}
-        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1 left-2 sm:left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-2xl shadow-md border-2 border-amber-300 flex items-center gap-1.5 z-20"
-      >
-        <span className="text-base">⭐</span>
-        <span className="text-xs font-black text-amber-950">+150 Điểm</span>
-      </m.div>
-
-      <m.div
-        animate={shouldReduceMotion ? undefined : { y: [4, -4, 4], rotate: [2, -2, 2] }}
-        transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-        className="absolute top-6 right-1 sm:right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-2xl shadow-md border-2 border-amber-300 flex items-center gap-1.5 z-20"
-      >
-        <span className="text-base">🦉</span>
-        <span className="text-xs font-black text-amber-950">Cú Bi Đồng Hành</span>
-      </m.div>
 
       {/* Main SVG Composition: Study Desk with CÚ BI Mascot */}
       <svg

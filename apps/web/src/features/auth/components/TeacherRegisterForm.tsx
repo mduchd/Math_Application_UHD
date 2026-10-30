@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { User, Mail, Lock, GraduationCap, ArrowRight } from 'lucide-react';
 import { registerTeacher } from '@/lib/api';
 import { useAppStore } from '@/stores/useAppStore';
 import { sound } from '@/lib/sound';
@@ -26,11 +25,11 @@ export const TeacherRegisterForm: React.FC = () => {
     setError('');
 
     if (!teacherName.trim() || !teacherEmail.trim() || !teacherPassword) {
-      setError('Vui lòng điền đầy đủ các thông tin bắt buộc.');
+      setError('Nhập đầy đủ thông tin để tiếp tục.');
       return;
     }
     if (teacherPassword.length < 6) {
-      setError('Mật khẩu phải có ít nhất 6 ký tự.');
+      setError('Mật khẩu cần ít nhất 6 ký tự.');
       return;
     }
 
@@ -45,8 +44,8 @@ export const TeacherRegisterForm: React.FC = () => {
       setUser(res.user);
       sound.playSuccess();
       router.push('/classes');
-    } catch (err: any) {
-      setError(err?.message || 'Không thể đăng ký tài khoản giáo viên.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Không thể đăng ký tài khoản giáo viên. Thầy/Cô thử lại giúp Cú Bi nhé!');
     } finally {
       setLoading(false);
     }
@@ -55,49 +54,48 @@ export const TeacherRegisterForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold text-center animate-in fade-in">
+        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-3.5 text-center text-sm font-bold text-rose-700 animate-in fade-in">
           {error}
         </div>
       )}
 
       {/* Họ và tên */}
       <InputField
-        label="Họ và tên Thầy/Cô:"
-        icon={<User className="w-4 h-4 text-emerald-600" />}
+        label="Họ và tên"
         type="text"
         placeholder="Ví dụ: Cô Nguyễn Hoàng Mai"
         value={teacherName}
         onChange={(e) => setTeacherName(e.target.value)}
+        autoComplete="name"
         required
       />
 
       {/* Email */}
       <InputField
-        label="Email công tác hoặc cá nhân:"
-        icon={<Mail className="w-4 h-4 text-emerald-600" />}
+        label="Email"
         type="email"
         placeholder="giaovien@truonghoc.edu.vn"
         value={teacherEmail}
         onChange={(e) => setTeacherEmail(e.target.value)}
+        autoComplete="email"
         required
       />
 
       {/* Mật khẩu */}
       <InputField
-        label="Mật khẩu bảo mật (tối thiểu 6 ký tự):"
-        icon={<Lock className="w-4 h-4 text-emerald-600" />}
+        label="Mật khẩu (tối thiểu 6 ký tự)"
         isPassword
         placeholder="••••••••"
         value={teacherPassword}
         onChange={(e) => setTeacherPassword(e.target.value)}
+        autoComplete="new-password"
         required
       />
 
       {/* Khối lớp giảng dạy chính */}
       <div>
-        <label className="block text-xs font-black text-slate-700 mb-2 flex items-center gap-1.5">
-          <GraduationCap className="w-4 h-4 text-emerald-600" />
-          <span>Khối lớp Thầy/Cô phụ trách chính:</span>
+        <label className="mb-2 block text-sm font-black text-slate-800">
+          Lớp phụ trách chính
         </label>
         <div className="grid grid-cols-5 gap-1.5">
           {[1, 2, 3, 4, 5].map((grade) => {
@@ -110,9 +108,9 @@ export const TeacherRegisterForm: React.FC = () => {
                   sound.playPop();
                   setTeacherGrade(grade);
                 }}
-                className={`py-2.5 rounded-xl text-xs font-black border-2 transition-all ${
+                className={`rounded-xl border-2 py-2.5 text-sm font-black transition-all ${
                   isSelected
-                    ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm'
+                    ? 'border-emerald-800 bg-emerald-800 text-white shadow-sm'
                     : 'bg-slate-50/70 border-slate-200 text-slate-700 hover:border-emerald-200'
                 }`}
               >
@@ -127,10 +125,9 @@ export const TeacherRegisterForm: React.FC = () => {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-display font-black text-sm sm:text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+        className="w-full rounded-2xl bg-emerald-800 px-6 py-3.5 text-sm font-black text-white shadow-md transition-all hover:bg-emerald-900 hover:shadow-lg active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
       >
-        <span>{loading ? 'Đang khởi tạo tài khoản...' : 'Tạo Tài Khoản Giáo Viên'}</span>
-        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+        {loading ? 'Đang tạo tài khoản...' : 'Tạo tài khoản'}
       </button>
 
       {/* Or Divider */}
@@ -138,8 +135,8 @@ export const TeacherRegisterForm: React.FC = () => {
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-slate-200" />
         </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-3 text-slate-500 font-extrabold">hoặc đăng ký nhanh</span>
+        <div className="relative flex justify-center text-sm">
+          <span className="bg-white px-3 font-extrabold text-slate-700">Hoặc</span>
         </div>
       </div>
 
@@ -151,13 +148,13 @@ export const TeacherRegisterForm: React.FC = () => {
 
       {/* Footer Switcher */}
       <div className="text-center pt-2">
-        <p className="text-xs sm:text-sm text-slate-700 font-bold">
-          Thầy/Cô đã có tài khoản rồi?{' '}
+        <p className="text-sm font-bold text-slate-700">
+          Đã có tài khoản?{' '}
           <Link
             href="/login?role=teacher"
             className="text-emerald-700 hover:text-emerald-800 font-black underline underline-offset-2"
           >
-            Đăng nhập ngay tại đây
+            Đăng nhập
           </Link>
         </p>
       </div>

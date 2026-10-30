@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Mail, Lock, ArrowRight } from 'lucide-react';
 import { loginTeacher } from '@/lib/api';
 import { useAppStore } from '@/stores/useAppStore';
 import { sound } from '@/lib/sound';
@@ -28,7 +27,7 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
     setError('');
 
     if (!teacherEmail.trim() || !teacherPassword) {
-      setError('Vui lòng nhập đầy đủ Email và Mật khẩu.');
+      setError('Nhập email và mật khẩu để tiếp tục.');
       return;
     }
 
@@ -41,8 +40,8 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
       setUser(res.user);
       sound.playSuccess();
       router.push(redirectPath || '/classes');
-    } catch (err: any) {
-      setError(err?.message || 'Email hoặc mật khẩu không chính xác.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Email hoặc mật khẩu không chính xác. Thầy/Cô kiểm tra lại giúp Cú Bi nhé!');
     } finally {
       setLoading(false);
     }
@@ -51,31 +50,31 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold text-center animate-in fade-in">
+        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-3.5 text-center text-sm font-bold text-rose-700 animate-in fade-in">
           {error}
         </div>
       )}
 
       {/* Input: Email */}
       <InputField
-        label="Email giáo viên / Nhà trường:"
-        icon={<Mail className="w-4 h-4 text-emerald-600" />}
+        label="Email"
         type="email"
         placeholder="giaovien@truonghoc.edu.vn"
         value={teacherEmail}
         onChange={(e) => setTeacherEmail(e.target.value)}
+        autoComplete="email"
         required
       />
 
       {/* Input: Mật khẩu */}
       <div className="space-y-1">
         <InputField
-          label="Mật khẩu tài khoản:"
-          icon={<Lock className="w-4 h-4 text-emerald-600" />}
+          label="Mật khẩu"
           isPassword
-          placeholder="Nhập mật khẩu của Thầy/Cô"
+          placeholder="Nhập mật khẩu"
           value={teacherPassword}
           onChange={(e) => setTeacherPassword(e.target.value)}
+          autoComplete="current-password"
           required
         />
 
@@ -83,7 +82,7 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
           <button
             type="button"
             onClick={() => alert('Vui lòng liên hệ Quản trị viên nhà trường hoặc bộ phận hỗ trợ kỹ thuật để khôi phục mật khẩu.')}
-            className="text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors"
+            className="text-sm font-extrabold text-slate-700 transition-colors hover:text-slate-900"
           >
             Quên mật khẩu?
           </button>
@@ -94,10 +93,9 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-display font-black text-sm sm:text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+        className="w-full rounded-2xl bg-emerald-800 px-6 py-3.5 text-sm font-black text-white shadow-md transition-all hover:bg-emerald-900 hover:shadow-lg active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
       >
-        <span>{loading ? 'Đang xác thực thông tin...' : 'Đăng Nhập Quản Lý Lớp'}</span>
-        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+        {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
       </button>
 
       {/* Or Divider */}
@@ -105,8 +103,8 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-slate-200" />
         </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-3 text-slate-500 font-extrabold">hoặc đăng nhập với</span>
+        <div className="relative flex justify-center text-sm">
+          <span className="bg-white px-3 font-extrabold text-slate-700">Hoặc</span>
         </div>
       </div>
 
@@ -119,13 +117,13 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
 
       {/* Footer Switcher */}
       <div className="text-center pt-2">
-        <p className="text-xs sm:text-sm text-slate-700 font-bold">
-          Thầy/Cô chưa có tài khoản?{' '}
+        <p className="text-sm font-bold text-slate-700">
+          Chưa có tài khoản?{' '}
           <Link
             href="/register?role=teacher"
             className="text-emerald-700 hover:text-emerald-800 font-black underline underline-offset-2"
           >
-            Đăng ký tài khoản Giáo viên mới
+            Đăng ký
           </Link>
         </p>
       </div>

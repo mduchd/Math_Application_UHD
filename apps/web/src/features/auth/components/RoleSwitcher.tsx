@@ -23,23 +23,21 @@ export const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ role, onChange }) =>
       <button
         type="button"
         onClick={() => handleSelect('student')}
-        className={`relative z-10 py-2.5 px-3 rounded-xl font-display font-black text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5 ${
-          role === 'student' ? 'text-amber-950 font-black' : 'text-slate-600 hover:text-slate-900'
+        className={`relative z-10 rounded-xl px-3 py-2.5 text-sm font-black transition-colors ${
+          role === 'student' ? 'text-amber-950 font-black' : 'text-slate-700 hover:text-slate-900'
         }`}
       >
-        <span>🎒</span>
-        <span>Học Sinh</span>
+        Học sinh
       </button>
 
       <button
         type="button"
         onClick={() => handleSelect('teacher')}
-        className={`relative z-10 py-2.5 px-3 rounded-xl font-display font-black text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5 ${
-          role === 'teacher' ? 'text-amber-950 font-black' : 'text-slate-600 hover:text-slate-900'
+        className={`relative z-10 rounded-xl px-3 py-2.5 text-sm font-black transition-colors ${
+          role === 'teacher' ? 'text-amber-950 font-black' : 'text-slate-700 hover:text-slate-900'
         }`}
       >
-        <span>👩‍🏫</span>
-        <span>Giáo Viên</span>
+        Giáo viên
       </button>
 
       {/* Animated pill background indicator in tactile yellow */}

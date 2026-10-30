@@ -22,7 +22,7 @@ export default function RegisterPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#F8F9FE] text-slate-600 font-bold">
+        <div className="min-h-screen flex items-center justify-center bg-[#F8F9FE] text-slate-700 font-bold">
           <div className="flex flex-col items-center gap-3">
             <div className="w-8 h-8 border-3 border-indigo-600 border-t-transparent rounded-full animate-spin" />
             <span className="text-sm">Đang tải trang đăng ký...</span>

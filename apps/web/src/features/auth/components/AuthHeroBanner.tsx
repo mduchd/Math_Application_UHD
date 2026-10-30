@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Trophy, ShieldCheck } from 'lucide-react';
 import { AuthIllustration } from './AuthIllustration';
 import { AuthRole } from '../types';
 
@@ -24,17 +23,17 @@ export const AuthHeroBanner: React.FC<AuthHeroBannerProps> = ({ role, mode = 'lo
         {/* Catchy Kid Commercial Headline */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-black text-amber-950 leading-tight tracking-tight">
           {isTeacher
-            ? 'Đồng hành giảng dạy, khơi mở tiềm năng trẻ thơ'
+            ? 'Dạy học và theo dõi tiến độ tại một nơi'
             : mode === 'register'
-              ? 'Bắt đầu chuyến du hành tri thức cùng bạn Cú Bi'
-              : 'Học vui mỗi ngày, tích ngàn sao sáng cùng Cú Bi!'}
+              ? 'Bắt đầu hành trình học tập cùng Cú Bi'
+              : 'Học vui mỗi ngày cùng Cú Bi'}
         </h2>
 
         {/* Subtitle with high contrast readable text */}
         <p className="text-sm sm:text-base font-bold text-amber-900 leading-relaxed max-w-md">
           {isTeacher
-            ? 'Quản lý bài giảng, theo dõi tiến độ từng học sinh với báo cáo chi tiết và trợ lý AI thông minh.'
-            : 'Hàng ngàn bài tập tương tác, hoạt hình sinh động và thử thách nhận huy hiệu đổi quà cực vui!'}
+            ? 'Giao bài, quản lý lớp và nắm tiến độ của từng học sinh.'
+            : 'Bài tập Toán tương tác dành cho học sinh tiểu học.'}
         </p>
       </div>
 
@@ -43,28 +42,6 @@ export const AuthHeroBanner: React.FC<AuthHeroBannerProps> = ({ role, mode = 'lo
         <AuthIllustration />
       </div>
 
-      {/* Bottom Feature Badges */}
-      <div className="relative z-10 grid grid-cols-2 gap-2.5 pt-2 border-t border-amber-400/40">
-        <div className="flex items-center gap-2.5 p-2 rounded-2xl bg-white/85 backdrop-blur-sm border border-amber-300/80 shadow-xs">
-          <div className="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800 shrink-0 font-bold">
-            <Trophy className="w-4 h-4 text-amber-600" />
-          </div>
-          <div>
-            <div className="text-xs font-black text-amber-950">50K+ Bạn Nhỏ</div>
-            <div className="text-[11px] font-bold text-amber-800">Đang học vui vẻ</div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2.5 p-2 rounded-2xl bg-white/85 backdrop-blur-sm border border-amber-300/80 shadow-xs">
-          <div className="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800 shrink-0 font-bold">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          </div>
-          <div>
-            <div className="text-xs font-black text-amber-950">100% An Toàn</div>
-            <div className="text-[11px] font-bold text-amber-800">Chuẩn giáo dục</div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
