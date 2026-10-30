@@ -1,0 +1,17 @@
+import { IconBase, KID_ICON_GOLD, type KidIconProps } from './IconBase';
+
+export const KidBellIcon = (props: KidIconProps) => <IconBase {...props}><path d="M6 17h12l-1.3-2.3V10a4.7 4.7 0 0 0-9.4 0v4.7L6 17Z" fill={KID_ICON_GOLD} /><path d="M10 19c.5 1.3 1.1 1.8 2 1.8s1.5-.5 2-1.8" /></IconBase>;
+export const KidMailIcon = (props: KidIconProps) => <IconBase {...props}><rect x="3.8" y="5.5" width="16.4" height="13" rx="2.8" fill={KID_ICON_GOLD} /><path d="m5 7 7 5.7L19 7" /></IconBase>;
+export const KidVolumeIcon = (props: KidIconProps) => <IconBase {...props}><path d="M4 10h3.5L12 6v12l-4.5-4H4v-4Z" fill={KID_ICON_GOLD} /><path d="M15 9.2a4 4 0 0 1 0 5.6M17.5 6.7a7.5 7.5 0 0 1 0 10.6" /></IconBase>;
+export const KidVolumeOffIcon = (props: KidIconProps) => <IconBase {...props}><path d="M4 10h3.5L12 6v12l-4.5-4H4v-4Z" fill={KID_ICON_GOLD} /><path d="m16 10 4 4m0-4-4 4" /></IconBase>;
+export const KidKeyboardIcon = (props: KidIconProps) => <IconBase {...props}><rect x="3" y="7" width="18" height="11" rx="2.4" fill={KID_ICON_GOLD} /><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M6 13h.01M9 13h.01M12 13h6" /></IconBase>;
+export const KidLaptopIcon = (props: KidIconProps) => <IconBase {...props}><rect x="5.5" y="4.5" width="13" height="10" rx="1.8" fill={KID_ICON_GOLD} /><path d="M3.5 18h17" /></IconBase>;
+export const KidMonitorIcon = (props: KidIconProps) => <IconBase {...props}><rect x="3.5" y="4.5" width="17" height="11.5" rx="2" fill={KID_ICON_GOLD} /><path d="M12 16v4M8 20h8" /></IconBase>;
+export const KidSmartphoneIcon = (props: KidIconProps) => <IconBase {...props}><rect x="7" y="3.5" width="10" height="17" rx="2.2" fill={KID_ICON_GOLD} /><path d="M11 17.5h2" /></IconBase>;
+export const KidHardDriveIcon = (props: KidIconProps) => <IconBase {...props}><rect x="4" y="6" width="16" height="12" rx="2.7" fill={KID_ICON_GOLD} /><path d="M7.5 14.5h.01M11 14.5h5.5" /></IconBase>;
+export const KidGlobeIcon = (props: KidIconProps) => <IconBase {...props}><circle cx="12" cy="12" r="8" fill={KID_ICON_GOLD} /><path d="M4 12h16M12 4c2.1 2.2 3.2 4.9 3.2 8S14.1 17.8 12 20c-2.1-2.2-3.2-4.9-3.2-8S9.9 6.2 12 4" /></IconBase>;
+export const KidBotIcon = (props: KidIconProps) => <IconBase {...props}><rect x="4" y="7" width="16" height="12" rx="4" fill={KID_ICON_GOLD} /><path d="M12 4v3M8.5 12h.01M15.5 12h.01M9 15h6" /><circle cx="12" cy="3.5" r="1" fill="#38BDF8" stroke="currentColor" /></IconBase>;
+export const KidCalculatorIcon = (props: KidIconProps) => <IconBase {...props}><rect x="5" y="3.5" width="14" height="17" rx="2.8" fill={KID_ICON_GOLD} /><path d="M8 7h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01" /></IconBase>;
+export const KidBrainIcon = (props: KidIconProps) => <IconBase {...props}><path d="M12 5c-1.1-1.4-3.8-1.5-5 .2-1.7-.1-3 1.3-2.8 3 .1 1.2.8 2 1.8 2.5-1.2 1.7-.4 4.2 1.8 4.5.5 1.9 2.9 2.8 4.2 1.4 1.3 1.4 3.7.5 4.2-1.4 2.2-.3 3-2.8 1.8-4.5 1-.5 1.7-1.3 1.8-2.5.2-1.7-1.1-3.1-2.8-3-1.2-1.7-3.9-1.6-5-.2Z" fill={KID_ICON_GOLD} /><path d="M12 7v8M9 9c1 0 1.5.7 1.5 1.5M15 9c-1 0-1.5.7-1.5 1.5" /></IconBase>;
+export const KidCompassIcon = (props: KidIconProps) => <IconBase {...props}><circle cx="12" cy="12" r="8" fill={KID_ICON_GOLD} /><path d="m15.8 8.2-2.1 5.5-5.5 2.1 2.1-5.5 5.5-2.1Z" fill="#38BDF8" /></IconBase>;
+export const KidLayersIcon = (props: KidIconProps) => <IconBase {...props}><path d="m12 4 8 4-8 4-8-4 8-4Z" fill={KID_ICON_GOLD} /><path d="m4 12 8 4 8-4M4 16l8 4 8-4" /></IconBase>;

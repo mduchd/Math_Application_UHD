@@ -29,7 +29,11 @@ export const AuthContainer: React.FC<AuthContainerProps> = ({
   }, []);
 
   return (
-    <main className="auth-viewport-shell grid min-h-dvh w-full overflow-x-hidden bg-[#FDFBF7] p-3 font-body sm:p-6 lg:p-8">
+    <main
+      className={`auth-viewport-shell grid min-h-dvh w-full overflow-x-hidden bg-[#FDFBF7] p-3 font-body sm:p-6 lg:p-8 ${
+        isLogin ? 'auth-login-viewport' : ''
+      }`}
+    >
       {/* Soft brand ambience */}
       <div className="pointer-events-none fixed -right-24 -top-24 h-96 w-96 rounded-full bg-amber-300/30 blur-3xl" />
       <div className="pointer-events-none fixed -bottom-24 -left-24 h-96 w-96 rounded-full bg-yellow-300/25 blur-3xl" />

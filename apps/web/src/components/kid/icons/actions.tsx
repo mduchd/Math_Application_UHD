@@ -1,0 +1,24 @@
+import { IconBase, KID_ICON_GOLD, type KidIconProps } from './IconBase';
+
+export const KidArrowLeftIcon = (props: KidIconProps) => <IconBase {...props}><path d="M20 12H4M10 6l-6 6 6 6" /></IconBase>;
+export const KidArrowRightIcon = (props: KidIconProps) => <IconBase {...props}><path d="M4 12h16M14 6l6 6-6 6" /></IconBase>;
+export const KidArrowUpIcon = (props: KidIconProps) => <IconBase {...props}><path d="M12 20V4M6 10l6-6 6 6" /></IconBase>;
+export const KidChevronDownIcon = (props: KidIconProps) => <IconBase {...props}><path d="m5 9 7 7 7-7" /></IconBase>;
+export const KidMenuIcon = (props: KidIconProps) => <IconBase {...props}><path d="M5 7h14M5 12h14M5 17h14" /></IconBase>;
+export const KidCloseIcon = (props: KidIconProps) => <IconBase {...props}><circle cx="12" cy="12" r="8" fill={KID_ICON_GOLD} /><path d="m9 9 6 6m0-6-6 6" /></IconBase>;
+export const KidPlusIcon = (props: KidIconProps) => <IconBase {...props}><circle cx="12" cy="12" r="8" fill={KID_ICON_GOLD} /><path d="M12 8v8M8 12h8" /></IconBase>;
+export const KidPlusSquareIcon = (props: KidIconProps) => <IconBase {...props}><rect x="4" y="4" width="16" height="16" rx="3" fill={KID_ICON_GOLD} /><path d="M12 8v8M8 12h8" /></IconBase>;
+export const KidCheckIcon = (props: KidIconProps) => <IconBase {...props}><path d="m5 12 4.3 4.3L19 6.7" /></IconBase>;
+export const KidCopyIcon = (props: KidIconProps) => <IconBase {...props}><rect x="8" y="4" width="11" height="13" rx="2" fill={KID_ICON_GOLD} /><path d="M16 17v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2" /></IconBase>;
+export const KidDownloadIcon = (props: KidIconProps) => <IconBase {...props}><path d="M12 4v10m-4-4 4 4 4-4M5 18v1.5A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V18" /><path d="M6 17h12" stroke={KID_ICON_GOLD} strokeWidth="3.2" /></IconBase>;
+export const KidExternalLinkIcon = (props: KidIconProps) => <IconBase {...props}><path d="M14 5h5v5M11 13l8-8M19 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4" /></IconBase>;
+export const KidFilterIcon = (props: KidIconProps) => <IconBase {...props}><path d="M4 6h16l-6.2 7.1v5.3l-3.6 1.6v-6.9L4 6Z" fill={KID_ICON_GOLD} /></IconBase>;
+export const KidRefreshIcon = (props: KidIconProps) => <IconBase {...props}><path d="M19 9V5l-1.8 1.8A7 7 0 1 0 19 14" /><path d="M19 5h-4" /></IconBase>;
+export const KidRotateIcon = (props: KidIconProps) => <IconBase {...props}><path d="M6.2 7.4A7.5 7.5 0 1 1 4.5 14" /><path d="M5 4v4h4" /></IconBase>;
+export const KidSlidersIcon = (props: KidIconProps) => <IconBase {...props}><path d="M5 7h14M5 17h14M9 7v3M15 17v-3" /><circle cx="9" cy="11" r="2" fill={KID_ICON_GOLD} /><circle cx="15" cy="13" r="2" fill={KID_ICON_GOLD} /></IconBase>;
+export const KidPlayIcon = (props: KidIconProps) => <IconBase {...props}><path d="M7 5.2v13.6L18 12 7 5.2Z" fill={KID_ICON_GOLD} /></IconBase>;
+export const KidSendIcon = (props: KidIconProps) => <IconBase {...props}><path d="m4 5 16 7-16 7 3-7-3-7Z" fill={KID_ICON_GOLD} /><path d="M7 12h8" /></IconBase>;
+export const KidShareIcon = (props: KidIconProps) => <IconBase {...props}><circle cx="6" cy="12" r="2" fill={KID_ICON_GOLD} /><circle cx="17" cy="6" r="2" fill={KID_ICON_GOLD} /><circle cx="17" cy="18" r="2" fill={KID_ICON_GOLD} /><path d="m7.7 11 7.5-4M7.7 13l7.5 4" /></IconBase>;
+export const KidLinkIcon = (props: KidIconProps) => <IconBase {...props}><path d="M10.2 13.8 8.8 15.2a3 3 0 0 1-4.2-4.2l3-3a3 3 0 0 1 4.2 0" /><path d="m13.8 10.2 1.4-1.4a3 3 0 0 1 4.2 4.2l-3 3a3 3 0 0 1-4.2 0" /><path d="m9 15 6-6" stroke={KID_ICON_GOLD} strokeWidth="3" /></IconBase>;
+export const KidMaximizeIcon = (props: KidIconProps) => <IconBase {...props}><path d="M8 4H4v4M16 4h4v4M8 20H4v-4M16 20h4v-4" /></IconBase>;
+export const KidMinimizeIcon = (props: KidIconProps) => <IconBase {...props}><path d="M5 12h14" stroke={KID_ICON_GOLD} strokeWidth="3.4" /></IconBase>;

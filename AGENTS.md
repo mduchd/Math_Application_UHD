@@ -132,6 +132,12 @@ apps/api/src/
    - Dùng outline Kid Icon với `strokeWidth={2.25}`; dùng `size-4` (16px) cho control phụ, `size-5` (20px) cho action/navigation, `size-6` (24px) cho action chính. Chỉ dùng filled icon phần thưởng khi biểu thị điểm hoặc thành tích đã đạt. Không trộn icon 3D, emoji, filled và outline ngẫu nhiên; không tạo icon gradient/bóng đổ/circular tile chỉ để trang trí.
    - Không biến mọi card, nút hay dòng thông tin thành một icon trong ô vuông/ô tròn màu sắc. Icon chỉ là tín hiệu phụ; nội dung, typography và hình minh hoạ/mascot có chủ đề mới là trọng tâm thị giác.
    - Icon-only button bắt buộc có `aria-label` và tooltip; icon mang nghĩa trạng thái phải đi kèm text hoặc nhãn hỗ trợ. Emoji được phép trong microcopy theo quy chuẩn trẻ em, nhưng không dùng để thay thế icon chức năng hoặc làm họa tiết rải ngẫu nhiên.
+6. **Responsive & Mobile UI bắt buộc**:
+   - Với mọi code mới hoặc thay đổi có ảnh hưởng đến giao diện, thiết kế và triển khai theo hướng mobile-first; kiểm tra cả màn hình nhỏ, tablet và desktop, kể cả các màn hình hoặc component liên quan bị ảnh hưởng.
+   - Kiểm tra thực tế trên trình duyệt hoặc công cụ mô phỏng tại tối thiểu các chiều rộng 320px, 375px, 768px và 1440px; kiểm tra thêm breakpoint và chiều ngang/dọc khi thay đổi có liên quan. Không chỉ dựa vào việc đọc CSS hoặc build thành công để kết luận responsive hoạt động.
+   - Kiểm tra nội dung không bị tràn ngang ngoài ý muốn, cắt mất, chồng lấp hoặc khó đọc; bố cục, ảnh, bảng, menu, modal, form và các trạng thái loading/error/empty phải thích ứng với không gian hiển thị. Vùng cuộn ngang có chủ đích phải rõ ràng và sử dụng được.
+   - Trên mobile, kiểm tra thao tác cảm ứng, khoảng cách giữa các control, vùng chạm tối thiểu 44×44 CSS px cho các hành động chính, điều hướng, bàn phím và nội dung không bị che bởi thanh cố định, safe area hoặc bàn phím ảo khi phù hợp. Giữ nguyên khả năng sử dụng bằng bàn phím và công nghệ hỗ trợ.
+   - Sửa các lỗi responsive phát sinh từ thay đổi trước khi hoàn thành. Trong báo cáo cuối, nêu các viewport và luồng đã kiểm tra; nếu không thể kiểm tra thực tế, nêu rõ lý do, phần chưa kiểm tra và rủi ro còn lại. Các thay đổi không ảnh hưởng UI không cần kiểm tra trực quan responsive.
 
 ---
 
@@ -176,4 +182,5 @@ Trước khi hoàn thành bất kỳ tác vụ nào, AI Agent phải rà soát:
   - Cỡ chữ có bị nhỏ hơn `14px` không? Nút bấm vàng có dùng chữ `text-amber-950` không?
   - Văn phong thương mại thân thiện, tích cực, đúng ngữ pháp tiếng Việt chưa?
 - [ ] **Icon có chủ đích**: Mỗi icon có mang nghĩa hành động/trạng thái/dữ liệu cụ thể không? Đã bỏ icon trang trí chung chung, icon trong ô màu lặp lại và các icon “Sparkles/Star/Rocket/Zap” không gắn với nội dung thực tế chưa?
+- [ ] **Responsive & Mobile UI**: Với thay đổi ảnh hưởng UI, đã kiểm tra thực tế các viewport 320px, 375px, 768px, 1440px và các luồng liên quan; xử lý tràn, che khuất, thao tác cảm ứng và báo cáo kết quả hoặc giới hạn kiểm tra chưa?
 - [ ] **Khả năng Scale & Maintain**: Người khác có dễ dàng đọc hiểu, bảo trì và viết test cho module này không?

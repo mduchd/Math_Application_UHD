@@ -47,9 +47,25 @@ body {
   }
 }
 
+@media (min-width: 1024px) {
+  .auth-login-viewport {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .auth-login-viewport .auth-card {
+    max-height: calc(100dvh - 4rem);
+  }
+}
+
 @media (min-width: 1024px) and (max-height: 900px) {
   .auth-viewport-shell {
     padding-block: 1rem;
+  }
+
+  .auth-login-viewport .auth-card {
+    max-height: calc(100dvh - 2rem);
   }
 
   .auth-card {
