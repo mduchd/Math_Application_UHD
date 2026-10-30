@@ -48,7 +48,7 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="auth-login-form flex flex-col gap-4">
       {error && (
         <div className="rounded-2xl border border-rose-200 bg-rose-50 p-3.5 text-center text-sm font-bold text-rose-700 animate-in fade-in">
           {error}
@@ -93,7 +93,7 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-2xl bg-emerald-800 px-6 py-3.5 text-sm font-black text-white shadow-md transition-all hover:bg-emerald-900 hover:shadow-lg active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
+        className="w-full rounded-2xl border-2 border-amber-500 bg-amber-400 px-6 py-3.5 text-sm font-black text-amber-950 shadow-tactile-yellow transition-all hover:bg-amber-500 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
       >
         {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
       </button>
@@ -121,7 +121,7 @@ export const TeacherLoginForm: React.FC<TeacherLoginFormProps> = ({ redirectPath
           Chưa có tài khoản?{' '}
           <Link
             href="/register?role=teacher"
-            className="text-emerald-700 hover:text-emerald-800 font-black underline underline-offset-2"
+            className="text-amber-800 hover:text-amber-950 font-black underline underline-offset-2"
           >
             Đăng ký
           </Link>

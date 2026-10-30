@@ -149,7 +149,7 @@ export const StudentLoginForm: React.FC<StudentLoginFormProps> = ({ redirectPath
         type="button"
         disabled={loading || guestLoading}
         onClick={handleGuestLogin}
-        className="mx-auto text-sm font-extrabold text-sky-800 underline underline-offset-4 transition-colors hover:text-sky-950 disabled:cursor-not-allowed disabled:opacity-60"
+        className="mx-auto text-sm font-extrabold text-amber-800 underline underline-offset-4 transition-colors hover:text-amber-950 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {guestLoading ? 'Đang chuẩn bị...' : 'Dùng thử không cần tài khoản'}
       </button>

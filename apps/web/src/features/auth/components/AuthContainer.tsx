@@ -44,14 +44,12 @@ export const AuthContainer: React.FC<AuthContainerProps> = ({
         </div>
 
         {/* Right Column: Clean Form Section */}
-        <div className="auth-form-column lg:col-span-6 flex flex-col justify-center px-1 py-2 sm:px-4 sm:py-4">
+        <div className="auth-form-column lg:col-span-6 flex flex-col justify-start px-1 py-2 sm:px-4 sm:py-4">
           <div className="auth-form-stack flex flex-col gap-6">
             {/* Header Titles */}
             <div className="space-y-1.5">
               <h1 className="text-2xl sm:text-3xl font-display font-black text-slate-900 tracking-tight">
-                {isLogin ? (
-                  role === 'student' ? 'Chào mừng trở lại' : 'Đăng nhập tài khoản'
-                ) : (
+                {isLogin ? 'Chào mừng trở lại' : (
                   role === 'student' ? 'Tạo tài khoản' : 'Tạo tài khoản giáo viên'
                 )}
               </h1>
